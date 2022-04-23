@@ -1,0 +1,22 @@
+.login-page-1 {
+    min-height: 100vh !important;
+  }
+  
+  .formContainer {
+    width: 100%;
+    max-width: 450px !important;
+  }
+  .loginForm input {
+    display: block;
+    margin: 20px 0;
+  }
+  
+  .btn-login {
+    width: 100%;
+   
+  }
+  .btn-login:hover {
+    color: whitesmoke;
+    font-weight: 900;
+  }
+  

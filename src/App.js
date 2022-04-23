@@ -1,11 +1,12 @@
-import "./App.css";
-import SideMenu, { menuItems } from "./components/Navigation/SideMenu";
+import './App.css';
+import SideMenu, { menuItems } from './components/Navigation/SideMenu';
 
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { useState } from "react";
-import ACPVerForm from "./components/ACPVerForm/ACPVerForm";
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { useState } from 'react';
+import ACPVerForm from './components/ACPVerForm/ACPVerForm';
+import Login from './pages/Login/Login';
 
-const Dashboard = () =><ACPVerForm/>;
+const Dashboard = () => <ACPVerForm />;
 const Content = () => <h1>Content</h1>;
 const Courses = () => <h1>Content/Courses</h1>;
 const Videos = () => <h1>Content/Videos</h1>;
@@ -17,38 +18,41 @@ const Design2 = () => <h1>Design 2</h1>;
 function App() {
   const [inactive, setInactive] = useState(false);
   return (
-    <div className="App">
+    <div className='App'>
       <Router>
-        <SideMenu
-          onCollapse={(inactive) => {
-            console.log(inactive);
-            setInactive(inactive);
-          }}
-        />
+        <Switch>
+          <Route exact path={'/'}>
+            <Login></Login>
+          </Route>
 
-        <div className={`container ${inactive ? "inactive" : ""}`}>
-          {/* improvememt, not recorded in video, its just looping through menuItems
-          instead of hard coding all the routes */}
-          {menuItems.map((menu, index) => (
-            <>
-              <Route key={menu.name} exact={menu.exact} path={menu.to}>
-                <h1>{menu.name}</h1>
-              </Route>
-              {menu.subMenus && menu.subMenus.length > 0
-                ? menu.subMenus.map((subMenu, i) => (
-                    <Route key={subMenu.name} path={subMenu.to}>
-                      <h1>{subMenu.name}</h1>
-                    </Route>
-                  ))
-                : null}
-            </>
-          ))}
+          <Route>
+            {/* <Switch> */}
+            <SideMenu
+              onCollapse={(inactive) => {
+                console.log(inactive);
+                setInactive(inactive);
+              }}
+            />
+            <div className={`containerSide ${inactive ? 'inactive' : ''}`}>
+              {menuItems.map((menu, index) => (
+                <>
+                  <Route key={menu.name} exact={menu.exact} path={menu.to}>
+                    <h1>{menu.name}</h1>
+                  </Route>
+                  {menu.subMenus && menu.subMenus.length > 0
+                    ? menu.subMenus.map((subMenu, i) => (
+                        <Route key={subMenu.name} path={subMenu.to}>
+                          <h1>{subMenu.name}</h1>
+                        </Route>
+                      ))
+                    : null}
+                </>
+              ))}
+            </div>
+            {/* </Switch> */}
+          </Route>
 
-          <Switch>
-            <Route exact path={"/"}>
-              <Dashboard />
-            </Route>
-            {/* <Route exact path={"/content"}>
+          {/* <Route exact path={"/content"}>
               <Content />
             </Route>
             <Route path={"/content/courses"}>
@@ -72,10 +76,8 @@ function App() {
             <Route path={"/design-2"}>
               <Design2 />
             </Route> */}
-          </Switch>
-        </div>
+        </Switch>
       </Router>
- 
     </div>
   );
 }

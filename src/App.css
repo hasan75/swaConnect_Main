@@ -48,11 +48,13 @@ body {
   position: fixed;
   /* background: #1A212F; */
   background: #212F3E;
-  width: 300px;
+  /* width changed 260 from 300  */
+  width: 260px;
   height: 100%;
   box-sizing: border-box;
   padding: 30px 20px;
   transition: width 0.2s ease-in;
+  /* overflow-y: scroll; */
 }
 
 .side-menu.inactive {
@@ -179,8 +181,7 @@ body {
 }
 
 .side-menu .main-menu .sub-menu a.active {
-  /* change in background, not recorded in video */
-  /* background: #222; */
+
   display: block;
 
   border-radius: 5px;
@@ -188,7 +189,6 @@ body {
   /* color:'#000'; */
 }
  
-
 .divider {
   width: 100%;
   height:1px;
@@ -197,13 +197,13 @@ body {
   /* background: #333; */
   background: rgb(234, 231, 231);
 }
-.container {
-  margin-left: 300px;
+.containerSide {
+  margin-left: 280px;
   transition: margin-left 0.2s ease-in;
   padding: 50px;
   box-sizing: border-box;
 }
 
-.container.inactive {
+.containerSide .inactive {
   margin-left: 80px;
 }

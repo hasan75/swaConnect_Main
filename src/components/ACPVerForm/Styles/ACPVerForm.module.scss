@@ -1,0 +1,67 @@
+.container{
+    //  background: #f5f9f3;
+    background: #f7f7f7;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    padding-bottom: 20px;
+    box-shadow: rgba(87, 88, 88, 0.4) 0px 0px 5px 2px, rgba(202, 216, 233, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;     
+    margin-top: 30px;
+     header{
+         font-size: 30px;
+         color: #ffffff;
+         background: rgb(68, 139, 210);
+        //  color: #ffffff;
+        padding: 10px 0px;
+         text-align: center;
+         font-family:'Times New Roman', Times, serif;
+         margin-bottom: 20px;
+     }
+ }
+ 
+//  .flex01{
+//      display: flex;
+//      justify-content: space-between;
+//  }
+  
+// LEGEND 
+.container2 ::before,
+.container2 ::after {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+}
+.container2 fieldset {
+  width: 300px;
+  position: relative;
+  height: 800px;
+  border: 1px solid rgb(189, 189, 69);
+  /* color: green; */
+  /* color: yellow; */
+  /* border-color: rgb(57, 169, 57); */
+}
+.container2 fieldset::before {
+  position: absolute;
+  content: "";
+  width: 60px;
+  /* background: green; */
+  /* color: red; */
+  height: 50px;
+  top: -10%;
+  left: 0%;
+  border: 30px solid rgb(189, 189, 69);
+  border-right-color: transparent;
+  border-bottom-color: transparent;
+}
+.container2 fieldset > legend {
+  margin-left: 20%;
+  padding: 10px;
+  font-size: 15px;
+  border-color: yellow;
+  /* border: solid; */
+  line-height: 30px;
+}
+.container2 {
+  position: absolute;
+  top: 30%;
+  left: 30%;
+}

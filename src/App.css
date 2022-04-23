@@ -1,0 +1,209 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+ul {
+  padding: 0;
+  margin: 0;
+}
+ul li:nth-child(9){
+    /* bottom:  30px; */
+    margin-bottom: 30px;
+}
+li {
+  list-style: none;
+  padding: 5px 0px 0px 0px 0px;
+}
+body {
+  background-color: #eee;
+  font-family: "Open Sans", sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+  display: none;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #333;
+  border-radius: 10px;
+  display: none;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+  display: block;
+}
+
+.side-menu {
+  position: fixed;
+  /* background: #1A212F; */
+  background: #212F3E;
+  width: 300px;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 30px 20px;
+  transition: width 0.2s ease-in;
+}
+
+.side-menu.inactive {
+  width: 80px;
+}
+
+.side-menu .top-section {
+  position: relative;
+}
+
+.side-menu .top-section .logo {
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+  display: inline-block;
+}
+.side-menu .top-section .logo img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.side-menu .top-section .toggle-menu-btn {
+  /* color: #666; */
+  color: rgb(61, 98, 220);
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  cursor: pointer;
+}
+
+.side-menu.inactive .top-section .toggle-menu-btn {
+  right: -50px;
+}
+
+.side-menu .main-menu .menu-item {
+  /* color: #333; */
+  color: #fff;
+  text-decoration: none;
+  font-size: 15px;
+  display: block;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.side-menu .main-menu .menu-item.active {
+  /* background: #333; */
+  /* background: #b4feba; */
+  background: #445363;
+  border-radius: 5px;
+  color: #fff;
+}
+
+.side-menu .main-menu {
+  margin: 5px 0;
+  position: relative;
+  /* max-height: 250px; */
+  height: auto;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+/* not required any more */
+/* .side-menu.inactive .main-menu {
+} */
+
+.side-menu .main-menu .menu-item .menu-icon {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+  line-height: 40px;
+  text-align: center;
+}
+
+.side-menu .main-menu .menu-item span {
+  position: absolute;
+  display: inline-block;
+  line-height: 40px;  
+  opacity: 1;
+  transition: opacity 0.2s ease-in;
+}
+
+.side-menu.inactive .main-menu .menu-item span {
+  opacity: 0;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.side-menu .main-menu .sub-menu {
+  /* color: #333; */
+  /* color: #fff; */
+  margin-left: 20px;
+  /* border-left: 1px solid #666; */
+  border-left: 2px solid #fff;
+  box-sizing: border-box;
+  padding-left: 30px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.2s ease-in;
+}
+
+.side-menu .main-menu .sub-menu.active {
+    /* background: rgb(69, 136, 195); */
+    background: #445363;
+    margin: 5px 0px 0px 20px;
+    border-radius: 4px;
+
+    /* color:#1A21' */
+  max-height: 200px;
+}
+
+.side-menu .main-menu .sub-menu a {
+  display: block;
+  margin: 5px 0;
+  font-size: 15px;
+  font-weight: 600;
+  text-decoration: none;
+  /* color: #333; */
+  color: #000;
+  box-sizing: border-box;
+  padding: 5px;
+}
+
+.side-menu .main-menu .sub-menu a.active {
+  /* change in background, not recorded in video */
+  /* background: #222; */
+  display: block;
+
+  border-radius: 5px;
+  /* color: #fff; */
+  /* color:'#000'; */
+}
+ 
+
+.divider {
+  width: 100%;
+  height:1px;
+  border-radius: 1px;
+  margin: 10px 0px;
+  /* background: #333; */
+  background: rgb(234, 231, 231);
+}
+.container {
+  margin-left: 300px;
+  transition: margin-left 0.2s ease-in;
+  padding: 50px;
+  box-sizing: border-box;
+}
+
+.container.inactive {
+  margin-left: 80px;
+}

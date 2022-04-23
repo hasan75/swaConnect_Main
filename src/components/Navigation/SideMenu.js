@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
-import logo from "../../assets/logo/swaconnect.png";
+import React, { useEffect, useState } from 'react';
+import logo from '../../assets/logo/swaconnect.png';
 // import user from "../../assets/user.jpg";
-import MenuItem from "./MenuItem";
+import MenuItem from './MenuItem';
 /**
  * @author
  * @function SideMenu
@@ -10,80 +10,75 @@ import MenuItem from "./MenuItem";
 // added more menuItems for testing
 export const menuItems = [
   {
-    name: "Dashboard",
+    name: 'Dashboard',
     exact: true,
-    to: "/",
-    iconClassName: "bi bi-speedometer2",
+    to: '/dashboard',
+    iconClassName: 'bi bi-speedometer2',
   },
   {
-    name: "SIM Cards",
+    name: 'SIM Cards',
     exact: true,
-    to: "#",
-    iconClassName: "bi bi-sim",
+    to: '#',
+    iconClassName: 'bi bi-sim',
     subMenus: [
-      { name: "ALL SIM Cards", to: "#" },
-      { name: "Add SIM Cards", to: "#" },
-      { name: "Service Carrier", to: "#" },
-      { name: "Phone Plans", to: "#" },
-      { name: "SIM Cards Returns", to: "#" },
-    ],
-  },
-  // {
-  //   name: "Dashboard",
-  //   exact: true,
-  //   to: "/",
-  //   iconClassName: "bi bi-speedometer2",
-  // },
-  // {
-  //   name: "Content",
-  //   exact: true,
-  //   to: `/content`,
-  //   iconClassName: "bi bi-speedometer2",
-  //   subMenus: [
-  //     { name: "Courses", to: "/content/courses" },
-  //     { name: "Videos", to: "/content/videos" },
-  //   ],
-  // },
-  {
-    name: "Devices",
-    exact: true,
-    to: "#",
-    iconClassName: "bi bi-phone",
-    subMenus: [
-      { name: "ALL Devices", to: "#" },
-      { name: "Device Returns", to: "#" },
+      { name: 'ALL SIM Cards', to: '/dashboard/simCards/allSimCard' },
+      { name: 'Add SIM Cards', to: '/dashboard/simCards/addSimCards' },
+      { name: 'Service Carrier', to: '/dashboard/simCards/serviceCarriers' },
+      { name: 'Phone Plans', to: '/dashboard/simCards/phonePlans' },
+      { name: 'SIM Cards Returns', to: '/dashboard/simCards/simCardReturns' },
     ],
   },
   {
-    name: "Vendors",
+    name: 'Devices',
     exact: true,
-    to: "#",
-    iconClassName: "bi bi-people",
+    to: '#',
+    iconClassName: 'bi bi-phone',
     subMenus: [
-      { name: "SIM Crads Orders", to: "#" },
-      { name: "Device Orders", to: "#" },
+      { name: 'ALL Devices', to: '/dashboard/devices/allDevices' },
+      { name: 'Device Returns', to: '/dashboard/devices/deviceReturns' },
     ],
   },
-  { name: "Operations", to: "#", iconClassName: "bi bi-sun" },
+  {
+    name: 'Vendors',
+    exact: true,
+    to: '#',
+    iconClassName: 'bi bi-people',
+    subMenus: [
+      { name: 'SIM Crads Orders', to: '/dashboard/vendors/simCardsOrders' },
+      { name: 'Device Orders', to: '/dashboard/vendors/deviceOrders' },
+    ],
+  },
+  {
+    name: 'Operations',
+    to: '/dashboard/operations',
+    iconClassName: 'bi bi-sun',
+  },
 
-  { name: "Subscribers", to: "#", iconClassName: "bi bi-person-check" },
-  { name: "Applications", to: "#", iconClassName: "bi bi-flower1" },
-  { name: "Distributors & Agents", to: "#", iconClassName: "bi bi-person-bounding-box" },
-  { name: "Reports", to: "#", iconClassName: "bi bi-x-octagon" },
-  { name: "Users", to: "#", iconClassName: "bi bi-person" },
-  { name: "Settings", to: "#", iconClassName: "bi bi-gear" },
-  { name: "Logout", to: "#", iconClassName: "bi bi-power" },
-
-];
-// added more sttingItems for testing
-export const settingItems = [
   {
-    name: "Setting",
-    exact: true,
-    to: "/",
-    iconClassName: "bi bi-speedometer2",
-  }
+    name: 'Subscribers',
+    to: '/dashboard/subscribers',
+    iconClassName: 'bi bi-person-check',
+  },
+  {
+    name: 'Applications',
+    to: '/dashboard/applications',
+    iconClassName: 'bi bi-flower1',
+  },
+  {
+    name: 'Distributors & Agents',
+    to: '/dashboard/distributors',
+    iconClassName: 'bi bi-person-bounding-box',
+  },
+  {
+    name: 'Reports',
+    to: '/dashboard/report',
+    iconClassName: 'bi bi-x-octagon',
+  },
+  { name: 'Users', to: '/dashboard/users', iconClassName: 'bi bi-person' },
+  { name: 'Settings', to: '/dashboard/settings', iconClassName: 'bi bi-gear' },
+  { name: 'Logout', to: '/logout', iconClassName: 'bi bi-power' },
 ];
+
 const SideMenu = (props) => {
   const [inactive, setInactive] = useState(false);
 
@@ -95,51 +90,50 @@ const SideMenu = (props) => {
     props.onCollapse(inactive);
   }, [inactive]);
 
-  //just an improvment and it is not recorded in video :(
+  //just an improvment
   const removeActiveClassFromSubMenu = () => {
-    document.querySelectorAll(".sub-menu").forEach((el) => {
-      el.classList.remove("active");
+    document.querySelectorAll('.sub-menu').forEach((el) => {
+      el.classList.remove('active');
     });
   };
 
   /*just a little improvement over click function of menuItem
-    Now no need to use expand state variable in MenuItem component
+    no need to use expand state variable in MenuItem component
   */
   useEffect(() => {
-    let menuItems = document.querySelectorAll(".menu-item");
+    let menuItems = document.querySelectorAll('.menu-item');
     menuItems.forEach((el) => {
-      el.addEventListener("click", (e) => {
+      el.addEventListener('click', (e) => {
         const next = el.nextElementSibling;
         removeActiveClassFromSubMenu();
-        menuItems.forEach((el) => el.classList.remove("active"));
-        el.classList.toggle("active");
+        menuItems.forEach((el) => el.classList.remove('active'));
+        el.classList.toggle('active');
         console.log(next);
         if (next !== null) {
-          next.classList.toggle("active");
+          next.classList.toggle('active');
         }
       });
     });
   }, []);
 
   return (
-    <div className={`side-menu ${inactive ? "inactive" : ""}`}>
-      <div className="top-section">
-        <div className="logo">
-          <img src={logo} alt="webscript" />
+    <div className={`side-menu ${inactive ? 'inactive' : ''}`}>
+      <div className='top-section'>
+        <div className='logo'>
+          <img src={logo} alt='webscript' />
         </div>
-        <div onClick={() => setInactive(!inactive)} className="toggle-menu-btn">
+        <div onClick={() => setInactive(!inactive)} className='toggle-menu-btn'>
           {inactive ? (
-            <i class="bi bi-arrow-right-square-fill"></i>
+            <i class='bi bi-arrow-right-square-fill'></i>
           ) : (
-            <i class="bi bi-arrow-left-square-fill"></i>
+            <i class='bi bi-arrow-left-square-fill'></i>
           )}
         </div>
       </div>
 
+      <div className='divider'></div>
 
-      <div className="divider"></div>
-
-      <div className="main-menu">
+      <div className='main-menu'>
         <ul>
           {menuItems.map((menuItem, index) => (
             <MenuItem

@@ -17,6 +17,7 @@ const Videos2 = () => <h1>Content/Videos 2</h1>;
 const Design2 = () => <h1>Design 2</h1>;
 function App() {
   const [inactive, setInactive] = useState(false);
+
   return (
     <div className='App'>
       <Router>
@@ -24,58 +25,75 @@ function App() {
           <Route exact path={'/'}>
             <Login></Login>
           </Route>
-
           <Route>
             {/* <Switch> */}
             <SideMenu
               onCollapse={(inactive) => {
-                console.log(inactive);
                 setInactive(inactive);
               }}
             />
-            <div className={`containerSide ${inactive ? 'inactive' : ''}`}>
-              {menuItems.map((menu, index) => (
-                <>
-                  <Route key={menu.name} exact={menu.exact} path={menu.to}>
-                    <h1>{menu.name}</h1>
-                  </Route>
-                  {menu.subMenus && menu.subMenus.length > 0
-                    ? menu.subMenus.map((subMenu, i) => (
-                        <Route key={subMenu.name} path={subMenu.to}>
-                          <h1>{subMenu.name}</h1>
-                        </Route>
-                      ))
-                    : null}
-                </>
-              ))}
+            <div
+              className={` ${
+                inactive ? 'containerSide inactive' : 'containerSide'
+              }`}
+            >
+              <Route exact path={'/dashboard'}>
+                <Content />
+              </Route>
+              <Route path={'/dashboard/simCards/allSimCard'}>
+                <Courses />
+              </Route>
+              <Route path={'/dashboard/simCards/addSimCards'}>
+                <Videos />
+              </Route>
+              <Route path={'/dashboard/simCards/serviceCarriers'}>
+                <Design />
+              </Route>
+              <Route exact path={'/dashboard/simCards/phonePlans'}>
+                <Content2 />
+              </Route>
+              <Route path={'/dashboard/simCards/simCardReturns'}>
+                <Courses2 />
+              </Route>
+              <Route path={'/dashboard/devices/allDevices'}>
+                <Videos2 />
+              </Route>
+              <Route path={'/dashboard/devices/deviceReturns'}>
+                <Design2 />
+              </Route>
+              <Route path={'/dashboard/vendors/simCardsOrders'}>
+                <Design2 />
+              </Route>
+              <Route path={'/dashboard/vendors/deviceOrders'}>
+                <Design2 />
+              </Route>
+              <Route path={'/dashboard/operations'}>
+                <Design2 />
+              </Route>
+              <Route path={'/dashboard/subscribers'}>
+                <Design2 />
+              </Route>
+              <Route path={'/dashboard/applications'}>
+                <Design2 />
+              </Route>
+              <Route path={'/dashboard/distributors'}>
+                <Design2 />
+              </Route>
+              <Route path={'/dashboard/report'}>
+                <Design2 />
+              </Route>
+              <Route path={'/dashboard/users'}>
+                <Design2 />
+              </Route>
+              <Route path={'/dashboard/settings'}>
+                <Design2 />
+              </Route>
+              <Route path={'/logout'}>
+                <Design2 />
+              </Route>
             </div>
             {/* </Switch> */}
           </Route>
-
-          {/* <Route exact path={"/content"}>
-              <Content />
-            </Route>
-            <Route path={"/content/courses"}>
-              <Courses />
-            </Route>
-            <Route path={"/content/videos"}>
-              <Videos />
-            </Route>
-            <Route path={"/design"}>
-              <Design />
-            </Route>
-            <Route exact path={"/content-2"}>
-              <Content2 />
-            </Route>
-            <Route path={"/content-2/courses"}>
-              <Courses2 />
-            </Route>
-            <Route path={"/content-2/videos"}>
-              <Videos2 />
-            </Route>
-            <Route path={"/design-2"}>
-              <Design2 />
-            </Route> */}
         </Switch>
       </Router>
     </div>

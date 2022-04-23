@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../../assets/logo/swaconnect.png';
 // import user from "../../assets/user.jpg";
 import MenuItem from './MenuItem';
@@ -41,7 +42,7 @@ export const menuItems = [
   {
     name: 'Vendors',
     exact: true,
-    to: '#',
+    to: '/dashboard/vendors',
     iconClassName: 'bi bi-people',
     subMenus: [
       { name: 'SIM Crads Orders', to: '/dashboard/vendors/simCardsOrders' },
@@ -120,7 +121,9 @@ const SideMenu = (props) => {
     <div className={`side-menu ${inactive ? 'inactive' : ''}`}>
       <div className='top-section'>
         <div className='logo'>
-          <img src={logo} alt='webscript' />
+          <Link to={'/dashboard'}>
+            <img src={logo} alt='webscript' />
+          </Link>
         </div>
         <div onClick={() => setInactive(!inactive)} className='toggle-menu-btn'>
           {inactive ? (

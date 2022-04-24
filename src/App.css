@@ -49,7 +49,7 @@ body {
   /* background: #1A212F; */
   background: #212F3E;
   /* width changed 260 from 300  */
-  width: 260px;
+  width: 240px;
   height: 100%;
   box-sizing: border-box;
   padding: 30px 20px;
@@ -198,9 +198,9 @@ body {
   background: rgb(234, 231, 231);
 }
 .containerSide {
-  margin-left: 260px;
+  margin-left: 240px;
   transition: margin-left 0.2s ease-in;
-  padding: 50px;
+  padding: 40px 20px;
   box-sizing: border-box;
 }
 .containerSide.inactive {

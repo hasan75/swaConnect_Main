@@ -1,0 +1,25 @@
+#allSimCard {
+    border-left: 3px solid;
+    border-image: linear-gradient(rgb(236, 62, 42), tomato);
+    border-image-slice: 1;
+}
+#active {
+    border-left: 3px solid;
+    border-image: linear-gradient(blue, cyan);
+    border-image-slice: 1;
+}
+#nonActive {
+    border-left: 3px solid;
+    border-image: linear-gradient(rgb(236, 62, 42), tomato);
+    border-image-slice: 1;
+}
+#assigned {
+    border-left: 3px solid;
+    border-image: linear-gradient(blue, cyan);
+    border-image-slice: 1;
+}
+#nonAssigned {
+    border-left: 3px solid;
+    border-image: linear-gradient(rgb(236, 62, 42), tomato);
+    border-image-slice: 1;
+}

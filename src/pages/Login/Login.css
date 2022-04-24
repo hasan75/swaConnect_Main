@@ -5,6 +5,9 @@
   .formContainer {
     width: 100%;
     max-width: 450px !important;
+    background-color: rgba(189, 186, 186, 0.329);
+    padding: 60px 20px;
+    border-radius: 5px;
   }
   .loginForm input {
     display: block;

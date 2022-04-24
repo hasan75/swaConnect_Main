@@ -22,7 +22,7 @@ export const menuItems = [
     to: '#',
     iconClassName: 'bi bi-sim',
     subMenus: [
-      { name: 'ALL SIM Cards', to: '/dashboard/simCards/allSimCard' },
+      { name: 'All SIM Cards', to: '/dashboard/simCards/allSimCard' },
       { name: 'Add SIM Cards', to: '/dashboard/simCards/addSimCards' },
       { name: 'Service Carrier', to: '/dashboard/simCards/serviceCarriers' },
       { name: 'Phone Plans', to: '/dashboard/simCards/phonePlans' },

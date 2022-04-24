@@ -5,16 +5,21 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { useState } from 'react';
 import ACPVerForm from './components/ACPVerForm/ACPVerForm';
 import Login from './pages/Login/Login';
+import Dashboard from './pages/Dashboard/Dashboard';
+import AllSimCards from './pages/AllSimCards/AllSimCards';
 
-const Dashboard = () => <ACPVerForm />;
+// for test
+
+// const Dashboard = () => <ACPVerForm />;
 const Content = () => <h1>Content</h1>;
-const Courses = () => <h1>Content/Courses</h1>;
+// const Courses = () => <h1>Content/Courses</h1>;
 const Videos = () => <h1>Content/Videos</h1>;
 const Design = () => <h1>Design</h1>;
 const Content2 = () => <h1>Content2</h1>;
 const Courses2 = () => <h1>Content/Courses 2</h1>;
 const Videos2 = () => <h1>Content/Videos 2</h1>;
 const Design2 = () => <h1>Design 2</h1>;
+
 function App() {
   const [inactive, setInactive] = useState(false);
 
@@ -38,10 +43,10 @@ function App() {
               }`}
             >
               <Route exact path={'/dashboard'}>
-                <Content />
+                <Dashboard></Dashboard>
               </Route>
               <Route path={'/dashboard/simCards/allSimCard'}>
-                <Courses />
+                <AllSimCards></AllSimCards>
               </Route>
               <Route path={'/dashboard/simCards/addSimCards'}>
                 <Videos />

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../../assets/logo/swaconnect.png';
+import { useHistory } from 'react-router';
 // import user from "../../assets/user.jpg";
 import MenuItem from './MenuItem';
 /**
@@ -77,11 +78,13 @@ export const menuItems = [
   },
   { name: 'Users', to: '/dashboard/users', iconClassName: 'bi bi-person' },
   { name: 'Settings', to: '/dashboard/settings', iconClassName: 'bi bi-gear' },
-  { name: 'Logout', to: '/logout', iconClassName: 'bi bi-power' },
+  { name: 'Logout', to: '/', iconClassName: 'bi bi-power' },
 ];
 
 const SideMenu = (props) => {
   const [inactive, setInactive] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     if (inactive) {
@@ -117,6 +120,14 @@ const SideMenu = (props) => {
     });
   }, []);
 
+  // for logout
+
+  const logOut = () => {
+    localStorage.clear();
+    history.go(0);
+    // window.location.href = '/';
+  };
+
   return (
     <div className={`side-menu ${inactive ? 'inactive' : ''}`}>
       <div className='top-section'>
@@ -149,6 +160,9 @@ const SideMenu = (props) => {
               onClick={(e) => {
                 if (inactive) {
                   setInactive(false);
+                }
+                if (e.target.innerHTML === 'Logout') {
+                  logOut();
                 }
               }}
             />

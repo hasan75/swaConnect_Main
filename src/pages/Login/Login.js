@@ -3,32 +3,52 @@ import { useForm } from 'react-hook-form';
 import { useHistory } from 'react-router-dom';
 import avatar from '../../assets/logo/swaconnec.png';
 import './Login.css';
+import PropTypes from 'prop-types';
 
-const Login = () => {
+async function loginUser(credentials) {
+  return fetch('http://localhost:3939/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(credentials),
+  }).then((data) => data.json());
+}
+
+const Login = ({ setToken }) => {
   const { register, handleSubmit } = useForm();
+
   const history = useHistory();
+
+  // async function login(data) {
+  //   let result = await fetch('http://localhost:3939/login', {
+  //     method: 'POST',
+  //     headers: {
+  //       'Content-type': 'application/json',
+  //       Accept: 'application/json',
+  //     },
+  //     body: JSON.stringify(data),
+  //   });
+  //   result = await result.json();
+  //   console.log(result.token);
+  //   localStorage.setItem('token', JSON.stringify(result.token));
+  //   history.push('/dashboard');
+  // }
+
   // useEffect(() => {
   //   if (localStorage.getItem('user-info')) {
   //     history.push('/dashboard');
   //   }
   // }, []);
 
-  const onSubmit = (data) => {
-    // userLogin({ ...data, history, redirect });
-    // async function login(data) {
-    //   let result = await fetch('http://localhost:3939/login', {
-    //     method: 'POST',
-    //     headers: {
-    //       'Content-type': 'application/json',
-    //       Accept: 'application/json',
-    //     },
-    //     body: JSON.stringify(data),
-    //   });
-    //   result = await result.json();
-    //   localStorage.setItem('user-info', JSON.stringify(result));
-    //   history.push('/dashboard');
-    // }
-    console.log(data);
+  // const onSubmit = (data) => {
+  //   login(data);
+  //   console.log(data);
+  // };
+
+  const onSubmit = async (data) => {
+    const token = await loginUser(data);
+    setToken(token);
   };
 
   return (
@@ -64,6 +84,10 @@ const Login = () => {
       </div>
     </div>
   );
+};
+
+Login.propTypes = {
+  setToken: PropTypes.func.isRequired,
 };
 
 export default Login;

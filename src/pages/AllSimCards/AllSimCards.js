@@ -3,8 +3,12 @@ import MaterialTable from 'material-table';
 import { Link } from 'react-router-dom';
 import allsimCardStyles from './AllSimCard.module.css';
 import tableIcons from '../../components/IconProvider/IconProvider';
+import useToken from '../../hooks/useToken';
 
 const AllSimCards = () => {
+  const { token } = useToken();
+  // console.log(token);
+
   const [ssid, setSSID] = useState('');
   const ssidRef = useRef('');
 

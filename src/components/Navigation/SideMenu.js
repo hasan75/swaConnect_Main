@@ -81,8 +81,17 @@ export const menuItems = [
   { name: 'Logout', to: '/', iconClassName: 'bi bi-power' },
 ];
 
+const sideMenuToggle = () => {
+  console.log(window.innerWidth);
+  if (window.innerWidth < 768) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
 const SideMenu = (props) => {
-  const [inactive, setInactive] = useState(false);
+  const [inactive, setInactive] = useState(sideMenuToggle());
 
   const history = useHistory();
 

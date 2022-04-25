@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const useToken = () => {
   function getToken() {
     const tokenString = localStorage.getItem('token');
-    console.log(tokenString);
+    // console.log(tokenString);
     if (tokenString) {
       const userToken = JSON.parse(tokenString);
       return userToken;

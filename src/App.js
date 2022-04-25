@@ -8,6 +8,7 @@ import Login from './pages/Login/Login';
 import Dashboard from './pages/Dashboard/Dashboard';
 import AllSimCards from './pages/AllSimCards/AllSimCards';
 import useToken from './hooks/useToken';
+import ContextProvider from './contexts/ContextProvider';
 
 // for test
 
@@ -37,7 +38,7 @@ function App() {
   const { token, setToken } = useToken();
 
   // const token = getToken();
-  console.log(token);
+  // console.log(token);
 
   if (!token) {
     return <Login setToken={setToken}></Login>;
@@ -45,85 +46,87 @@ function App() {
 
   return (
     <div className='App'>
-      <Router>
-        <Switch>
-          {/* <Route exact path={'/'}>
+      <ContextProvider>
+        <Router>
+          <Switch>
+            {/* <Route exact path={'/'}>
             <Login></Login>
           </Route> */}
-          <Route>
-            {/* <Switch> */}
-            <SideMenu
-              onCollapse={(inactive) => {
-                setInactive(inactive);
-              }}
-            />
-            <div
-              className={` ${
-                inactive ? 'containerSide inactive' : 'containerSide'
-              }`}
-            >
-              <Route exact path={'/'}>
-                <Dashboard></Dashboard>
-              </Route>
-              <Route exact path={'/dashboard'}>
-                <Dashboard></Dashboard>
-              </Route>
-              <Route path={'/dashboard/simCards/allSimCard'}>
-                <AllSimCards></AllSimCards>
-              </Route>
-              <Route path={'/dashboard/simCards/addSimCards'}>
-                <Videos />
-              </Route>
-              <Route path={'/dashboard/simCards/serviceCarriers'}>
-                <Design />
-              </Route>
-              <Route exact path={'/dashboard/simCards/phonePlans'}>
-                <Content2 />
-              </Route>
-              <Route path={'/dashboard/simCards/simCardReturns'}>
-                <Courses2 />
-              </Route>
-              <Route path={'/dashboard/devices/allDevices'}>
-                <Videos2 />
-              </Route>
-              <Route path={'/dashboard/devices/deviceReturns'}>
-                <Design2 />
-              </Route>
-              <Route path={'/dashboard/vendors/simCardsOrders'}>
-                <Design2 />
-              </Route>
-              <Route path={'/dashboard/vendors/deviceOrders'}>
-                <Design2 />
-              </Route>
-              <Route path={'/dashboard/operations'}>
-                <Design2 />
-              </Route>
-              <Route path={'/dashboard/subscribers'}>
-                <Design2 />
-              </Route>
-              <Route path={'/dashboard/applications'}>
-                <Design2 />
-              </Route>
-              <Route path={'/dashboard/distributors'}>
-                <Design2 />
-              </Route>
-              <Route path={'/dashboard/report'}>
-                <Design2 />
-              </Route>
-              <Route path={'/dashboard/users'}>
-                <Design2 />
-              </Route>
-              <Route path={'/dashboard/settings'}>
-                <Design2 />
-              </Route>
-              <Route path={'/logout'}>
-                <Design2 />
-              </Route>
-            </div>
-            {/* </Switch> */}
-          </Route>
-        </Switch>
-      </Router>
+            <Route>
+              {/* <Switch> */}
+              <SideMenu
+                onCollapse={(inactive) => {
+                  setInactive(inactive);
+                }}
+              />
+              <div
+                className={` ${
+                  inactive ? 'containerSide inactive' : 'containerSide'
+                }`}
+              >
+                <Route exact path={'/'}>
+                  <Dashboard></Dashboard>
+                </Route>
+                <Route exact path={'/dashboard'}>
+                  <Dashboard></Dashboard>
+                </Route>
+                <Route path={'/dashboard/simCards/allSimCard'}>
+                  <AllSimCards></AllSimCards>
+                </Route>
+                <Route path={'/dashboard/simCards/addSimCards'}>
+                  <Videos />
+                </Route>
+                <Route path={'/dashboard/simCards/serviceCarriers'}>
+                  <Design />
+                </Route>
+                <Route exact path={'/dashboard/simCards/phonePlans'}>
+                  <Content2 />
+                </Route>
+                <Route path={'/dashboard/simCards/simCardReturns'}>
+                  <Courses2 />
+                </Route>
+                <Route path={'/dashboard/devices/allDevices'}>
+                  <Videos2 />
+                </Route>
+                <Route path={'/dashboard/devices/deviceReturns'}>
+                  <Design2 />
+                </Route>
+                <Route path={'/dashboard/vendors/simCardsOrders'}>
+                  <Design2 />
+                </Route>
+                <Route path={'/dashboard/vendors/deviceOrders'}>
+                  <Design2 />
+                </Route>
+                <Route path={'/dashboard/operations'}>
+                  <Design2 />
+                </Route>
+                <Route path={'/dashboard/subscribers'}>
+                  <Design2 />
+                </Route>
+                <Route path={'/dashboard/applications'}>
+                  <Design2 />
+                </Route>
+                <Route path={'/dashboard/distributors'}>
+                  <Design2 />
+                </Route>
+                <Route path={'/dashboard/report'}>
+                  <Design2 />
+                </Route>
+                <Route path={'/dashboard/users'}>
+                  <Design2 />
+                </Route>
+                <Route path={'/dashboard/settings'}>
+                  <Design2 />
+                </Route>
+                <Route path={'/logout'}>
+                  <Design2 />
+                </Route>
+              </div>
+              {/* </Switch> */}
+            </Route>
+          </Switch>
+        </Router>
+      </ContextProvider>
     </div>
   );
 }

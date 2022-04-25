@@ -10,7 +10,7 @@ import AllSimCards from './pages/AllSimCards/AllSimCards';
 import useToken from './hooks/useToken';
 import ContextProvider from './contexts/ContextProvider';
 import SimCardDetails from './pages/SimCardDetails/SimCardDetails';
-import AddSimCards from './pages/AddSimCards';
+import AddSimCards from './pages/AddSimCards/AddSimCards';
 
 // for test
 

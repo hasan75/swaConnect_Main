@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import addSimStyles from '../assets/css/AddSimCards.module.css';
+import ImportSim from '../../components/ImportSim/ImportSim';
+import addSimStyles from './AddSimCards.module.css';
 
 const AddSimCards = () => {
   const [toggleDivision, setToggleDivision] = useState(1);
@@ -58,7 +59,7 @@ const AddSimCards = () => {
                   : addSimStyles['contentForm']
               }
             >
-              <h2>Hello</h2>
+              <ImportSim></ImportSim>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import AddNewSimCard from '../../components/AddNewSimCard/AddNewSimCard';
 import ImportSim from '../../components/ImportSim/ImportSim';
 import addSimStyles from './AddSimCards.module.css';
 
@@ -47,7 +48,9 @@ const AddSimCards = () => {
                   : addSimStyles['contentForm']
               }
             >
-              <h1>Kuddus</h1>
+              <div className='container'>
+                <AddNewSimCard></AddNewSimCard>
+              </div>
             </div>
             <div
               className={

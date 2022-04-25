@@ -12,7 +12,9 @@
     -webkit-transition: outline-offset .15s ease-in-out, background-color .15s linear;
     transition: outline-offset .15s ease-in-out, background-color .15s linear; border:1px solid #92b0b3;
  }
+
 .files{ position:relative}
+
 .files:after {  pointer-events: none;
     position: absolute;
     top: 60px;
@@ -21,7 +23,7 @@
     right: 0;
     height: 56px;
     content: "";
-    background-image: url(https://image.flaticon.com/icons/png/128/109/109612.png);
+    background-image: url(https://clippingpathgreat.com/wp-content/uploads/2021/04/upload-files.jpg);
     display: block;
     margin: 0 auto;
     background-size: 100%;

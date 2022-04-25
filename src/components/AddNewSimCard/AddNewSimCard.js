@@ -166,6 +166,8 @@ function AddNewSimCard() {
   const { token } = useToken();
   const { register, handleSubmit, reset } = useForm();
 
+  //process.env file used
+
   const url = process.env.REACT_APP_ROOT_URL;
 
   const onSubmit = (data) => {

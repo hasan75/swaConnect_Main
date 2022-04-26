@@ -64,7 +64,6 @@ const AllSimCards = () => {
 
   const getSSID = (e) => {
     setSSID(e.target.value);
-    console.log(phonePlan);
   };
 
   const distributorChange = (e) => {
@@ -111,7 +110,6 @@ const AllSimCards = () => {
         (simStatus === '' || mData.sim_status === simStatus) &&
         (ssid === '' || mData.ssid === ssid)
     );
-    console.log(matchedData);
     setDisplayData(matchedData);
   };
 
@@ -134,6 +132,18 @@ const AllSimCards = () => {
     setSimStatus('');
     simStatusRef.current.value = '';
   };
+
+  // let newDisplayData = [];
+  // displayData.map((results) => {
+  //   results.forEach((data) => {
+  //     newDisplayData.push({
+  //       PUK1: data.PUK1,
+  //       SSID: data.SSID,
+  //     });
+  //   });
+  // });
+
+  // console.log('new', newDisplayData);
 
   return (
     <section>
@@ -315,8 +325,18 @@ const AllSimCards = () => {
             { title: 'Created Date', field: 'createdDate', type: 'date' },
             { title: 'Sim Status', field: 'simStatus', sorting: false },
             { title: 'Status Date', field: 'statusDate', type: 'date' },
-            { title: 'Vendor', field: 'vendorId', sorting: false },
-            { title: 'Distributor', field: 'distributor', sorting: false },
+            {
+              title: 'Vendor',
+              field: 'company',
+              sorting: false,
+              render: (row) => row.serviceCarrier.name,
+            },
+            {
+              title: 'Distributor',
+              field: 'company',
+              sorting: false,
+              render: (row) => row?.vendor?.company,
+            },
             { title: 'Agent', field: 'agent', sorting: false },
             { title: 'Phone Plan', field: 'phone_plan', sorting: false },
             {

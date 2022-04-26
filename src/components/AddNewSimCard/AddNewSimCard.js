@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import avfStyle from './Styles/ACPVerForm.module.css';
 import { useForm } from 'react-hook-form';
 import useToken from '../../hooks/useToken';
@@ -8,6 +8,7 @@ function AddNewSimCard() {
   const [active, setActive] = useState(true);
   const [alternativeSelect, setAlternativeSelect] = useState(false);
   const selectRef = useRef('');
+  const [serviceCarrier, setServiceCarrier] = useState([]);
   // the below useRef is used for alternative id type
   const disabledRef = useRef('');
   const bqpselectRef = useRef('');
@@ -172,8 +173,8 @@ function AddNewSimCard() {
 
   const onSubmit = (data) => {
     data.userName = 'hasanjab14';
-    data.vendorId = '2324354564657';
-    data.orderNumber = 45454544545445;
+    data.vendorId = '626725302339ce037aa6ef25';
+    data.orderNumber = '626727dcc400516e0d7246e8';
     const preData = {
       simAddingMethod: 'manually',
       simCardData: data,
@@ -190,13 +191,33 @@ function AddNewSimCard() {
     })
       .then((res) => {
         res.json();
-        console.log(res);
+        console.log(res.status);
+        if (res.status === 200) {
+          Swal.fire('Sim Added Successfully!', '', 'success');
+        }
       })
       .then((data) => {
         reset();
-        // Swal.fire('Confirmed!', '', 'success');
       });
   };
+
+  useEffect(() => {
+    fetch(`${url}/servicecarrier`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setServiceCarrier(data.data))
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          tittle: 'Sorry',
+          text: 'Fetching went Wrong',
+        });
+      });
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -246,8 +267,13 @@ function AddNewSimCard() {
                   <option selected disabled hidden>
                     Select
                   </option>
-                  <option value='321Com'>321</option>
-                  <option value='PWG'>PWG</option>
+                  {serviceCarrier.map((service) => (
+                    <option key={service._id} value={service._id}>
+                      {service.name}
+                    </option>
+                  ))}
+                  {/* <option value='321Com'>321</option>
+                  <option value='PWG'>PWG</option> */}
                 </select>
               </div>
             </div>

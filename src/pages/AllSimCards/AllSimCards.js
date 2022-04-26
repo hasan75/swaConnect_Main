@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import allsimCardStyles from './AllSimCard.module.css';
 import tableIcons from '../../components/IconProvider/IconProvider';
 import useToken from '../../hooks/useToken';
+import Swal from 'sweetalert2';
 
 const AllSimCards = () => {
   const { token } = useToken();
@@ -28,7 +29,9 @@ const AllSimCards = () => {
   const agentRef = useRef('');
   const [agent, setAgent] = useState('');
 
-  const url = 'http://localhost:4040/simCards';
+  const urlPre = process.env.REACT_APP_ROOT_URL;
+
+  const url = `${urlPre}/simCard`;
 
   const [data, setData] = useState([]);
   const [displayData, setDisplayData] = useState([]);
@@ -38,11 +41,24 @@ const AllSimCards = () => {
   }, []);
 
   const getSimCards = () => {
-    fetch(url)
+    fetch(url, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-type': 'application/json',
+      },
+    })
       .then((res) => res.json())
       .then((resp) => {
-        setData(resp);
-        setDisplayData(resp);
+        setData(resp.data);
+        setDisplayData(resp.data);
+        console.log(resp.data);
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Sorry',
+          text: `${err.message}`,
+        });
       });
   };
 
@@ -287,20 +303,19 @@ const AllSimCards = () => {
             { title: 'ID', field: 'id', sorting: false },
             {
               title: 'SSID',
-              field: 'ssid',
-              type: 'numeric',
+              field: 'SSID',
               sorting: false,
               render: (row) => (
-                <Link to={`/dashboard/simCardDetails/${row.ssid}`}>
-                  {row.ssid}
+                <Link to={`/dashboard/simCardDetails/${row.SSID}`}>
+                  {row.SSID}
                 </Link>
               ),
             },
-            { title: 'PUK 1', field: 'puk1', sorting: false },
-            { title: 'Created Date', field: 'created_date', type: 'date' },
-            { title: 'Sim Status', field: 'sim_status', sorting: false },
-            { title: 'Status Date', field: 'status_date', type: 'date' },
-            { title: 'Vendor', field: 'vendor', sorting: false },
+            { title: 'PUK 1', field: 'PUK1', sorting: false },
+            { title: 'Created Date', field: 'createdDate', type: 'date' },
+            { title: 'Sim Status', field: 'simStatus', sorting: false },
+            { title: 'Status Date', field: 'statusDate', type: 'date' },
+            { title: 'Vendor', field: 'vendorId', sorting: false },
             { title: 'Distributor', field: 'distributor', sorting: false },
             { title: 'Agent', field: 'agent', sorting: false },
             { title: 'Phone Plan', field: 'phone_plan', sorting: false },

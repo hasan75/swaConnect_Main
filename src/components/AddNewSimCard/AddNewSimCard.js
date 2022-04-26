@@ -172,10 +172,13 @@ function AddNewSimCard() {
 
   const onSubmit = (data) => {
     data.userName = 'hasanjab14';
+    data.vendorId = '2324354564657';
+    data.orderNumber = 45454544545445;
     const preData = {
       simAddingMethod: 'manually',
       simCardData: data,
     };
+    console.log(preData);
 
     fetch(`${url}/simcard/add`, {
       method: 'POST',

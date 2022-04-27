@@ -1,11 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SimCard from './SimCard/SimCard';
 import PhoneCarrierOperations from './PhoneCarrierOperations/PhoneCarrierOperations';
 import AcpOperation from './AcpOperation/AcpOperation';
 import Returns from './Returns/Returns';
 import Notes from './Notes/Notes';
+import SimOperationsLog from './SimOperationsLog/SimOperationsLog';
+import useToken from '../../hooks/useToken';
 
 const SimCardDetail = (props) => {
+  //url pre
+  const preUrl = process.env.REACT_APP_ROOT_URL;
+
+  const { token } = useToken();
+
+  const url = `${preUrl}/simCard`;
+
+  // getting sim info
+  const [simInfo, setSimInfo] = useState({});
+
+  // const _id = props.simId;
+  const _id = '6268574817f5a185a63c8f6f';
+  console.log(JSON.stringify({ _id }));
+
+  useEffect(() => {
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ _id }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data.data));
+  }, []);
+
   const { simId } = props;
   return (
     <div className='tables'>
@@ -14,6 +43,7 @@ const SimCardDetail = (props) => {
       <AcpOperation></AcpOperation>
       <Returns></Returns>
       <Notes></Notes>
+      <SimOperationsLog></SimOperationsLog>
     </div>
   );
 };

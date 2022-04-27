@@ -316,7 +316,7 @@ const AllSimCards = () => {
               field: 'SSID',
               sorting: false,
               render: (row) => (
-                <Link to={`/dashboard/simCardDetails/${row.SSID}`}>
+                <Link to={`/dashboard/simCardDetails/${row._id}`}>
                   {row.SSID}
                 </Link>
               ),

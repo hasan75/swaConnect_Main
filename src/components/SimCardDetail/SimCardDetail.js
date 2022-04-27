@@ -18,9 +18,7 @@ const SimCardDetail = (props) => {
   // getting sim info
   const [simInfo, setSimInfo] = useState({});
 
-  // const _id = props.simId;
-  const _id = '6268574817f5a185a63c8f6f';
-  console.log(JSON.stringify({ _id }));
+  const _id = props.simId;
 
   useEffect(() => {
     fetch(url, {
@@ -32,7 +30,7 @@ const SimCardDetail = (props) => {
       body: JSON.stringify({ _id }),
     })
       .then((res) => res.json())
-      .then((data) => console.log(data.data));
+      .then((data) => setSimInfo(data.data));
   }, []);
 
   const { simId } = props;

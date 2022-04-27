@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SimCard = () => {
+const SimCard = ({ simInfo }) => {
   return (
     <>
       <div className='simCardContainer m-2 border rounded p-3'>
@@ -23,11 +23,11 @@ const SimCard = () => {
             </thead>
             <tbody className='mb-5'>
               <tr>
-                <th scope='row'>1568454</th>
-                <td>4564786787</td>
-                <td>{new Date().toLocaleDateString()}</td>
-                <td>Kuddus</td>
-                <td>Najim Telecom</td>
+                <th scope='row'>{simInfo?.SSID}</th>
+                <td>{simInfo?.PUK1}</td>
+                <td>{new Date(simInfo?.createdDate).toLocaleDateString()}</td>
+                <td>{simInfo?.userName}</td>
+                <td>{simInfo?.vendor ? simInfo.vendor.company : 'NA'}</td>
               </tr>
             </tbody>
             <br />
@@ -41,10 +41,12 @@ const SimCard = () => {
             </thead>
             <tbody>
               <tr>
-                <td>1568454</td>
-                <td colSpan={2}>4564786787</td>
-                <td>Good</td>
-                <td>202020</td>
+                <td>{simInfo?.compatibility}</td>
+                <td colSpan={2}>
+                  {simInfo?.orderNumber ? simInfo.orderNumber : 'NA'}
+                </td>
+                <td>{simInfo?.physicalStatus}</td>
+                <td>{simInfo?.batchNumber ? simInfo.batchNumber : 'None'}</td>
               </tr>
             </tbody>
           </table>

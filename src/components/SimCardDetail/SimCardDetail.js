@@ -32,11 +32,10 @@ const SimCardDetail = (props) => {
       .then((res) => res.json())
       .then((data) => setSimInfo(data.data));
   }, []);
-
-  const { simId } = props;
+  console.log(simInfo);
   return (
     <div className='tables'>
-      <SimCard></SimCard>
+      <SimCard simInfo={simInfo}></SimCard>
       <PhoneCarrierOperations></PhoneCarrierOperations>
       <AcpOperation></AcpOperation>
       <Returns></Returns>

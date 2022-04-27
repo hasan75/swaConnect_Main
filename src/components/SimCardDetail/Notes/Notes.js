@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Returns = () => {
+const Notes = () => {
   return (
     <>
-      <div className='returnContainer m-2 border rounded p-3'>
+      <div className='simCardContainer m-2 border rounded p-3'>
         <div className='mb-2'>
           <div className='d-flex justify-content-between align-items-center'>
             <span className='fw-bold text-primary'>Returns</span>
@@ -59,4 +59,4 @@ const Returns = () => {
   );
 };
 
-export default Returns;
+export default Notes;

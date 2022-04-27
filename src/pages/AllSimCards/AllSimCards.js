@@ -326,7 +326,7 @@ const AllSimCards = () => {
             { title: 'Sim Status', field: 'simStatus', sorting: false },
             { title: 'Status Date', field: 'statusDate', type: 'date' },
             {
-              title: 'Vendor',
+              title: 'Service Carrier', //replaced with vendor
               field: 'company',
               sorting: false,
               render: (row) => row.serviceCarrier.name,
@@ -335,15 +335,27 @@ const AllSimCards = () => {
               title: 'Distributor',
               field: 'company',
               sorting: false,
-              render: (row) => row?.vendor?.company,
+              render: (row) =>
+                row?.vendor?.company ? row.vendor.company : 'NA',
             },
-            { title: 'Agent', field: 'agent', sorting: false },
-            { title: 'Phone Plan', field: 'phone_plan', sorting: false },
+            {
+              title: 'Agent',
+              field: 'agent',
+              sorting: false,
+              render: (row) => (row?.agent ? row.agent : 'NA'),
+            },
+            {
+              title: 'Phone Plan',
+              field: 'phone_plan',
+              sorting: false,
+              render: (row) => (row?.phonePlan ? row.phonePlan : 'NA'),
+            },
             {
               title: 'Customer ID',
               field: 'customer_id',
               type: 'numeric',
               sorting: false,
+              render: (row) => (row?.customerID ? row.customerID : 'NA'),
             },
           ]}
           data={displayData}

@@ -11,7 +11,7 @@ const SimCard = () => {
           </div>
         </div>
         <div className='table-responsive'>
-          <table class='table table-bordered'>
+          <table class='table table-bordered text-center'>
             <thead class='thead-dark'>
               <tr>
                 <th scope='col'>SSID</th>
@@ -34,15 +34,15 @@ const SimCard = () => {
             <thead class='thead-dark'>
               <tr>
                 <th scope='col'>Sim Card Compatibility</th>
-                <th scope='col'>Sim Order Number</th>
+                <th colSpan={2}>Sim Order Number</th>
                 <th scope='col'>Psycial Status</th>
                 <th scope='col'>Batch Number</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <th>1568454</th>
-                <td>4564786787</td>
+                <td>1568454</td>
+                <td colSpan={2}>4564786787</td>
                 <td>Good</td>
                 <td>202020</td>
               </tr>

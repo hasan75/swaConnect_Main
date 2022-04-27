@@ -3,6 +3,7 @@ import SimCard from './SimCard/SimCard';
 import PhoneCarrierOperations from './PhoneCarrierOperations/PhoneCarrierOperations';
 import AcpOperation from './AcpOperation/AcpOperation';
 import Returns from './Returns/Returns';
+import Notes from './Notes/Notes';
 
 const SimCardDetail = (props) => {
   const { simId } = props;
@@ -12,6 +13,7 @@ const SimCardDetail = (props) => {
       <PhoneCarrierOperations></PhoneCarrierOperations>
       <AcpOperation></AcpOperation>
       <Returns></Returns>
+      <Notes></Notes>
     </div>
   );
 };

@@ -1,0 +1,97 @@
+ .TableData > .table{
+   width: 100%;
+ }
+  .serviceView {
+    padding: 30px;
+  }
+
+  .serviceCarrierContainer{
+    background-color: white;
+    margin: 10px 0px;
+    border-radius: 7px;
+  }
+  
+  .serviceView h1 {
+    font-size: 25px;
+    padding: 15px 0px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+  
+  .serviceView table tbody tr td {
+    padding: 15px;
+    font-size: 15px;
+  }
+  
+  .button {
+    margin: 30px 0px;
+  }
+  
+  .downloadBtn, .printBtn {
+    background-color: DodgerBlue;
+    border: none;
+    color: white;
+    padding: 8px 15px;
+    cursor: pointer;
+    font-size: 15px;
+    border-radius: 4px;
+  }
+  
+  .downloadBtn {
+    margin-right: 5px;
+  }
+  
+  .printBtn {
+    margin-left: 5px;
+  }
+  
+  .downloadBtn:hover {
+    background-color: RoyalBlue;
+  }
+  
+  .printBtn:hover {
+    background-color: RoyalBlue;
+  }
+  
+  .addBtn {
+    position: absolute;
+    right: 0%;
+    padding: 8px;
+    border-radius: 4px;
+    border: none;
+    background: #4c62e2;
+    color: white;
+  }
+  
+  .planTable {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .planTable thead tr th {
+    font-size: 20px;
+    background: #f1eeee;
+    font-weight: 100;
+    padding-left: 30px;
+  }
+  
+  .planTable thead tr th:nth-child(4) {
+    text-align: end;
+    padding-right: 30px;
+  }
+  
+  .planTable tbody tr td {
+    font-size: 18px;
+    padding-left: 30px;
+    background: #b4cee4;
+  }
+  
+  .planTable tbody tr td i {
+    color: #e43039;
+  }
+  
+  .planTable tbody tr td:nth-child(4) {
+    text-align: end;
+    background: #b4cee4;
+    padding-right: 30px;
+  }
+  /*# sourceMappingURL=ServiceCarrier.module.css.map */

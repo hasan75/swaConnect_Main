@@ -11,6 +11,7 @@ import useToken from './hooks/useToken';
 import ContextProvider from './contexts/ContextProvider';
 import SimCardDetails from './pages/SimCardDetails/SimCardDetails';
 import AddSimCards from './pages/AddSimCards/AddSimCards';
+import ServiceCarriers from './pages/ServiceCarriers/ServiceCarriers';
 
 // for test
 
@@ -82,7 +83,7 @@ function App() {
                   <AddSimCards></AddSimCards>
                 </Route>
                 <Route path={'/dashboard/simCards/serviceCarriers'}>
-                  <Design />
+                  <ServiceCarriers></ServiceCarriers>
                 </Route>
                 <Route exact path={'/dashboard/simCards/phonePlans'}>
                   <Content2 />

@@ -267,7 +267,7 @@ function AddNewSimCard() {
                   <option selected disabled hidden>
                     Select
                   </option>
-                  {serviceCarrier.map((service) => (
+                  {serviceCarrier?.map((service) => (
                     <option key={service._id} value={service._id}>
                       {service.name}
                     </option>

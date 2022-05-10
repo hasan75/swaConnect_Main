@@ -154,7 +154,7 @@ const AllSimCards = () => {
         <span>Search By:</span>
         {/* form input  */}
         <div class='form-row row d-flex flex-row justify-content-center align-items-center'>
-          <div class='form-group d-flex flex-row justify-content-center align-items-center col-md-3 col-lg-3'>
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3 col-lg-3'>
             <label className='me-1' htmlFor='ssid'>
               SSID
             </label>
@@ -167,7 +167,7 @@ const AllSimCards = () => {
               onChange={getSSID}
             />
           </div>
-          <div class='col-md-6 col-lg-5'>
+          <div class='col-12 col-md-6 col-lg-5'>
             <div className='row'>
               {/* <div className='col-md-3'>
                 <span>Created Date</span>
@@ -185,7 +185,7 @@ const AllSimCards = () => {
                   onChange={createdDateFromChange}
                 />
               </div>
-              <div className='from-group col-md-5 d-flex flex-row justify-content-center align-items-center'>
+              <div className='from-group col-12 col-md-5 d-flex flex-row justify-content-center align-items-center'>
                 <label htmlFor='to' className='me-1'>
                   to
                 </label>
@@ -200,7 +200,7 @@ const AllSimCards = () => {
               </div>
             </div>
           </div>
-          <div class='form-group d-flex flex-row justify-content-center align-items-center col-md-3 col-lg-4'>
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3 col-lg-4'>
             <label className='me-1' htmlFor='simStatus'>
               Sim Status
             </label>
@@ -223,7 +223,7 @@ const AllSimCards = () => {
           </div>
         </div>
         <div class='form-row row my-1'>
-          <div class='form-group d-flex flex-row justify-content-center align-items-center col-md-3'>
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
             <label className='me-1' for='vendor'>
               Vendor
             </label>
@@ -241,7 +241,7 @@ const AllSimCards = () => {
               <option value='PWG'>PWG</option>
             </select>
           </div>
-          <div class='form-group d-flex flex-row justify-content-center align-items-center col-md-3'>
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
             <label className='me-1' for='distributor'>
               Distributor
             </label>
@@ -253,7 +253,7 @@ const AllSimCards = () => {
               onChange={distributorChange}
             />
           </div>
-          <div class='form-group d-flex flex-row justify-content-center align-items-center col-md-3'>
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
             <label className='me-1' for='agent'>
               Agent
             </label>
@@ -264,7 +264,7 @@ const AllSimCards = () => {
               onChange={agentChange}
             />
           </div>
-          <div class='form-group d-flex flex-row justify-content-center align-items-center col-md-3'>
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
             <label className='me-1' for='phonePlan'>
               Phone Plan
             </label>
@@ -291,10 +291,13 @@ const AllSimCards = () => {
         </div>
       </div>
       <div className='my-2 ms-3'>
-        <button onClick={handleBulkSearch} className='btn btn-success'>
+        <button onClick={handleBulkSearch} className='btn btn-success mb-1'>
           Search
         </button>
-        <button className='btn btn-success mx-3' onClick={resetSearchFields}>
+        <button
+          className='btn btn-success mx-md-3 ms-1 mb-1'
+          onClick={resetSearchFields}
+        >
           Reset Search Fields
         </button>
       </div>

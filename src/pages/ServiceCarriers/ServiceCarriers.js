@@ -106,8 +106,8 @@ const ServiceCarriers = () => {
 
   return (
     <div className={`${scStyle.serviceCarrierContainer} py-3`}>
-      <div className={scStyle.serviceData} class='my-5 mx-5'>
-        <div class='d-flex justify-content-between px-4'>
+      <div className={scStyle.serviceData} class='my-3 mx-lg-5'>
+        <div class='d-flex justify-content-between px-lg-4 px-2'>
           <h3>Service Carriers</h3>
           <button
             type='button'

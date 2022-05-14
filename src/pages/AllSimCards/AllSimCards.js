@@ -133,18 +133,6 @@ const AllSimCards = () => {
     simStatusRef.current.value = '';
   };
 
-  // let newDisplayData = [];
-  // displayData.map((results) => {
-  //   results.forEach((data) => {
-  //     newDisplayData.push({
-  //       PUK1: data.PUK1,
-  //       SSID: data.SSID,
-  //     });
-  //   });
-  // });
-
-  // console.log('new', newDisplayData);
-
   return (
     <section>
       <h3 className='fw-bold text-center my-2'>All Sim Cards</h3>

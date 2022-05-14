@@ -15,6 +15,8 @@ import ServiceCarriers from './pages/ServiceCarriers/ServiceCarriers';
 import SimCardOperations from './pages/SimCardOperations/SimCardOperations';
 import PhonePlans from './pages/PhonePlans/PhonePlans';
 import SimCardReturns from './pages/SimCardReturns/SimCardReturns';
+import SimCardOrders from './pages/SimCardOrders/SimCardOrders';
+import DeviceOrders from './pages/DeviceOrders/DeviceOrders';
 
 // for test
 
@@ -104,10 +106,10 @@ function App() {
                   <Design2 />
                 </Route>
                 <Route path={'/dashboard/vendors/simCardsOrders'}>
-                  <Design2 />
+                  <SimCardOrders></SimCardOrders>
                 </Route>
                 <Route path={'/dashboard/vendors/deviceOrders'}>
-                  <Design2 />
+                  <DeviceOrders></DeviceOrders>
                 </Route>
                 <Route path={'/dashboard/operations'}>
                   <Design2 />

@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
-import srStyle from './Styles/SimCardReturn.module.css';
+import drStyle from './Styles/DeviceOrder.module.css';
 
-const SimCardReturns = () => {
+const DeviceOrders = () => {
   // NOTE
   const [noteBtn, setNoteBtn] = useState(true);
   const [isNote, setIsNote] = useState(false);
@@ -33,6 +33,39 @@ const SimCardReturns = () => {
     }
     setNote(newNote);
   };
+
+  // END
+  // FILE
+  const [fileBtn, setFileBtn] = useState(true);
+  const [isFile, setIsFile] = useState(false);
+  const [fileTable, setFileTable] = useState(false);
+  const fileRef = useRef('');
+  const handleFile = () => {
+    setIsFile(!isFile);
+    setFileBtn(!fileBtn);
+  };
+  const [file, setFile] = useState([]);
+  const addFile = () => {
+    if (fileRef.current.value === '') {
+      alert('Please Enter value for adding plan ');
+    } else {
+      const fileValue = {
+        fileName: fileRef.current.value,
+      };
+      setFile([...file, fileValue]);
+      console.log(file);
+      fileRef.current.value = '';
+      setFileTable(true);
+    }
+  };
+  const fileDelete = (index) => {
+    let newFile = file.slice(0, index).concat(file.slice(index + 1));
+    if (file.length == 1 || file.length == 0) {
+      setFileTable(false);
+    }
+    setFile(newFile);
+  };
+
   // END
   // ITEW SELECT
   const itemRef = useRef('');
@@ -47,28 +80,31 @@ const SimCardReturns = () => {
   };
   // END
   return (
-    <div className={`${srStyle.srContainer} py-2 py-md-3`}>
-      <div className={srStyle.simreturnData} class='my-1 my-lg-3 mx-1 mx-lg-3'>
-        <div class='d-flex justify-content-between px-lg-4'>
-          <h3>Sim Card Returns</h3>
+    <div className={`${drStyle.doContainer} py-2 py-md-3`}>
+      <div
+        className={drStyle.deviceorderData}
+        class='my-1 my-lg-3 mx-1 mx-lg-3'
+      >
+        <div class='d-flex justify-content-between px-4'>
+          <h3>Device Order</h3>
           <button
             type='button'
             class='btn btn-secondary'
             data-bs-toggle='modal'
-            data-bs-target='#simreturnModal'
+            data-bs-target='#devicereturnModal'
           >
-            Add New Vendor
+            Add Device Order
           </button>
         </div>
-        <div className={srStyle.TableData}>
-          <table className={srStyle.Table}>
+        <div className={drStyle.TableData}>
+          <table className={drStyle.Table}>
             <thead>
               <tr>
-                <th>ID</th>
-                <th>Return Date</th>
-                <th>Return Reason</th>
-                <th>Agent</th>
-                <th>Distributor</th>
+                <th>Device Order Number</th>
+                <th>Order Date</th>
+                <th>Quantity</th>
+                <th>Vendor</th>
+                <th>Received Date</th>
                 <th>Operations</th>
               </tr>
             </thead>
@@ -76,15 +112,15 @@ const SimCardReturns = () => {
               <tr>
                 <td>324</td>
                 <td>20 April 2022</td>
-                <td>I have more sim same company</td>
+                <td>32</td>
                 <td>William</td>
-                <td>William</td>
+                <td>20 April 2022</td>
                 <td>
                   <ul>
                     <button
                       type='button'
                       data-bs-toggle='modal'
-                      data-bs-target='#viewsimreturnModal'
+                      data-bs-target='#viewdevicereturnModal'
                     >
                       View
                     </button>
@@ -101,16 +137,16 @@ const SimCardReturns = () => {
       </div>
       <div
         class='modal fade w-100'
-        id='simreturnModal'
+        id='devicereturnModal'
         tabindex='-1'
-        aria-labelledby='simreturnModalLabel'
+        aria-labelledby='devicereturnModalLabel'
         aria-hidden='true'
       >
         <div class='modal-dialog modal-xl'>
           <div class='modal-content'>
             <div class='modal-header'>
-              <h5 class='modal-title ms-5' id='simreturnModalLabel'>
-                Add Sim Card Return Data
+              <h5 class='modal-title ms-5' id='devicereturnModalLabel'>
+                Add Device Order Data
               </h5>
               <button
                 type='button'
@@ -126,38 +162,14 @@ const SimCardReturns = () => {
                     <div class='col-12 col-md-6 col-lg-6'>
                       <div class='mb-3 text-start'>
                         <label f class='form-label'>
-                          ID
-                        </label>
-                        <input
-                          type='number'
-                          class='form-control'
-                          placeholder='ID'
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div class='col-12 col-md-6 col-lg-6'>
-                      <div class='mb-3 text-start'>
-                        <label f class='form-label'>
-                          {' '}
-                          Return Reason
+                          Device Order Number
                         </label>
                         <input
                           type='text'
                           class='form-control'
-                          placeholder='Return Reason'
+                          placeholder='Device Order Number'
                           required
                         />
-                      </div>
-                    </div>
-                  </div>
-                  <div class='row px-5'>
-                    <div class='col-12 col-md-6 col-lg-6'>
-                      <div class='mb-3 text-start'>
-                        <label f class='form-label'>
-                          Return Date{' '}
-                        </label>
-                        <input type='date' class='form-control' required />
                       </div>
                     </div>
                     <div class='col-12 col-md-6 col-lg-6'>
@@ -200,6 +212,30 @@ const SimCardReturns = () => {
                       </div>
                     </div>
                   )}
+                  <div class='row px-5'>
+                    <div class='col-12 col-md-6 col-lg-6'>
+                      <div class='mb-3 text-start'>
+                        <label f class='form-label'>
+                          Oreder Date{' '}
+                        </label>
+                        <input type='date' class='form-control' required />
+                      </div>
+                    </div>
+                    <div class='col-12 col-md-6 col-lg-6'>
+                      <div class='mb-3 text-start'>
+                        <label f class='form-label'>
+                          {' '}
+                          Quantity
+                        </label>
+                        <input
+                          type='number'
+                          class='form-control'
+                          placeholder='Quantity'
+                          required
+                        />
+                      </div>
+                    </div>
+                  </div>
                   <div class='row px-5'>
                     <div class='col-12 col-md-6 col-lg-6'>
                       <div class='mb-3 text-start'>
@@ -346,7 +382,7 @@ const SimCardReturns = () => {
                         <div>
                           <button
                             onClick={addNote}
-                            className={srStyle.addBtn}
+                            className={drStyle.addBtn}
                             type='button'
                           >
                             ADD
@@ -420,11 +456,120 @@ const SimCardReturns = () => {
                     )}
                   </div>
                   {/* END  */}
-
+                  <div class=' m-3  '>
+                    <div class='d-flex mt-3'>
+                      <p class='fs-4 ms-4'> Add Files </p>
+                      {fileBtn && (
+                        <i
+                          onClick={handleFile}
+                          style={{ cursor: 'pointer' }}
+                          class='bi bi-plus-square fs-4 ms-3 '
+                        ></i>
+                      )}
+                      {!fileBtn && (
+                        <i
+                          onClick={handleFile}
+                          style={{ cursor: 'pointer' }}
+                          class='bi bi-dash-square fs-4 ms-3 '
+                        ></i>
+                      )}
+                    </div>
+                  </div>
+                  {isFile && (
+                    <div class='px-5'>
+                      <div
+                        style={{ position: 'relative', marginBottom: '70px' }}
+                      >
+                        <div class=' mb-3'>
+                          {/* <label for="formFile" class="form-label"></label> */}
+                          <input
+                            class='form-control'
+                            type='file'
+                            id='formFile'
+                            ref={fileRef}
+                            multiple
+                          />
+                        </div>
+                        <div>
+                          <button
+                            onClick={addFile}
+                            className={drStyle.addBtn}
+                            type='button'
+                          >
+                            ADD
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                  <div class='px-5 mt-3'>
+                    {fileTable && (
+                      <div style={{ marginBottom: '20px', marginTop: '0px' }}>
+                        <table
+                          style={{ borderColllaps: 'collapse', width: '100%' }}
+                          class='table  border border-1'
+                        >
+                          <thead>
+                            <tr>
+                              <th
+                                style={{
+                                  backgroundColor: '#ecedf7',
+                                  width: '5%',
+                                }}
+                                class='fs-6 fw-normal p-6  border'
+                              >
+                                #
+                              </th>
+                              <th
+                                style={{ backgroundColor: '#ecedf7' }}
+                                class='fs-6 fw-normal p-6 ps-5 text-center border'
+                              >
+                                Files
+                              </th>
+                              <th
+                                style={{
+                                  backgroundColor: '#ecedf7',
+                                  width: '5%',
+                                }}
+                                class='fs-6 fw-normal p-6 ps-5 border'
+                              >
+                                Action
+                              </th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            {file.map((file, index) => (
+                              <tr>
+                                <td
+                                  style={{ width: '5%' }}
+                                  class='fs-6 fw-normal border'
+                                >
+                                  {index + 1}
+                                </td>
+                                <td class='fs-6 ps-5 text-start fw-normal border'>
+                                  {file.fileName}
+                                </td>
+                                <td class='fs-5 ps-5 fw-normal border'>
+                                  <i
+                                    style={{
+                                      color: '#ff4533',
+                                      cursor: 'pointer',
+                                    }}
+                                    onClick={() => fileDelete(index)}
+                                    class='bi bi-trash ms-2'
+                                  ></i>
+                                </td>
+                              </tr>
+                            ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    )}
+                  </div>
                   {/* END  */}
                   <div style={{ marginTop: '50px' }} class='col-12 text-center'>
                     <button class='btn btn-primary' type='submit'>
-                      Add Vendor
+                      Add Device Order
                     </button>
                   </div>
                 </div>
@@ -436,7 +581,7 @@ const SimCardReturns = () => {
       {/* start  */}
       <div
         class='modal fade w-100'
-        id='viewsimreturnModal'
+        id='viewdevicereturnModal'
         tabindex='-1'
         aria-labelledby='viewModalLabel'
         aria-hidden='true'
@@ -445,7 +590,7 @@ const SimCardReturns = () => {
           <div class='modal-content'>
             <div class='modal-header'>
               <h5 class='modal-title' id='viewModalLabel'>
-                Sim Card Return Data
+                Device Order Data
               </h5>
               <button
                 type='button'
@@ -455,75 +600,65 @@ const SimCardReturns = () => {
               ></button>
             </div>
             <div class='modal-body'>
-              <div style={{ width: '100%' }} className={srStyle.serviceView}>
+              <div style={{ width: '100%' }} className={drStyle.serviceView}>
                 <h1 style={{ textAlign: 'start', fontSize: '20px' }}>
                   General Information
                 </h1>
                 <table class='table table-striped '>
                   <tbody>
                     <tr>
-                      <td>ID</td>
+                      <td>Device Order Number</td>
                       <td>321 </td>
                     </tr>
                     <tr>
-                      <td>Return Date</td>
+                      <td>Item</td>
+                      <td>Sim Card </td>
+                    </tr>
+                    <tr>
+                      <td>Order Date</td>
                       <td>20 April 2022 </td>
                     </tr>
                     <tr>
-                      <td>Return Reason </td>
-                      <td>I have another sim same company</td>
+                      <td>Quantity</td>
+                      <td>323</td>
                     </tr>
                     <tr>
-                      <td>Agent</td>
+                      <td>Vendor</td>
                       <td>William</td>
-                    </tr>
-                    <tr>
-                      <td>Distributor</td>
-                      <td>William</td>
-                    </tr>
-                    <tr>
-                      <td>Item</td>
-                      <td>Sim Card</td>
-                    </tr>
-                    <tr>
-                      <td>Device Serial Number</td>
-                      <td>abce234234</td>
-                    </tr>
-                    <tr>
-                      <td>IMEI-1</td>
-                      <td>AM243233</td>
-                    </tr>
-                    <tr>
-                      <td>IMEI-2</td>
-                      <td>AM243233</td>
-                    </tr>
-                    <tr>
-                      <td>Shipping Method</td>
-                      <td>DHL</td>
                     </tr>
                     <tr>
                       <td>Tracking Number</td>
-                      <td>234abc32</td>
+                      <td>abc234</td>
                     </tr>
                     <tr>
-                      <td>Reception Status</td>
-                      <td>Active</td>
-                    </tr>
-                    <tr>
-                      <td>Reception Date</td>
+                      <td>Received Date</td>
                       <td>20 April 2022</td>
                     </tr>
                     <tr>
-                      <td>Note</td>
-                      <td>SWA connect supporting affordable communication</td>
+                      <td>Batch Number</td>
+                      <td>abc234</td>
+                    </tr>
+                    <tr>
+                      <td>Device Modal</td>
+                      <td>AM243233</td>
+                    </tr>
+                    <tr>
+                      <td>Notes</td>
+                      <td>
+                        SWA connect is a supporting affordable communication
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Files</td>
+                      <td>swaconnect.png</td>
                     </tr>
                   </tbody>
                 </table>
-                <div className={srStyle.button}>
-                  <button className={srStyle.downloadBtn}>
+                <div className={drStyle.button}>
+                  <button className={drStyle.downloadBtn}>
                     <i class='fa fa-download' download></i> Download
                   </button>
-                  <button className={srStyle.printBtn}>
+                  <button className={drStyle.printBtn}>
                     <i class='fa fa-print' download></i> Print
                   </button>
                 </div>
@@ -538,4 +673,4 @@ const SimCardReturns = () => {
   );
 };
 
-export default SimCardReturns;
+export default DeviceOrders;

@@ -1,5 +1,8 @@
+import MaterialTable from 'material-table';
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import tableIcons from '../../components/IconProvider/IconProvider';
 import useToken from '../../hooks/useToken';
 import simOpStyles from './SimCardOperations.module.css';
 
@@ -285,6 +288,175 @@ const SimCardOperations = () => {
         >
           Reset Search Fields
         </button>
+      </div>
+      <div className={`${simOpStyles.planContainer}`}>
+        <span className='ms-2 my-2'>
+          {' '}
+          <span className='fw-bold'> Service Carrier #1 </span>321Communications
+        </span>
+        <div className='row py-md-2'>
+          <div className='col-6 col-lg-2 py-sm-1 py-md-0'>
+            <select
+              // ref={simStatusRef}
+              type='text'
+              className='form-select'
+              id='simPlan'
+              placeholder='Sim Plan'
+              //   ref={simStatusRef}
+              //   onChange={simStatusChange}
+            >
+              <option hidden disabled selected value>
+                Select Plan
+              </option>
+              <option value='plan 1'>Plan 1</option>
+              <option value='plan 2'>Plan 2</option>
+              <option value='plan 3'>Plan 3</option>
+            </select>
+          </div>
+          <div className='col-6 col-lg-1 py-sm-1 py-md-0'>
+            <button className='btn btn-outline-secondary'>Activate</button>
+          </div>
+          <div className='col-6 col-lg-1 py-sm-1 py-md-0'>
+            <button className='btn btn-outline-secondary'>HotLine</button>
+          </div>
+          <div className='col-6 col-lg-1 py-sm-1 py-md-0'>
+            <button className='btn btn-outline-secondary'>UnHotline</button>
+          </div>
+          <div className='col-lg-1'></div>
+          <div className='col-6 col-lg-2 py-sm-1 py-md-0'>
+            <select type='text' className='form-select' id='simPlan1'>
+              <option hidden disabled selected value>
+                Select Plan
+              </option>
+              <option value='plan 1'>Plan 1</option>
+              <option value='plan 2'>Plan 2</option>
+              <option value='plan 3'>Plan 3</option>
+            </select>
+          </div>
+          <div className='col-6 col-lg-2 py-sm-1 py-md-0'>
+            <button className='btn btn-outline-secondary'>Change Plan</button>
+          </div>
+          <div className='col-6 col-lg-2 py-sm-1 py-md-0'>
+            <button className='btn btn-outline-secondary'>SWAP MDN</button>
+          </div>
+        </div>
+      </div>
+      {/* the sim card table  */}
+      <div className='mui-table my-3'>
+        <MaterialTable
+          icons={tableIcons}
+          title=''
+          columns={[
+            { title: 'ID', field: 'id', sorting: false },
+            {
+              title: 'SSID',
+              field: 'SSID',
+              sorting: false,
+              render: (row) => (
+                <Link to={`/dashboard/simCardDetails/${row._id}`}>
+                  {row.SSID}
+                </Link>
+              ),
+            },
+            { title: 'PUK 1', field: 'PUK1', sorting: false },
+            { title: 'Created Date', field: 'createdDate', type: 'date' },
+            { title: 'Sim Status', field: 'simStatus', sorting: false },
+            { title: 'Status Date', field: 'statusDate', type: 'date' },
+            {
+              title: 'Service Carrier', //replaced with vendor
+              field: 'company',
+              sorting: false,
+              render: (row) => row.serviceCarrier.name,
+            },
+            {
+              title: 'Distributor',
+              field: 'company',
+              sorting: false,
+              render: (row) =>
+                row?.vendor?.company ? row.vendor.company : 'NA',
+            },
+            {
+              title: 'Agent',
+              field: 'agent',
+              sorting: false,
+              render: (row) => (row?.agent ? row.agent : 'NA'),
+            },
+            {
+              title: 'Phone Plan',
+              field: 'phone_plan',
+              sorting: false,
+              render: (row) => (row?.phonePlan ? row.phonePlan : 'NA'),
+            },
+            {
+              title: 'Customer ID',
+              field: 'customer_id',
+              type: 'numeric',
+              sorting: false,
+              render: (row) => (row?.customerID ? row.customerID : 'NA'),
+            },
+          ]}
+          data={displayData}
+          options={{
+            selection: true,
+            exportButton: true,
+            exportAllData: true,
+            shorting: true,
+            paging: true,
+            pageSizeOptions: [2, 5, 10, 50, 100, 500, 1000],
+            pageSize: 5,
+            paginationType: 'stepped',
+            paginationPosition: 'bottom',
+            showTextRowsSelected: false,
+            rowStyle: (data, index) =>
+              index % 2 === 0 ? { background: '#f5f5f5' } : null,
+            headerStyle: {
+              background: '#445363',
+              color: 'white',
+              //   borderRight: '1px solid #212F74',
+            },
+            // cellStyle: { borderRight: '1px solid #212F74' },
+          }}
+          actions={[
+            {
+              icon: () => (
+                <button
+                  style={{
+                    fontSize: '1rem',
+                    borderRadius: '2px',
+                    backgroundColor: '#dddddd',
+                    color: 'black',
+                    border: 'none',
+                    padding: '2px',
+                  }}
+                >
+                  Assign to Distributor
+                </button>
+              ),
+              tooltip: 'Click to assign item to distributor',
+              onClick: (data) => console.log(data),
+              // isFreeAction: true,
+            },
+            {
+              icon: () => (
+                <button
+                  style={{
+                    fontSize: '1rem',
+                    borderRadius: '2px',
+                    backgroundColor: '#dddddd',
+                    color: 'black',
+                    border: 'none',
+                    padding: '2px',
+                  }}
+                >
+                  Assign Batch Number
+                </button>
+              ),
+              tooltip: 'Click to assign batch number',
+              onClick: (data) => console.log(data),
+              // isFreeAction: true,
+            },
+          ]}
+        />
       </div>
     </section>
   );

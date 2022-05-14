@@ -356,7 +356,7 @@ const AllSimCards = () => {
             exportAllData: true,
             shorting: true,
             paging: true,
-            pageSizeOptions: [2, 5, 10, 50, 100, 500, 1000, 2000],
+            pageSizeOptions: [2, 5, 10, 50, 100, 500, 1000],
             pageSize: 5,
             paginationType: 'stepped',
             paginationPosition: 'bottom',

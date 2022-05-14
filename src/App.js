@@ -13,6 +13,8 @@ import SimCardDetails from './pages/SimCardDetails/SimCardDetails';
 import AddSimCards from './pages/AddSimCards/AddSimCards';
 import ServiceCarriers from './pages/ServiceCarriers/ServiceCarriers';
 import SimCardOperations from './pages/SimCardOperations/SimCardOperations';
+import PhonePlans from './pages/PhonePlans/PhonePlans';
+import SimCardReturns from './pages/SimCardReturns/SimCardReturns';
 
 // for test
 
@@ -90,10 +92,10 @@ function App() {
                   <ServiceCarriers></ServiceCarriers>
                 </Route>
                 <Route exact path={'/dashboard/simCards/phonePlans'}>
-                  <Content2 />
+                  <PhonePlans></PhonePlans>
                 </Route>
                 <Route path={'/dashboard/simCards/simCardReturns'}>
-                  <Courses2 />
+                  <SimCardReturns></SimCardReturns>
                 </Route>
                 <Route path={'/dashboard/devices/allDevices'}>
                   <Videos2 />

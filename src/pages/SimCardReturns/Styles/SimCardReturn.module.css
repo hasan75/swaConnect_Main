@@ -1,4 +1,9 @@
-.serviceData {
+.srContainer{
+  background-color: white;
+  margin: 10px 0px;
+  border-radius: 7px;
+}
+.simreturnData {
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   margin-top: 30px;
 }
@@ -10,9 +15,7 @@
 
 .TableData table {
   width: 100%;
-  text-align: center;
 }
-
 
 .TableData table tr th {
   font-weight: 100;
@@ -23,7 +26,6 @@
 
 .TableData table tbody tr td {
   border: 1px solid #445363;
-  padding-bottom: 10px;    /* added */
 }
 
 .TableData table tbody tr td ul button {
@@ -38,19 +40,16 @@
   border-right: none;
 }
 
-/* added later  */
-.serviceCarrierContainer{
-  background-color: white;
-  margin: 10px 0px;
-  border-radius: 7px;
-}
-
 .serviceView h1 {
   padding: 5px 0px;
 }
 
 .serviceView table tbody tr td {
   text-align: start;
+}
+
+.serviceView table tbody tr td:nth-child(2) {
+  padding-left: 50px;
 }
 
 .downloadBtn, .printBtn {
@@ -121,4 +120,4 @@
   background: #b4cee4;
   padding-right: 30px;
 }
-/*# sourceMappingURL=ServiceCarrier.module.css.map */
+/*# sourceMappingURL=SimCardReturn.module.css.map */

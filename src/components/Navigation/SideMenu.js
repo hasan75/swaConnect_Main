@@ -25,6 +25,10 @@ export const menuItems = [
     subMenus: [
       { name: 'All SIM Cards', to: '/dashboard/simCards/allSimCard' },
       { name: 'Add SIM Cards', to: '/dashboard/simCards/addSimCards' },
+      {
+        name: 'Sim Card Operations',
+        to: '/dashboard/simCards/simCardOperations',
+      },
       { name: 'Service Carrier', to: '/dashboard/simCards/serviceCarriers' },
       { name: 'Phone Plans', to: '/dashboard/simCards/phonePlans' },
       { name: 'SIM Cards Returns', to: '/dashboard/simCards/simCardReturns' },

@@ -225,7 +225,7 @@ function AddNewSimCard() {
         {/* SIM CARD DATA START  */}
         <header class='bg-primary'>SIM Card Data</header>
         <div class='mb-5 m-3 p-3 border border-primary'>
-          <div class='row px-5'>
+          <div class='row px-md-5'>
             <div class='col-12 col-md-6 col-lg-4'>
               <div class='mb-3'>
                 <label for='exampleFormControlInput1' class='form-label'>
@@ -278,7 +278,23 @@ function AddNewSimCard() {
               </div>
             </div>
           </div>
-          <div class='row px-5'>
+          <div className='row px-md-5'>
+            <div className='col-12 col-md-6'>
+              <div class='mb-3'>
+                <label for='userName' class='form-label'>
+                  User Name
+                </label>
+                <input
+                  type='text'
+                  class='form-control'
+                  id='userName'
+                  placeholder='User Name'
+                  {...register('userName', { required: true })}
+                />
+              </div>
+            </div>
+          </div>
+          <div class='row px-md-5'>
             <div class='col-12 col-md-6  '>
               <div class='mb-3'>
                 <label for='exampleFormControlInput1' class='form-label'>

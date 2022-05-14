@@ -152,7 +152,7 @@ body {
   /* border-left: 1px solid #666; */
   border-left: 2px solid #fff;
   box-sizing: border-box;
-  padding-left: 30px;
+  padding-left: 25px;
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.2s ease-in;
@@ -165,7 +165,7 @@ body {
     border-radius: 4px;
 
     /* color:#1A21' */
-  max-height: 200px;
+  max-height: 255px;
 }
 
 .side-menu .main-menu .sub-menu a {

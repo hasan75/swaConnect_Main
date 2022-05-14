@@ -12,6 +12,7 @@ import ContextProvider from './contexts/ContextProvider';
 import SimCardDetails from './pages/SimCardDetails/SimCardDetails';
 import AddSimCards from './pages/AddSimCards/AddSimCards';
 import ServiceCarriers from './pages/ServiceCarriers/ServiceCarriers';
+import SimCardOperations from './pages/SimCardOperations/SimCardOperations';
 
 // for test
 
@@ -81,6 +82,9 @@ function App() {
                 </Route>
                 <Route path={'/dashboard/simCards/addSimCards'}>
                   <AddSimCards></AddSimCards>
+                </Route>
+                <Route path={'/dashboard/simCards/simCardOperations'}>
+                  <SimCardOperations></SimCardOperations>
                 </Route>
                 <Route path={'/dashboard/simCards/serviceCarriers'}>
                   <ServiceCarriers></ServiceCarriers>

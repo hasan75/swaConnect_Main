@@ -17,6 +17,8 @@ import PhonePlans from './pages/PhonePlans/PhonePlans';
 import SimCardReturns from './pages/SimCardReturns/SimCardReturns';
 import SimCardOrders from './pages/SimCardOrders/SimCardOrders';
 import DeviceOrders from './pages/DeviceOrders/DeviceOrders';
+import AllDevices from './pages/AllDevices/AllDevices';
+import DeviceReturns from './pages/DeviceReturns/DeviceReturns';
 
 // for test
 
@@ -100,10 +102,10 @@ function App() {
                   <SimCardReturns></SimCardReturns>
                 </Route>
                 <Route path={'/dashboard/devices/allDevices'}>
-                  <Videos2 />
+                  <AllDevices></AllDevices>
                 </Route>
                 <Route path={'/dashboard/devices/deviceReturns'}>
-                  <Design2 />
+                  <DeviceReturns></DeviceReturns>
                 </Route>
                 <Route path={'/dashboard/vendors/simCardsOrders'}>
                   <SimCardOrders></SimCardOrders>

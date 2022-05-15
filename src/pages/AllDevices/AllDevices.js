@@ -10,24 +10,38 @@ const AllDevices = () => {
   const { token } = useToken();
   // console.log(token);
 
-  const [ssid, setSSID] = useState('');
+  const [deviceType, setDeviceType] = useState('');
   const deviceTypeRef = useRef('');
 
   const imei1Ref = useRef('');
   const imei2Ref = useRef('');
-  const [createdDateFrom, setCreatedDateFrom] = useState('');
-  const [createdDateTo, setCreatedDateTo] = useState('');
+  const [imei1, setimei1] = useState('');
+  const [imei2, setimei2] = useState('');
 
-  const simStatusRef = useRef('');
-  const [simStatus, setSimStatus] = useState('');
+  const snRef = useRef('');
+  const [sn, setSN] = useState('');
   const vendorRef = useRef('');
   const [vendor, setVendor] = useState('');
-  const phonePlanRef = useRef('');
-  const [phonePlan, setPhonePlan] = useState('');
+  const batchNumRef = useRef('');
+  const [batchNum, setBatchNum] = useState('');
   const distributorRef = useRef('');
   const [distributor, setDistributor] = useState('');
   const agentRef = useRef('');
   const [agent, setAgent] = useState('');
+
+  const [model, setModel] = useState('');
+  const modelRef = useRef('');
+  const [deviceOrderNum, setDeviceOrderNum] = useState('');
+  const deviceOrderNumRef = useRef('');
+  const [color, setColor] = useState('');
+  const colorRef = useRef('');
+
+  const [fccStatus, setFccStatus] = useState('');
+  const fccStatusRef = useRef('');
+  const [fccName, setFccName] = useState('');
+  const fccNameRef = useRef('');
+  const [fccAppDate, setFccAppDate] = useState('');
+  const fccAppDateRef = useRef('');
 
   const urlPre = process.env.REACT_APP_ROOT_URL;
 
@@ -63,7 +77,7 @@ const AllDevices = () => {
   };
 
   const getDeviceType = (e) => {
-    setSSID(e.target.value);
+    setDeviceType(e.target.value);
   };
 
   const distributorChange = (e) => {
@@ -74,63 +88,83 @@ const AllDevices = () => {
     setAgent(e.target.value);
   };
 
-  const simStatusChange = (e) => {
-    setSimStatus(e.target.value);
+  const snChange = (e) => {
+    setSN(e.target.value);
   };
   const vendorChange = (e) => {
     setVendor(e.target.value);
   };
 
-  const phonePlanChange = (e) => {
-    setPhonePlan(e.target.value);
+  const batchNumChange = (e) => {
+    setBatchNum(e.target.value);
   };
 
   const imei1Change = (e) => {
-    setCreatedDateFrom(e.target.value);
+    setimei1(e.target.value);
   };
   const imei2Change = (e) => {
-    setCreatedDateTo(e.target.value);
+    setimei2(e.target.value);
+  };
+
+  const modelChange = (e) => {
+    setModel(e.target.value);
+  };
+
+  const deviceOrderNumChange = (e) => {
+    setDeviceOrderNum(e.target.value);
+  };
+
+  const colorChange = (e) => {
+    setColor(e.target.value);
+  };
+
+  const fccStatusChange = (e) => {
+    setFccStatus(e.target.value);
+  };
+
+  const fccNameChange = (e) => {
+    setFccName(e.target.value);
+  };
+
+  const fccAppDateChange = (e) => {
+    setFccAppDate(e.target.value);
   };
 
   const handleBulkSearch = () => {
     const matchedData = data.filter(
       (mData) =>
-        (createdDateFrom === '' ||
-          createdDateTo === '' ||
-          (new Date(createdDateFrom) < new Date(mData.created_date) &&
-            new Date(createdDateTo) > new Date(mData.created_date)) ||
-          new Date(createdDateFrom).toDateString() ===
-            new Date(mData.created_date).toDateString() ||
-          new Date(createdDateTo).toDateString() ===
-            new Date(mData.created_date).toDateString()) &&
-        (phonePlan === '' || mData.phone_plan === phonePlan) &&
+        (imei1 === '' ||
+          imei2 === '' ||
+          imei1 === mData.created_date ||
+          imei2 === mData.created_date) &&
+        (batchNum === '' || mData.phone_plan === batchNum) &&
         (agent === '' || mData.agent === agent) &&
         (distributor === '' || mData.distributor === distributor) &&
         (vendor === '' || mData.vendor === vendor) &&
-        (simStatus === '' || mData.sim_status === simStatus) &&
-        (ssid === '' || mData.ssid === ssid)
+        (sn === '' || mData.sim_status === sn) &&
+        (deviceType === '' || mData.deviceType === deviceType)
     );
     setDisplayData(matchedData);
   };
 
   // for reset button
   const resetSearchFields = () => {
-    setSSID('');
+    setDeviceType('');
     deviceTypeRef.current.value = '';
     setAgent('');
     agentRef.current.value = '';
     setDistributor('');
     distributorRef.current.value = '';
-    setCreatedDateFrom('');
+    setimei1('');
     imei1Ref.current.value = '';
-    setCreatedDateTo('');
+    setimei2('');
     imei2Ref.current.value = '';
     setVendor('');
     vendorRef.current.value = '';
-    setPhonePlan('');
-    phonePlanRef.current.value = '';
-    setSimStatus('');
-    simStatusRef.current.value = '';
+    setBatchNum('');
+    batchNumRef.current.value = '';
+    setSN('');
+    snRef.current.value = '';
   };
 
   return (
@@ -155,14 +189,20 @@ const AllDevices = () => {
             <label className='me-1' htmlFor='deviceType'>
               Device Type
             </label>
-            <input
+            <select
               type='text'
-              className='form-control'
+              className='form-select'
               id='deviceType'
-              placeholder='Device Type'
               ref={deviceTypeRef}
               onChange={getDeviceType}
-            />
+            >
+              <option hidden disabled selected value>
+                Select Type
+              </option>
+              <option value='active'>Type 1</option>
+              <option value='active 2'>Type 2</option>
+              <option value='Blank'>Blank</option>
+            </select>
           </div>
           <div class='col-12 col-md-6 col-lg-5'>
             <div className='row'>
@@ -198,25 +238,17 @@ const AllDevices = () => {
             </div>
           </div>
           <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3 col-lg-4'>
-            <label className='me-1' htmlFor='simStatus'>
-              Sim Status
+            <label className='me-1' htmlFor='sn'>
+              S/N
             </label>
-            <select
-              // ref={simStatusRef}
+            <input
+              // ref={snRef}
               type='text'
-              class='form-select'
-              id='simStatus'
-              placeholder='SIM Status'
-              ref={simStatusRef}
-              onChange={simStatusChange}
-            >
-              <option hidden disabled selected value>
-                Select Status
-              </option>
-              <option value='active'>Active</option>
-              <option value='active'>Inactive</option>
-              <option value='Blank'>Blank</option>
-            </select>
+              class='form-control'
+              id='sn'
+              ref={snRef}
+              onChange={snChange}
+            />
           </div>
         </div>
         <div class='form-row row my-1'>
@@ -262,28 +294,65 @@ const AllDevices = () => {
             />
           </div>
           <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
-            <label className='me-1' for='phonePlan'>
-              Phone Plan
+            <label className='me-1' for='batchNum'>
+              Batch Number
             </label>
-            <select
+            <input
               type='text'
-              class='form-select'
-              id='phonePlan'
-              ref={phonePlanRef}
-              onChange={phonePlanChange}
-            >
-              {vendor === '321Com' && (
-                <>
-                  <option hidden disabled selected value>
-                    Select a Phone Plan
-                  </option>
-                  <option value='613'>613</option>
-                  <option value='614'>614</option>
-                  <option value='615'>615</option>
-                  <option value='616'>616</option>
-                </>
-              )}
-            </select>
+              class='form-control'
+              id='batchNum'
+              ref={batchNumRef}
+              onChange={batchNumChange}
+            />
+          </div>
+        </div>
+        <div class='form-row row my-1'>
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
+            <label className='me-1' for='model'>
+              Model
+            </label>
+            <input
+              type='text'
+              class='form-control'
+              id='model'
+              ref={modelRef}
+              onChange={modelChange}
+            />
+          </div>
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
+            <label className='me-1' for='distributor'>
+              Distributor
+            </label>
+            <input
+              type='text'
+              class='form-control'
+              id='distributor'
+              ref={distributorRef}
+              onChange={distributorChange}
+            />
+          </div>
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
+            <label className='me-1' for='agent'>
+              Agent
+            </label>
+            <input
+              id='agent'
+              class='form-control'
+              ref={agentRef}
+              onChange={agentChange}
+            />
+          </div>
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
+            <label className='me-1' for='batchNum'>
+              Batch Number
+            </label>
+            <input
+              type='text'
+              class='form-control'
+              id='batchNum'
+              ref={batchNumRef}
+              onChange={batchNumChange}
+            />
           </div>
         </div>
       </div>
@@ -317,7 +386,7 @@ const AllDevices = () => {
             },
             { title: 'PUK 1', field: 'PUK1', sorting: false },
             { title: 'Created Date', field: 'createdDate', type: 'date' },
-            { title: 'Sim Status', field: 'simStatus', sorting: false },
+            { title: 'Sim Status', field: 'sn', sorting: false },
             { title: 'Status Date', field: 'statusDate', type: 'date' },
             {
               title: 'Service Carrier', //replaced with vendor

@@ -171,7 +171,7 @@ const AllDevices = () => {
     <section>
       {/* the initials */}
       <div className=' row d-flex justify-content-between align-items-center my-md-2'>
-        <h3 className='col-12 col-md-4 fw-bold my-2 ms-2'>All Sim Cards</h3>
+        <h3 className='col-12 col-md-4 fw-bold my-2 ms-2'>All Devices</h3>
         <div className='col-12 col-md-6 d-flex justify-content-end me-lg-3'>
           <button className='btn btn-outline-secondary mx-2'>
             Add A New Device
@@ -182,7 +182,7 @@ const AllDevices = () => {
 
       {/* search forms starts */}
       <div className={`${adStyle.searchContainer}`}>
-        <span>Search By:</span>
+        <p className={`${adStyle.searchText}`}>Search By:</p>
         {/* form input  */}
         <div class='form-row row d-flex flex-row justify-content-center align-items-center'>
           <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3 col-lg-3'>
@@ -319,39 +319,65 @@ const AllDevices = () => {
               onChange={modelChange}
             />
           </div>
-          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
-            <label className='me-1' for='distributor'>
-              Distributor
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-6'>
+            <label className='me-1' for='deviceOrderNum'>
+              Device Order Number
             </label>
             <input
               type='text'
               class='form-control'
-              id='distributor'
-              ref={distributorRef}
-              onChange={distributorChange}
+              id='deviceOrderNum'
+              ref={deviceOrderNumRef}
+              onChange={deviceOrderNumChange}
             />
           </div>
           <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
-            <label className='me-1' for='agent'>
-              Agent
+            <label className='me-1' for='color'>
+              Color
             </label>
             <input
-              id='agent'
+              id='color'
               class='form-control'
-              ref={agentRef}
-              onChange={agentChange}
+              ref={colorRef}
+              onChange={colorChange}
             />
           </div>
+        </div>
+        <div class='form-row row my-1'>
           <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
-            <label className='me-1' for='batchNum'>
-              Batch Number
+            <label className='me-1' for='fccStatus'>
+              FCC Status
             </label>
             <input
               type='text'
               class='form-control'
-              id='batchNum'
-              ref={batchNumRef}
-              onChange={batchNumChange}
+              id='fccStatus'
+              ref={fccStatusRef}
+              onChange={fccStatusChange}
+            />
+          </div>
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-6'>
+            <label className='me-1' for='fccAppDate'>
+              FCC Approval Date
+            </label>
+            <input
+              type='date'
+              id='fccAppDate'
+              class='form-control'
+              ref={fccAppDateRef}
+              onChange={fccAppDateChange}
+            />
+          </div>
+          <div class='form-group d-flex flex-row justify-content-center align-items-center col-12 col-md-3'>
+            <label className='me-1' for='fccName'>
+              FCC Name
+            </label>
+            <input
+              type='text'
+              class='form-control'
+              id='fccName'
+              ref={fccNameRef}
+              onChange={fccNameChange}
             />
           </div>
         </div>

@@ -11,3 +11,8 @@
     border-radius: 2px;
     background-color: rgb(246, 252, 252);
 }
+
+.searchText{
+    margin-bottom: 10px;
+    font-weight: 700;
+}

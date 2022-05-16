@@ -67,6 +67,7 @@ const SimCardOrders = () => {
   };
 
   // END
+
   return (
     <div className={`${scrStyle.scoContainer} py-2 py-md-3`}>
       <div className={scrStyle.simreturnData} class='my-1 my-lg-3 mx-1 mx-lg-3'>
@@ -107,365 +108,405 @@ const SimCardOrders = () => {
                     </button>
                     <button>Edit</button>
                     <button>Delete </button>
-                    <button>Active</button>
-                    <button>Deactive</button>
                   </ul>
+                  {/* modal for the view button starts */}
+                  <div
+                    class='modal fade w-100'
+                    id='simorderModal'
+                    tabindex='-1'
+                    aria-labelledby='simorderModalLabel'
+                    aria-hidden='true'
+                  >
+                    <div class='modal-dialog modal-xl'>
+                      <div class='modal-content'>
+                        <div class='modal-header'>
+                          <h5 class='modal-title ms-5' id='simorderModalLabel'>
+                            Add Sim Card Order Data
+                          </h5>
+                          <button
+                            type='button'
+                            class='btn-close'
+                            data-bs-dismiss='modal'
+                            aria-label='Close'
+                          ></button>
+                        </div>
+                        <div class='modal-body'>
+                          <form action=''>
+                            <div style={{ fontFamily: 'sans-serif' }}>
+                              <div class='row px-5'>
+                                <div class='col-12 col-md-6 col-lg-6'>
+                                  <div class='mb-3 text-start'>
+                                    <label f class='form-label'>
+                                      {' '}
+                                      Sim Order Number
+                                    </label>
+                                    <input
+                                      type='text'
+                                      class='form-control'
+                                      placeholder=' Order Number'
+                                      required
+                                    />
+                                  </div>
+                                </div>
+                                <div class='col-12 col-md-6 col-lg-6'>
+                                  <div class='mb-3 text-start'>
+                                    <label f class='form-label'>
+                                      Order Date
+                                    </label>
+                                    <input
+                                      type='date'
+                                      class='form-control'
+                                      required
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                              <div class='row px-5'>
+                                <div class='col-12 col-md-6 col-lg-6'>
+                                  <div class='mb-3 text-start'>
+                                    <label f class='form-label'>
+                                      {' '}
+                                      Quantity
+                                    </label>
+                                    <input
+                                      type='number'
+                                      class='form-control'
+                                      placeholder='Quantity'
+                                      required
+                                    />
+                                  </div>
+                                </div>
+                                <div class='col-12 col-md-6 col-lg-6'>
+                                  <div class='mb-3 text-start'>
+                                    <label f class='form-label'>
+                                      {' '}
+                                      vendor
+                                    </label>
+                                    <input
+                                      type='number'
+                                      class='form-control'
+                                      placeholder='vendor'
+                                      required
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                              <div class='row px-5'>
+                                <div class='col-12 col-md-6 col-lg-6'>
+                                  <div class='mb-3 text-start'>
+                                    <label f class='form-label'>
+                                      {' '}
+                                      Tracking Number
+                                    </label>
+                                    <input
+                                      type='text'
+                                      class='form-control'
+                                      placeholder=' Tracking Number'
+                                    />
+                                  </div>
+                                </div>
+                                <div class='col-12 col-md-6 col-lg-6'>
+                                  <div class='mb-3 text-start'>
+                                    <label f class='form-label'>
+                                      {' '}
+                                      Batch Number
+                                    </label>
+                                    <input
+                                      type='text'
+                                      class='form-control'
+                                      placeholder='Batch Number'
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                              <div class='row px-5'>
+                                <div class='col-12 col-md-6 col-lg-6'>
+                                  <div class='mb-3 text-start'>
+                                    <label f class='form-label'>
+                                      {' '}
+                                      Received Date
+                                    </label>
+                                    <input type='date' class='form-control' />
+                                  </div>
+                                </div>
+                              </div>
+
+                              {/* ADD NOTES  */}
+                              <div class=' m-3  '>
+                                <div class='d-flex mt-3'>
+                                  <p class='fs-4 ms-4'>Add Notes </p>
+                                  {noteBtn && (
+                                    <i
+                                      onClick={handleNote}
+                                      style={{ cursor: 'pointer' }}
+                                      class='bi bi-plus-square fs-4 ms-3 '
+                                    ></i>
+                                  )}
+                                  {!noteBtn && (
+                                    <i
+                                      onClick={handleNote}
+                                      style={{ cursor: 'pointer' }}
+                                      class='bi bi-dash-square fs-4 ms-3 '
+                                    ></i>
+                                  )}
+                                </div>
+                              </div>
+                              {isNote && (
+                                <div class='px-5'>
+                                  <div
+                                    style={{
+                                      position: 'relative',
+                                      marginBottom: '70px',
+                                    }}
+                                  >
+                                    <div class='form-floating mb-3'>
+                                      <textarea
+                                        class='form-control'
+                                        placeholder='Leave a comment here'
+                                        id='floatingTextarea'
+                                        ref={noteRef}
+                                      ></textarea>
+                                      <label for='floatingTextarea'>
+                                        Notes
+                                      </label>
+                                    </div>
+                                    <div>
+                                      <button
+                                        onClick={addNote}
+                                        className={scrStyle.addBtn}
+                                        type='button'
+                                      >
+                                        ADD
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                              <div class='px-5 mt-3'>
+                                {noteTable && (
+                                  <div
+                                    style={{
+                                      marginBottom: '20px',
+                                      marginTop: '0px',
+                                    }}
+                                  >
+                                    <table
+                                      style={{
+                                        borderColllaps: 'collapse',
+                                        width: '100%',
+                                      }}
+                                      class='table  border border-1'
+                                    >
+                                      <thead>
+                                        <tr>
+                                          <th
+                                            style={{
+                                              backgroundColor: '#ecedf7',
+                                              width: '5%',
+                                            }}
+                                            class='fs-6 fw-normal p-6  border'
+                                          >
+                                            #
+                                          </th>
+                                          <th
+                                            style={{
+                                              backgroundColor: '#ecedf7',
+                                            }}
+                                            class='fs-6 fw-normal p-6 ps-5 text-center border'
+                                          >
+                                            Notes
+                                          </th>
+                                          <th
+                                            style={{
+                                              backgroundColor: '#ecedf7',
+                                              width: '5%',
+                                            }}
+                                            class='fs-6 fw-normal p-6 ps-5 border'
+                                          >
+                                            Action
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {note.map((note, index) => (
+                                          <tr>
+                                            <td
+                                              style={{ width: '5%' }}
+                                              class='fs-6 fw-normal border'
+                                            >
+                                              {index + 1}
+                                            </td>
+                                            <td class='fs-6 ps-5 text-start fw-normal border'>
+                                              {note.noteName}
+                                            </td>
+                                            <td class='fs-5 ps-5 fw-normal border'>
+                                              <i
+                                                style={{
+                                                  color: '#ff4533',
+                                                  cursor: 'pointer',
+                                                }}
+                                                onClick={() =>
+                                                  noteDelete(index)
+                                                }
+                                                class='bi bi-trash ms-2'
+                                              ></i>
+                                            </td>
+                                          </tr>
+                                        ))}
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                )}
+                              </div>
+                              {/* END  */}
+                              <div class=' m-3  '>
+                                <div class='d-flex mt-3'>
+                                  <p class='fs-4 ms-4'> Add Files </p>
+                                  {fileBtn && (
+                                    <i
+                                      onClick={handleFile}
+                                      style={{ cursor: 'pointer' }}
+                                      class='bi bi-plus-square fs-4 ms-3 '
+                                    ></i>
+                                  )}
+                                  {!fileBtn && (
+                                    <i
+                                      onClick={handleFile}
+                                      style={{ cursor: 'pointer' }}
+                                      class='bi bi-dash-square fs-4 ms-3 '
+                                    ></i>
+                                  )}
+                                </div>
+                              </div>
+                              {isFile && (
+                                <div class='px-5'>
+                                  <div
+                                    style={{
+                                      position: 'relative',
+                                      marginBottom: '70px',
+                                    }}
+                                  >
+                                    <div class=' mb-3'>
+                                      {/* <label for="formFile" class="form-label"></label> */}
+                                      <input
+                                        class='form-control'
+                                        type='file'
+                                        id='formFile'
+                                        ref={fileRef}
+                                        multiple
+                                      />
+                                    </div>
+                                    <div>
+                                      <button
+                                        onClick={addFile}
+                                        className={scrStyle.addBtn}
+                                        type='button'
+                                      >
+                                        ADD
+                                      </button>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                              <div class='px-5 mt-3'>
+                                {fileTable && (
+                                  <div
+                                    style={{
+                                      marginBottom: '20px',
+                                      marginTop: '0px',
+                                    }}
+                                  >
+                                    <table
+                                      style={{
+                                        borderColllaps: 'collapse',
+                                        width: '100%',
+                                      }}
+                                      class='table  border border-1'
+                                    >
+                                      <thead>
+                                        <tr>
+                                          <th
+                                            style={{
+                                              backgroundColor: '#ecedf7',
+                                              width: '5%',
+                                            }}
+                                            class='fs-6 fw-normal p-6  border'
+                                          >
+                                            #
+                                          </th>
+                                          <th
+                                            style={{
+                                              backgroundColor: '#ecedf7',
+                                            }}
+                                            class='fs-6 fw-normal p-6 ps-5 text-center border'
+                                          >
+                                            Files
+                                          </th>
+                                          <th
+                                            style={{
+                                              backgroundColor: '#ecedf7',
+                                              width: '5%',
+                                            }}
+                                            class='fs-6 fw-normal p-6 ps-5 border'
+                                          >
+                                            Action
+                                          </th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        {file.map((file, index) => (
+                                          <tr>
+                                            <td
+                                              style={{ width: '5%' }}
+                                              class='fs-6 fw-normal border'
+                                            >
+                                              {index + 1}
+                                            </td>
+                                            <td class='fs-6 ps-5 text-start fw-normal border'>
+                                              {file.fileName}
+                                            </td>
+                                            <td class='fs-5 ps-5 fw-normal border'>
+                                              <i
+                                                style={{
+                                                  color: '#ff4533',
+                                                  cursor: 'pointer',
+                                                }}
+                                                onClick={() =>
+                                                  fileDelete(index)
+                                                }
+                                                class='bi bi-trash ms-2'
+                                              ></i>
+                                            </td>
+                                          </tr>
+                                        ))}
+                                      </tbody>
+                                    </table>
+                                  </div>
+                                )}
+                              </div>
+                              {/* END  */}
+                              <div
+                                style={{ marginTop: '50px' }}
+                                class='col-12 text-center'
+                              >
+                                <button class='btn btn-primary' type='submit'>
+                                  Add Device Order
+                                </button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* modal ends  */}
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div
-        class='modal fade w-100'
-        id='simorderModal'
-        tabindex='-1'
-        aria-labelledby='simorderModalLabel'
-        aria-hidden='true'
-      >
-        <div class='modal-dialog modal-xl'>
-          <div class='modal-content'>
-            <div class='modal-header'>
-              <h5 class='modal-title ms-5' id='simorderModalLabel'>
-                Add Sim Card Order Data
-              </h5>
-              <button
-                type='button'
-                class='btn-close'
-                data-bs-dismiss='modal'
-                aria-label='Close'
-              ></button>
-            </div>
-            <div class='modal-body'>
-              <form action=''>
-                <div style={{ fontFamily: 'sans-serif' }}>
-                  <div class='row px-5'>
-                    <div class='col-12 col-md-6 col-lg-6'>
-                      <div class='mb-3 text-start'>
-                        <label f class='form-label'>
-                          {' '}
-                          Sim Order Number
-                        </label>
-                        <input
-                          type='text'
-                          class='form-control'
-                          placeholder=' Order Number'
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div class='col-12 col-md-6 col-lg-6'>
-                      <div class='mb-3 text-start'>
-                        <label f class='form-label'>
-                          Order Date
-                        </label>
-                        <input type='date' class='form-control' required />
-                      </div>
-                    </div>
-                  </div>
-                  <div class='row px-5'>
-                    <div class='col-12 col-md-6 col-lg-6'>
-                      <div class='mb-3 text-start'>
-                        <label f class='form-label'>
-                          {' '}
-                          Quantity
-                        </label>
-                        <input
-                          type='number'
-                          class='form-control'
-                          placeholder='Quantity'
-                          required
-                        />
-                      </div>
-                    </div>
-                    <div class='col-12 col-md-6 col-lg-6'>
-                      <div class='mb-3 text-start'>
-                        <label f class='form-label'>
-                          {' '}
-                          vendor
-                        </label>
-                        <input
-                          type='number'
-                          class='form-control'
-                          placeholder='vendor'
-                          required
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class='row px-5'>
-                    <div class='col-12 col-md-6 col-lg-6'>
-                      <div class='mb-3 text-start'>
-                        <label f class='form-label'>
-                          {' '}
-                          Tracking Number
-                        </label>
-                        <input
-                          type='text'
-                          class='form-control'
-                          placeholder=' Tracking Number'
-                        />
-                      </div>
-                    </div>
-                    <div class='col-12 col-md-6 col-lg-6'>
-                      <div class='mb-3 text-start'>
-                        <label f class='form-label'>
-                          {' '}
-                          Batch Number
-                        </label>
-                        <input
-                          type='text'
-                          class='form-control'
-                          placeholder='Batch Number'
-                        />
-                      </div>
-                    </div>
-                  </div>
-                  <div class='row px-5'>
-                    <div class='col-12 col-md-6 col-lg-6'>
-                      <div class='mb-3 text-start'>
-                        <label f class='form-label'>
-                          {' '}
-                          Received Date
-                        </label>
-                        <input type='date' class='form-control' />
-                      </div>
-                    </div>
-                  </div>
 
-                  {/* ADD NOTES  */}
-                  <div class=' m-3  '>
-                    <div class='d-flex mt-3'>
-                      <p class='fs-4 ms-4'>Add Notes </p>
-                      {noteBtn && (
-                        <i
-                          onClick={handleNote}
-                          style={{ cursor: 'pointer' }}
-                          class='bi bi-plus-square fs-4 ms-3 '
-                        ></i>
-                      )}
-                      {!noteBtn && (
-                        <i
-                          onClick={handleNote}
-                          style={{ cursor: 'pointer' }}
-                          class='bi bi-dash-square fs-4 ms-3 '
-                        ></i>
-                      )}
-                    </div>
-                  </div>
-                  {isNote && (
-                    <div class='px-5'>
-                      <div
-                        style={{ position: 'relative', marginBottom: '70px' }}
-                      >
-                        <div class='form-floating mb-3'>
-                          <textarea
-                            class='form-control'
-                            placeholder='Leave a comment here'
-                            id='floatingTextarea'
-                            ref={noteRef}
-                          ></textarea>
-                          <label for='floatingTextarea'>Notes</label>
-                        </div>
-                        <div>
-                          <button
-                            onClick={addNote}
-                            className={scrStyle.addBtn}
-                            type='button'
-                          >
-                            ADD
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  <div class='px-5 mt-3'>
-                    {noteTable && (
-                      <div style={{ marginBottom: '20px', marginTop: '0px' }}>
-                        <table
-                          style={{ borderColllaps: 'collapse', width: '100%' }}
-                          class='table  border border-1'
-                        >
-                          <thead>
-                            <tr>
-                              <th
-                                style={{
-                                  backgroundColor: '#ecedf7',
-                                  width: '5%',
-                                }}
-                                class='fs-6 fw-normal p-6  border'
-                              >
-                                #
-                              </th>
-                              <th
-                                style={{ backgroundColor: '#ecedf7' }}
-                                class='fs-6 fw-normal p-6 ps-5 text-center border'
-                              >
-                                Notes
-                              </th>
-                              <th
-                                style={{
-                                  backgroundColor: '#ecedf7',
-                                  width: '5%',
-                                }}
-                                class='fs-6 fw-normal p-6 ps-5 border'
-                              >
-                                Action
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {note.map((note, index) => (
-                              <tr>
-                                <td
-                                  style={{ width: '5%' }}
-                                  class='fs-6 fw-normal border'
-                                >
-                                  {index + 1}
-                                </td>
-                                <td class='fs-6 ps-5 text-start fw-normal border'>
-                                  {note.noteName}
-                                </td>
-                                <td class='fs-5 ps-5 fw-normal border'>
-                                  <i
-                                    style={{
-                                      color: '#ff4533',
-                                      cursor: 'pointer',
-                                    }}
-                                    onClick={() => noteDelete(index)}
-                                    class='bi bi-trash ms-2'
-                                  ></i>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    )}
-                  </div>
-                  {/* END  */}
-                  <div class=' m-3  '>
-                    <div class='d-flex mt-3'>
-                      <p class='fs-4 ms-4'> Add Files </p>
-                      {fileBtn && (
-                        <i
-                          onClick={handleFile}
-                          style={{ cursor: 'pointer' }}
-                          class='bi bi-plus-square fs-4 ms-3 '
-                        ></i>
-                      )}
-                      {!fileBtn && (
-                        <i
-                          onClick={handleFile}
-                          style={{ cursor: 'pointer' }}
-                          class='bi bi-dash-square fs-4 ms-3 '
-                        ></i>
-                      )}
-                    </div>
-                  </div>
-                  {isFile && (
-                    <div class='px-5'>
-                      <div
-                        style={{ position: 'relative', marginBottom: '70px' }}
-                      >
-                        <div class=' mb-3'>
-                          {/* <label for="formFile" class="form-label"></label> */}
-                          <input
-                            class='form-control'
-                            type='file'
-                            id='formFile'
-                            ref={fileRef}
-                            multiple
-                          />
-                        </div>
-                        <div>
-                          <button
-                            onClick={addFile}
-                            className={scrStyle.addBtn}
-                            type='button'
-                          >
-                            ADD
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  )}
-                  <div class='px-5 mt-3'>
-                    {fileTable && (
-                      <div style={{ marginBottom: '20px', marginTop: '0px' }}>
-                        <table
-                          style={{ borderColllaps: 'collapse', width: '100%' }}
-                          class='table  border border-1'
-                        >
-                          <thead>
-                            <tr>
-                              <th
-                                style={{
-                                  backgroundColor: '#ecedf7',
-                                  width: '5%',
-                                }}
-                                class='fs-6 fw-normal p-6  border'
-                              >
-                                #
-                              </th>
-                              <th
-                                style={{ backgroundColor: '#ecedf7' }}
-                                class='fs-6 fw-normal p-6 ps-5 text-center border'
-                              >
-                                Files
-                              </th>
-                              <th
-                                style={{
-                                  backgroundColor: '#ecedf7',
-                                  width: '5%',
-                                }}
-                                class='fs-6 fw-normal p-6 ps-5 border'
-                              >
-                                Action
-                              </th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                            {file.map((file, index) => (
-                              <tr>
-                                <td
-                                  style={{ width: '5%' }}
-                                  class='fs-6 fw-normal border'
-                                >
-                                  {index + 1}
-                                </td>
-                                <td class='fs-6 ps-5 text-start fw-normal border'>
-                                  {file.fileName}
-                                </td>
-                                <td class='fs-5 ps-5 fw-normal border'>
-                                  <i
-                                    style={{
-                                      color: '#ff4533',
-                                      cursor: 'pointer',
-                                    }}
-                                    onClick={() => fileDelete(index)}
-                                    class='bi bi-trash ms-2'
-                                  ></i>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      </div>
-                    )}
-                  </div>
-                  {/* END  */}
-                  <div style={{ marginTop: '50px' }} class='col-12 text-center'>
-                    <button class='btn btn-primary' type='submit'>
-                      Add Device Order
-                    </button>
-                  </div>
-                </div>
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
       {/* start  */}
       <div
         class='modal fade w-100'

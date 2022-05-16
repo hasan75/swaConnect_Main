@@ -1,7 +1,53 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
+import useToken from '../../hooks/useToken';
 import ppStyle from './Styles/PhonePlan.module.css';
 
 const PhonePlans = () => {
+  const { token } = useToken();
+
+  //hook form things
+  const { register, handleSubmit, reset } = useForm();
+
+  //url for work
+  const urlPre = process.env.REACT_APP_ROOT_URL;
+  const url = `${urlPre}/phonePlan`;
+
+  // adding phone plans
+  const onSubmit = (data) => {
+    console.log(data);
+    const phonePlanData = {
+      phonePlan: data,
+    };
+    fetch(`${url}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ ...phonePlanData }),
+    })
+      .then((res) => {
+        res.json();
+        console.log(res);
+        if (res.status === 201) {
+          Swal.fire('Phone Plan Added SuccessFully', '', 'success');
+        }
+      })
+      .then((data) => {
+        console.log(data);
+        reset();
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Sorry',
+          text: `${err.message}`,
+        });
+      });
+  };
+
   return (
     <div className={`${ppStyle.ppContainer} py-md-3`}>
       <div className={ppStyle.phoneData} class='my-1 mx-1 my-lg-3 mx-lg-3'>
@@ -74,7 +120,7 @@ const PhonePlans = () => {
               ></button>
             </div>
             <div class='modal-body'>
-              <form action=''>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div style={{ fontFamily: 'sans-serif' }}>
                   <div class='row px-5'>
                     <div class='col-12 col-md-6 col-lg-6'>
@@ -86,7 +132,7 @@ const PhonePlans = () => {
                           type='text'
                           class='form-control'
                           placeholder='Name'
-                          required
+                          {...register('name', { required: true })}
                         />
                       </div>
                     </div>
@@ -100,6 +146,7 @@ const PhonePlans = () => {
                           type='text'
                           class='form-control'
                           placeholder='Phone Plan'
+                          {...register('planCode', { required: true })}
                         />
                       </div>
                     </div>
@@ -113,10 +160,13 @@ const PhonePlans = () => {
                         <select
                           class='form-select'
                           aria-label='Default select example'
+                          {...register('serviceCarrier', { required: true })}
                         >
                           <option selected>Select Option</option>
-                          <option value='1'>PWG</option>
-                          <option value='2'>321 Communication</option>
+                          <option value='625389531749f041cdc3f3dc'>PWG</option>
+                          <option value='625389531749f041cdc3f3dc'>
+                            321 Communication
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -145,6 +195,7 @@ const PhonePlans = () => {
                           class='form-control'
                           placeholder='Leave a description here'
                           id='floatingTextarea'
+                          {...register('description', { required: true })}
                         ></textarea>
                       </div>
                     </div>

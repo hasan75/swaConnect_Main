@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 
 function AddNewSimCard() {
   const [active, setActive] = useState(true);
-  const [alternativeSelect, setAlternativeSelect] = useState(false);
+  // const [alternativeSelect, setAlternativeSelect] = useState(false);
   const selectRef = useRef('');
   const [serviceCarrier, setServiceCarrier] = useState([]);
   // the below useRef is used for alternative id type

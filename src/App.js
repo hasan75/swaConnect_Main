@@ -19,6 +19,7 @@ import SimCardOrders from './pages/SimCardOrders/SimCardOrders';
 import DeviceOrders from './pages/DeviceOrders/DeviceOrders';
 import AllDevices from './pages/AllDevices/AllDevices';
 import DeviceReturns from './pages/DeviceReturns/DeviceReturns';
+import Vendors from './pages/Vendors/Vendors';
 
 // for test
 
@@ -106,6 +107,9 @@ function App() {
                 </Route>
                 <Route path={'/dashboard/devices/deviceReturns'}>
                   <DeviceReturns></DeviceReturns>
+                </Route>
+                <Route exact path={'/dashboard/vendors'}>
+                  <Vendors></Vendors>
                 </Route>
                 <Route path={'/dashboard/vendors/simCardsOrders'}>
                   <SimCardOrders></SimCardOrders>

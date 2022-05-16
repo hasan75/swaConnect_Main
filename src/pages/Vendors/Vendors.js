@@ -70,6 +70,8 @@ const Vendors = () => {
       });
   };
 
+  console.log(vendors);
+
   return (
     <div className={`${vendorStyle.ppContainer} py-md-3`}>
       <div className={vendorStyle.phoneData} class='my-1 mx-1 my-lg-3 mx-lg-3'>
@@ -96,24 +98,150 @@ const Vendors = () => {
             </thead>
             <tbody>
               {vendors?.map((vendor) => (
-                <tr key={vendor?._id}>
-                  <td>{vendor?.company}</td>
-                  <td>{vendor?.phone}</td>
-                  <td>{vendor?.email}</td>
-                  <td>
-                    <ul>
-                      <button
-                        type='button'
-                        data-bs-toggle='modal'
-                        data-bs-target='#viewVendors'
-                      >
-                        View
-                      </button>
-                      <button>Edit</button>
-                      <button>Delete </button>
-                    </ul>
-                  </td>
-                </tr>
+                <>
+                  <tr key={vendor?._id}>
+                    <td>{vendor?.company}</td>
+                    <td>{vendor?.phone}</td>
+                    <td>{vendor?.email}</td>
+                    <td>
+                      <ul>
+                        <button
+                          type='button'
+                          data-bs-toggle='modal'
+                          data-bs-target='#viewVendors'
+                        >
+                          View
+                        </button>
+                        <button>Edit</button>
+                        <button>Delete </button>
+                      </ul>
+                    </td>
+                  </tr>
+                  {/* view vendor modal  code starts*/}
+                  <div
+                    class='modal fade w-100'
+                    id='viewVendors'
+                    tabindex='-1'
+                    aria-labelledby='viewModalLabel'
+                    aria-hidden='true'
+                  >
+                    <div class='modal-dialog modal-xl'>
+                      <div class='modal-content'>
+                        <div class='modal-header'>
+                          <h5 class='modal-title' id='viewModalLabel'>
+                            Vendor Data
+                          </h5>
+                          <button
+                            type='button'
+                            class='btn-close'
+                            data-bs-dismiss='modal'
+                            aria-label='Close'
+                          ></button>
+                        </div>
+                        <div class='modal-body'>
+                          <div
+                            style={{ width: '100%' }}
+                            className={vendorStyle.serviceView}
+                          >
+                            <h1
+                              style={{ textAlign: 'start', fontSize: '20px' }}
+                            >
+                              General Information
+                            </h1>
+                            <table className='table table-striped'>
+                              <tbody>
+                                <tr>
+                                  <td className='ps-1 ps-md-2'>ID</td>
+                                  <td className='ps-1 ps-md-2'>{vendor?.id}</td>
+                                </tr>
+                                <tr>
+                                  <td className='ps-1 ps-md-2'> Company</td>
+                                  <td className='ps-1 ps-md-2'>
+                                    {vendor?.company}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className='ps-1 ps-md-2'>Phone</td>
+                                  <td className='ps-1 ps-md-2'>
+                                    {vendor?.phone}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className='ps-1 ps-md-2'>Email</td>
+                                  <td className='ps-1 ps-md-2'>
+                                    {vendor?.email}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className='ps-1 ps-md-2'>Address 1</td>
+                                  <td className='ps-1 ps-md-2'>
+                                    {vendor?.address1}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className='ps-1 ps-md-2'>Address 2</td>
+                                  <td className='ps-1 ps-md-2'>
+                                    {vendor?.address2}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className='ps-1 ps-md-2'>City</td>
+                                  <td className='ps-1 ps-md-2'>
+                                    {vendor?.city}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className='ps-1 ps-md-2'>State</td>
+                                  <td className='ps-1 ps-md-2'>
+                                    {vendor?.state}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className='ps-1 ps-md-2'>Zip Code</td>
+                                  <td className='ps-1 ps-md-2'>
+                                    {vendor?.zipCode}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className='ps-1 ps-md-2'>First Name</td>
+                                  <td className='ps-1 ps-md-2'>
+                                    {vendor?.firstName}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className='ps-1 ps-md-2'>Last Name</td>
+                                  <td className='ps-1 ps-md-2'>
+                                    {vendor?.lastName}
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td className='ps-1 ps-md-2'>Note</td>
+                                  <td className='ps-1 ps-md-2'>
+                                    {vendor.notes
+                                      ? vendors?.notes?.map((note, index) => {
+                                          <tr key={index}>
+                                            <td>{note}</td>
+                                          </tr>;
+                                        })
+                                      : 'No Notes Found'}
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <div className={vendorStyle.button}>
+                              <button className={vendorStyle.downloadBtn}>
+                                <i class='fa fa-download' download></i> Download
+                              </button>
+                              <button className={vendorStyle.printBtn}>
+                                <i class='fa fa-print' download></i> Print
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </>
               ))}
             </tbody>
           </table>
@@ -288,109 +416,6 @@ const Vendors = () => {
           </div>
         </div>
       </div>
-      {/* start  */}
-      <div
-        class='modal fade w-100'
-        id='viewVendors'
-        tabindex='-1'
-        aria-labelledby='viewModalLabel'
-        aria-hidden='true'
-      >
-        <div class='modal-dialog modal-xl'>
-          <div class='modal-content'>
-            <div class='modal-header'>
-              <h5 class='modal-title' id='viewModalLabel'>
-                Vendor Data
-              </h5>
-              <button
-                type='button'
-                class='btn-close'
-                data-bs-dismiss='modal'
-                aria-label='Close'
-              ></button>
-            </div>
-            <div class='modal-body'>
-              <div
-                style={{ width: '100%' }}
-                className={vendorStyle.serviceView}
-              >
-                <h1 style={{ textAlign: 'start', fontSize: '20px' }}>
-                  General Information
-                </h1>
-                <table class='table table-striped '>
-                  <tbody>
-                    <tr>
-                      <td>ID</td>
-                      <td>321 Communication</td>
-                    </tr>
-                    <tr>
-                      <td> Company</td>
-                      <td>We Provide best service</td>
-                    </tr>
-                    <tr>
-                      <td>Phone</td>
-                      <td>12343</td>
-                    </tr>
-                    <tr>
-                      <td>Email</td>
-                      <td>ative@gmail.com</td>
-                    </tr>
-                    <tr>
-                      <td>Address 1</td>
-                      <td>Supporting affordable communications</td>
-                    </tr>
-                    <tr>
-                      <td>Address 2</td>
-                      <td>Supporting affordable communications</td>
-                    </tr>
-                    <tr>
-                      <td>City</td>
-                      <td>Supporting affordable communications</td>
-                    </tr>
-                    <tr>
-                      <td>State</td>
-                      <td>Supporting affordable communications</td>
-                    </tr>
-                    <tr>
-                      <td>Zip Code</td>
-                      <td>Supporting affordable communications</td>
-                    </tr>
-                    <tr>
-                      <td>First Name</td>
-                      <td>Supporting affordable communications</td>
-                    </tr>
-                    <tr>
-                      <td>Last Name</td>
-                      <td>Supporting affordable communications</td>
-                    </tr>
-                    <tr>
-                      <td>Note</td>
-                      <td>
-                        <tr>
-                          <td>First Column</td>
-                        </tr>
-                        <tr>
-                          <td>Second Column</td>
-                        </tr>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className={vendorStyle.button}>
-                  <button className={vendorStyle.downloadBtn}>
-                    <i class='fa fa-download' download></i> Download
-                  </button>
-                  <button className={vendorStyle.printBtn}>
-                    <i class='fa fa-print' download></i> Print
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* end  */}
     </div>
   );
 };

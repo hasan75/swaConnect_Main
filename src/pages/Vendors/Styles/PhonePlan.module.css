@@ -1,0 +1,122 @@
+.ppContainer{
+  background-color: white;
+  margin: 10px 0px;
+  border-radius: 7px;
+}
+
+.phoneData {
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  margin-top: 30px;
+}
+
+.TableData {
+  margin-top: 30px;
+  padding: 0px 20px;
+}
+
+.TableData table {
+  width: 100%;
+  text-align: center;
+}
+
+.TableData table tr th {
+  font-weight: 100;
+  background: #212F3E;
+  color: #ffffff;
+  padding: 8px;
+}
+
+.TableData table tbody tr td {
+  border: 1px solid #445363;
+  padding: 10px 0px;
+}
+
+.TableData table tbody tr td ul button {
+  border: none;
+  text-align: center;
+  background: none;
+  border-right: .5px solid #445363;
+  padding: 5px 7px; 
+}
+
+.TableData table tbody tr td ul button:nth-child(5) {
+  border-right: none;
+}
+
+.serviceView h1 {
+  padding: 5px 0px;
+}
+
+.serviceView table tbody tr td {
+  text-align: start;
+}
+
+.downloadBtn, .printBtn {
+  background-color: DodgerBlue;
+  border: none;
+  color: white;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 4px;
+}
+
+.downloadBtn {
+  margin-right: 5px;
+}
+
+.printBtn {
+  margin-left: 5px;
+}
+
+.downloadBtn:hover {
+  background-color: RoyalBlue;
+}
+
+.printBtn:hover {
+  background-color: RoyalBlue;
+}
+
+.addBtn {
+  position: absolute;
+  right: 0%;
+  padding: 8px;
+  border-radius: 4px;
+  border: none;
+  background: #4c62e2;
+  color: white;
+}
+
+.planTable {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.planTable thead tr th {
+  font-size: 20px;
+  background: #f1eeee;
+  font-weight: 100;
+  padding-left: 30px;
+}
+
+.planTable thead tr th:nth-child(4) {
+  text-align: end;
+  padding-right: 30px;
+}
+
+.planTable tbody tr td {
+  font-size: 18px;
+  padding-left: 30px;
+  background: #b4cee4;
+}
+
+.planTable tbody tr td i {
+  color: #e43039;
+}
+
+.planTable tbody tr td:nth-child(4) {
+  text-align: end;
+  background: #b4cee4;
+  padding-right: 30px;
+}
+/*# sourceMappingURL=PhonePlan.module.css.map */

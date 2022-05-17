@@ -6,6 +6,7 @@ import useToken from '../../hooks/useToken';
 // import { Link } from 'react-router-dom';
 // import tableIcons from '../../components/IconProvider/IconProvider';
 import { useForm } from 'react-hook-form';
+import EditVendor from './EditVendor/EditVendor';
 
 const Vendors = () => {
   //hook form things
@@ -72,19 +73,6 @@ const Vendors = () => {
 
   console.log(vendors);
 
-  const onEditSubmit = async (data) => {
-    Swal.fire({
-      icon: 'warning',
-      title: 'Sure to Update this Vendor?',
-      showCancelButton: true,
-      confirmButtonText: 'Yes',
-    }).then((result) => {
-      if (result.isConfirmed) {
-        console.log('good');
-      }
-    });
-  };
-
   const downloadClick = () => {
     console.log('data');
   };
@@ -132,7 +120,7 @@ const Vendors = () => {
                         <button
                           type='button'
                           data-bs-toggle='modal'
-                          data-bs-target='#editSingleVendor'
+                          data-bs-target={`#${vendor.name}`}
                         >
                           Edit
                         </button>
@@ -268,188 +256,12 @@ const Vendors = () => {
                     </div>
                   </div>
                   {/* edit vendor modal code starts  */}
-                  <div
-                    class='modal fade w-100'
-                    id='editSingleVendor'
-                    tabindex='-1'
-                    aria-labelledby='editModalLabel'
-                    aria-hidden='true'
-                  >
-                    <div class='modal-dialog modal-xl'>
-                      <div class='modal-content'>
-                        <div class='modal-header'>
-                          <h5 class='modal-title ms-5' id='editModalLabel'>
-                            Edit Vendor Information
-                          </h5>
-                          <button
-                            type='button'
-                            class='btn-close'
-                            data-bs-dismiss='modal'
-                            aria-label='Close'
-                          ></button>
-                        </div>
-                        <div class='modal-body'>
-                          <form onSubmit={handleSubmit(onEditSubmit)}>
-                            <div style={{ fontFamily: 'sans-serif' }}>
-                              <div class='row px-5'>
-                                <div class='col-12 col-md-6'>
-                                  <div class='mb-3 text-start'>
-                                    <label f class='form-label'>
-                                      First Name
-                                    </label>
-                                    <input
-                                      type='text'
-                                      class='form-control'
-                                      defaultValue={vendor.firstName}
-                                      placeholder={vendor.firstName}
-                                      {...register('firstName')}
-                                    />
-                                  </div>
-                                </div>
-                                <div class='col-12 col-md-6'>
-                                  <div class='mb-3 text-start'>
-                                    <label f class='form-label'>
-                                      {' '}
-                                      Last Name
-                                    </label>
-                                    <input
-                                      type='text'
-                                      class='form-control'
-                                      defaultValue={vendor.lastName}
-                                      placeholder={vendor.lastName}
-                                      {...register('lastName')}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                              <div class='row px-5'>
-                                <div class='col-12 col-md-4 col-lg-4'>
-                                  <div class='mb-3 text-start'>
-                                    <label f class='form-label'>
-                                      Company
-                                    </label>
-                                    <input
-                                      class='form-control'
-                                      type='text'
-                                      id='company'
-                                      placeholder={vendor.company}
-                                      defaultValue={vendor.company}
-                                      {...register('company')}
-                                    />
-                                  </div>
-                                </div>
-                                <div class='col-12 col-md-4 col-lg-4'>
-                                  <div class='mb-3 text-start'>
-                                    <label f class='form-label'>
-                                      {' '}
-                                      Phone
-                                    </label>
-                                    <input
-                                      className='form-control'
-                                      id='phone'
-                                      type='text'
-                                      placeholder={vendor.phone}
-                                      defaultValue={vendor.phone}
-                                      {...register('phone')}
-                                    />
-                                  </div>
-                                </div>
-                                <div class='col-12 col-md-4 col-lg-4'>
-                                  <div class='mb-3 text-start'>
-                                    <label f class='form-label'>
-                                      {' '}
-                                      Email
-                                    </label>
-                                    <input
-                                      class='form-control'
-                                      type='email'
-                                      id='email'
-                                      placeholder={vendor.email}
-                                      defaultValue={vendor.email}
-                                      {...register('email')}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                              <div class='row px-5'>
-                                <div class='col-12 col-md-12 col-lg-6'>
-                                  <div class='mb-3 text-start'>
-                                    <label class='form-label'>Address 1</label>
-                                    <input
-                                      class='form-control'
-                                      id='address1'
-                                      placeholder={vendor.address1}
-                                      defaultValue={vendor.address1}
-                                      {...register('address1')}
-                                    ></input>
-                                  </div>
-                                </div>
-                                <div class='col-12 col-md-12 col-lg-6'>
-                                  <div class='mb-3 text-start'>
-                                    <label class='form-label'>Address 2</label>
-                                    <input
-                                      class='form-control'
-                                      id='address2'
-                                      placeholder={vendor.address2}
-                                      defaultValue={vendor.address2}
-                                      {...register('address2')}
-                                    ></input>
-                                  </div>
-                                </div>
-                              </div>
-                              <div class='row px-5'>
-                                <div class='col-12 col-md-4 col-lg-4'>
-                                  <div class='mb-3 text-start'>
-                                    <label class='form-label'>City</label>
-                                    <input
-                                      class='form-control'
-                                      id='city'
-                                      placeholder={vendor.city}
-                                      defaultValue={vendor.city}
-                                      {...register('city')}
-                                    ></input>
-                                  </div>
-                                </div>
-                                <div class='col-12 col-md-4 col-lg-4'>
-                                  <div class='mb-3 text-start'>
-                                    <label class='form-label'>State</label>
-                                    <input
-                                      class='form-control'
-                                      id='state'
-                                      placeholder={vendor.state}
-                                      defaultValue={vendor.state}
-                                      {...register('state')}
-                                    ></input>
-                                  </div>
-                                </div>
-                                <div class='col-12 col-md-4 col-lg-4'>
-                                  <div class='mb-3 text-start'>
-                                    <label class='form-label'>Zip Code</label>
-                                    <input
-                                      class='form-control'
-                                      id='zipCode'
-                                      placeholder={vendor.zipCode}
-                                      defaultValue={vendor.zipCode}
-                                      {...register('zipCode')}
-                                    ></input>
-                                  </div>
-                                </div>
-                              </div>
-                              {/* END  */}
-                              <div
-                                style={{ marginTop: '50px' }}
-                                class='col-12 text-center'
-                              >
-                                <button class='btn btn-primary' type='submit'>
-                                  Edit Vendor
-                                </button>
-                              </div>
-                            </div>
-                          </form>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  <EditVendor
+                    vendor={vendor}
+                    key={vendor?._id}
+                    id={vendor?.id}
+                    name={vendor?.name}
+                  ></EditVendor>
                 </>
               ))}
             </tbody>

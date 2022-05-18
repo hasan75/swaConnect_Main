@@ -4,6 +4,8 @@ import logo from '../../assets/logo/swaconnect.png';
 import { useHistory } from 'react-router';
 // import user from "../../assets/user.jpg";
 import MenuItem from './MenuItem';
+import Swal from 'sweetalert2';
+import useToken from '../../hooks/useToken';
 /**
  * @author
  * @function SideMenu
@@ -125,7 +127,7 @@ const SideMenu = (props) => {
         removeActiveClassFromSubMenu();
         menuItems.forEach((el) => el.classList.remove('active'));
         el.classList.toggle('active');
-        console.log(next);
+        // console.log(next);
         if (next !== null) {
           next.classList.toggle('active');
         }
@@ -133,11 +135,48 @@ const SideMenu = (props) => {
     });
   }, []);
 
+  //token
+  const { token } = useToken();
+  //url
+  const urlPre = process.env.REACT_APP_ROOT_URL;
+  const url = `${urlPre}/logout`;
+
   // for logout
 
   const logOut = () => {
-    localStorage.clear();
-    history.go(0);
+    Swal.fire({
+      icon: 'warning',
+      title: 'Sure to logout?',
+      showCancelButton: true,
+      confirmButtonText: 'Yes',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`${url}`, {
+          headers: {
+            'Content-type': 'applicaiton/json',
+            'Authorization': `Bearer ${token}`,
+          },
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            Swal.fire({
+              icon: 'success',
+              title: `${data.data.message}`,
+            });
+            localStorage.clear();
+            history.go(0);
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Sorry',
+              text: `error ocurred in logout`,
+            });
+          });
+      }
+    });
+
     // window.location.href = '/';
   };
 

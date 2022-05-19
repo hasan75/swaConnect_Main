@@ -72,12 +72,18 @@ const Vendors = () => {
       });
   };
 
-  console.log(vendors);
+  // console.log(vendors);
 
   //for view modal
   let [showViewModal, setShowViewModal] = useState(false);
   let [viewModalId, setViewModalId] = useState(null);
   const [viewData, setViewData] = useState({});
+
+  const viewTheVendor = (vendor) => {
+    setViewData((prevendor) => Object.assign(prevendor, vendor));
+    console.log(viewData);
+  };
+  // console.log(viewData);
 
   let showTheViewModal = (index) => {
     setShowViewModal(true);
@@ -101,7 +107,7 @@ const Vendors = () => {
   let editModalColse = () => {
     setShowEditModal(false);
   };
-  console.log(viewData);
+  // console.log(viewData);
   //for modal
 
   return (
@@ -141,9 +147,9 @@ const Vendors = () => {
                           type='button'
                           data-bs-toggle='modal'
                           data-bs-target='#viewVendors'
-                          onClick={async () => {
+                          onClick={() => {
+                            viewTheVendor(vendor);
                             showTheViewModal(index);
-                            await setViewData(vendor);
                           }}
                         >
                           View
@@ -171,13 +177,12 @@ const Vendors = () => {
         </div>
       </div>
       <ViewVendor
-        key={viewData?._id}
-        show={showViewModal}
-        onHide={viewModalColse}
+        key={viewData?.name}
         viewData={viewData}
+        onHide={viewModalColse}
       ></ViewVendor>
       <EditVendor
-        key={editData?._id}
+        key={editData?.name}
         show={showEditModal}
         onHide={editModalColse}
         editData={editData}

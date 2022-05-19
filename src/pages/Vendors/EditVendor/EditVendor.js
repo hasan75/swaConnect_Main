@@ -7,7 +7,13 @@ const EditVendor = (props) => {
   const { editData } = props;
   // console.log(props);
   //hook form things
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset } = useForm({});
+  useEffect(() => {
+    let defaultValues = {};
+    defaultValues = editData;
+    reset({ ...defaultValues });
+  }, [props]);
+
   // token
   const { token } = useToken();
   //url
@@ -19,7 +25,6 @@ const EditVendor = (props) => {
     const vendorEditData = {
       vendor: data,
     };
-    console.log(vendorEditData);
     Swal.fire({
       icon: 'warning',
       title: 'Sure to Update this Vendor?',
@@ -92,8 +97,9 @@ const EditVendor = (props) => {
                       </label>
                       <input
                         type='text'
+                        // name='id'
                         class='form-control'
-                        defaultValue={editData.id}
+                        value={editData.id}
                         placeholder={editData.id}
                         readonly
                       />
@@ -106,8 +112,9 @@ const EditVendor = (props) => {
                       </label>
                       <input
                         type='text'
+                        // name='firstName'
                         class='form-control'
-                        defaultValue={editData.firstName}
+                        // defaultValue={editData.firstName}
                         placeholder={editData.firstName}
                         {...register('firstName')}
                       />
@@ -121,8 +128,9 @@ const EditVendor = (props) => {
                       </label>
                       <input
                         type='text'
+                        // name='lastName'
                         class='form-control'
-                        defaultValue={editData.lastName}
+                        // defaultValue={editData.lastName}
                         placeholder={editData.lastName}
                         {...register('lastName')}
                       />
@@ -139,8 +147,9 @@ const EditVendor = (props) => {
                         class='form-control'
                         type='text'
                         id='company'
+                        // name='company'
                         placeholder={editData.company}
-                        defaultValue={editData.company}
+                        // defaultValue={editData.company}
                         {...register('company')}
                       />
                     </div>
@@ -154,9 +163,10 @@ const EditVendor = (props) => {
                       <input
                         className='form-control'
                         id='phone'
+                        // name='phone'
                         type='text'
                         placeholder={editData.phone}
-                        defaultValue={editData.phone}
+                        // defaultValue={editData.phone}
                         {...register('phone')}
                       />
                     </div>
@@ -171,8 +181,9 @@ const EditVendor = (props) => {
                         class='form-control'
                         type='email'
                         id='email'
+                        // name='email'
                         placeholder={editData.email}
-                        defaultValue={editData.email}
+                        // defaultValue={editData.email}
                         {...register('email')}
                       />
                     </div>
@@ -185,8 +196,9 @@ const EditVendor = (props) => {
                       <input
                         class='form-control'
                         id='address1'
+                        // name='address1'
                         placeholder={editData.address1}
-                        defaultValue={editData.address1}
+                        // defaultValue={editData.address1}
                         {...register('address1')}
                       ></input>
                     </div>
@@ -197,8 +209,9 @@ const EditVendor = (props) => {
                       <input
                         class='form-control'
                         id='address2'
+                        // name='address2'
                         placeholder={editData.address2}
-                        defaultValue={editData.address2}
+                        // defaultValue={editData.address2}
                         {...register('address2')}
                       ></input>
                     </div>
@@ -211,8 +224,9 @@ const EditVendor = (props) => {
                       <input
                         class='form-control'
                         id='city'
+                        // name='city'
                         placeholder={editData.city}
-                        defaultValue={editData.city}
+                        // defaultValue={editData.city}
                         {...register('city')}
                       ></input>
                     </div>
@@ -223,8 +237,9 @@ const EditVendor = (props) => {
                       <input
                         class='form-control'
                         id='state'
+                        name='state'
                         placeholder={editData.state}
-                        defaultValue={editData.state}
+                        // defaultValue={editData.state}
                         {...register('state')}
                       ></input>
                     </div>
@@ -235,8 +250,9 @@ const EditVendor = (props) => {
                       <input
                         class='form-control'
                         id='zipCode'
+                        // name='zipCode'
                         placeholder={editData.zipCode}
-                        defaultValue={editData.zipCode}
+                        // defaultValue={editData.zipCode}
                         {...register('zipCode')}
                       ></input>
                     </div>

@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import vendorStyle from '../Styles/PhonePlan.module.css';
+import ReactToPrint, { useReactToPrint } from 'react-to-print';
 
 const ViewVendor = (props) => {
+  const printComponentRef = useRef();
+
   const downloadClick = () => {
     console.log('data');
   };
+
+  const handlePrint = useReactToPrint({
+    content: () => printComponentRef.current,
+  });
+
   return (
     <div
       class='modal fade w-100'
@@ -27,7 +35,7 @@ const ViewVendor = (props) => {
               aria-label='Close'
             ></button>
           </div>
-          <div class='modal-body'>
+          <div class='modal-body' ref={printComponentRef}>
             <div style={{ width: '100%' }} className={vendorStyle.serviceView}>
               <h1 style={{ textAlign: 'start', fontSize: '20px' }}>
                 General Information
@@ -107,7 +115,7 @@ const ViewVendor = (props) => {
                 >
                   <i class='fa fa-download' download></i> Download
                 </button>
-                <button className={vendorStyle.printBtn}>
+                <button onClick={handlePrint} className={vendorStyle.printBtn}>
                   <i class='fa fa-print' download></i> Print
                 </button>
               </div>

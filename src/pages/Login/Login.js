@@ -4,6 +4,7 @@ import { useHistory } from 'react-router-dom';
 import avatar from '../../assets/logo/swaconnec.png';
 import './Login.css';
 import PropTypes from 'prop-types';
+import Swal from 'sweetalert2';
 
 async function loginUser(credentials) {
   return fetch('http://localhost:3939/login', {
@@ -12,7 +13,15 @@ async function loginUser(credentials) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(credentials),
-  }).then((data) => data.json());
+  })
+    .then((data) => data.json())
+    .catch((err) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Sorry',
+        text: 'Login Not Successful',
+      });
+    });
 }
 
 const Login = ({ setToken }) => {

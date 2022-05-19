@@ -159,13 +159,12 @@ const SideMenu = (props) => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log(data);
+            localStorage.clear();
+            history.go(0);
             Swal.fire({
               icon: 'success',
               title: `${data.data.message}`,
             });
-            localStorage.clear();
-            history.go(0);
           })
           .catch((err) => {
             Swal.fire({

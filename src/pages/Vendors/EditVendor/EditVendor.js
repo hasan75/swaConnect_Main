@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
 import useToken from '../../../hooks/useToken';
 
 const EditVendor = (props) => {
-  const { vendor, id, name } = props;
+  const { editData } = props;
+  // console.log(props);
   //hook form things
   const { register, handleSubmit, reset } = useForm();
   // token
@@ -14,9 +15,11 @@ const EditVendor = (props) => {
   const url = `${urlPre}/vendor`;
 
   const onEditSubmit = async (data) => {
+    data.id = editData.id;
     const vendorEditData = {
       vendor: data,
     };
+    console.log(vendorEditData);
     Swal.fire({
       icon: 'warning',
       title: 'Sure to Update this Vendor?',
@@ -29,19 +32,15 @@ const EditVendor = (props) => {
           headers: {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${token}`,
+            'Access-Control-Allow-Origin': '*',
           },
           body: JSON.stringify({ ...vendorEditData }),
         })
           .then((res) => {
             res.json();
-            console.log(res);
-          })
-          .then((data) => {
-            if (data.modifiedCount) {
-              reset();
+            if (res.status === 200) {
               Swal.fire('Updated!', '', 'success');
-            } else {
-              Swal.fire("You didn't change", '', 'warning');
+              window.location.reload();
             }
           })
           .catch((err) => {
@@ -62,10 +61,11 @@ const EditVendor = (props) => {
   return (
     <div
       class='modal fade w-100'
-      id={name}
+      id='editVendorModal'
       tabindex='-1'
       aria-labelledby='editModalLabel'
       aria-hidden='true'
+      {...props}
     >
       <div class='modal-dialog modal-xl'>
         <div class='modal-content'>
@@ -78,6 +78,7 @@ const EditVendor = (props) => {
               class='btn-close'
               data-bs-dismiss='modal'
               aria-label='Close'
+              onClick={props.onHide}
             ></button>
           </div>
           <div class='modal-body'>
@@ -92,8 +93,8 @@ const EditVendor = (props) => {
                       <input
                         type='text'
                         class='form-control'
-                        defaultValue={vendor.id}
-                        placeholder={vendor.id}
+                        defaultValue={editData.id}
+                        placeholder={editData.id}
                         readonly
                       />
                     </div>
@@ -106,8 +107,8 @@ const EditVendor = (props) => {
                       <input
                         type='text'
                         class='form-control'
-                        defaultValue={vendor.firstName}
-                        placeholder={vendor.firstName}
+                        defaultValue={editData.firstName}
+                        placeholder={editData.firstName}
                         {...register('firstName')}
                       />
                     </div>
@@ -121,8 +122,8 @@ const EditVendor = (props) => {
                       <input
                         type='text'
                         class='form-control'
-                        defaultValue={vendor.lastName}
-                        placeholder={vendor.lastName}
+                        defaultValue={editData.lastName}
+                        placeholder={editData.lastName}
                         {...register('lastName')}
                       />
                     </div>
@@ -138,8 +139,8 @@ const EditVendor = (props) => {
                         class='form-control'
                         type='text'
                         id='company'
-                        placeholder={vendor.company}
-                        defaultValue={vendor.company}
+                        placeholder={editData.company}
+                        defaultValue={editData.company}
                         {...register('company')}
                       />
                     </div>
@@ -154,8 +155,8 @@ const EditVendor = (props) => {
                         className='form-control'
                         id='phone'
                         type='text'
-                        placeholder={vendor.phone}
-                        defaultValue={vendor.phone}
+                        placeholder={editData.phone}
+                        defaultValue={editData.phone}
                         {...register('phone')}
                       />
                     </div>
@@ -170,8 +171,8 @@ const EditVendor = (props) => {
                         class='form-control'
                         type='email'
                         id='email'
-                        placeholder={vendor.email}
-                        defaultValue={vendor.email}
+                        placeholder={editData.email}
+                        defaultValue={editData.email}
                         {...register('email')}
                       />
                     </div>
@@ -184,8 +185,8 @@ const EditVendor = (props) => {
                       <input
                         class='form-control'
                         id='address1'
-                        placeholder={vendor.address1}
-                        defaultValue={vendor.address1}
+                        placeholder={editData.address1}
+                        defaultValue={editData.address1}
                         {...register('address1')}
                       ></input>
                     </div>
@@ -196,8 +197,8 @@ const EditVendor = (props) => {
                       <input
                         class='form-control'
                         id='address2'
-                        placeholder={vendor.address2}
-                        defaultValue={vendor.address2}
+                        placeholder={editData.address2}
+                        defaultValue={editData.address2}
                         {...register('address2')}
                       ></input>
                     </div>
@@ -210,8 +211,8 @@ const EditVendor = (props) => {
                       <input
                         class='form-control'
                         id='city'
-                        placeholder={vendor.city}
-                        defaultValue={vendor.city}
+                        placeholder={editData.city}
+                        defaultValue={editData.city}
                         {...register('city')}
                       ></input>
                     </div>
@@ -222,8 +223,8 @@ const EditVendor = (props) => {
                       <input
                         class='form-control'
                         id='state'
-                        placeholder={vendor.state}
-                        defaultValue={vendor.state}
+                        placeholder={editData.state}
+                        defaultValue={editData.state}
                         {...register('state')}
                       ></input>
                     </div>
@@ -234,8 +235,8 @@ const EditVendor = (props) => {
                       <input
                         class='form-control'
                         id='zipCode'
-                        placeholder={vendor.zipCode}
-                        defaultValue={vendor.zipCode}
+                        placeholder={editData.zipCode}
+                        defaultValue={editData.zipCode}
                         {...register('zipCode')}
                       ></input>
                     </div>

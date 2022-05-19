@@ -7,6 +7,7 @@ import useToken from '../../hooks/useToken';
 // import tableIcons from '../../components/IconProvider/IconProvider';
 import { useForm } from 'react-hook-form';
 import EditVendor from './EditVendor/EditVendor';
+import ViewVendor from './ViewVendor/ViewVendor';
 
 const Vendors = () => {
   //hook form things
@@ -73,9 +74,35 @@ const Vendors = () => {
 
   console.log(vendors);
 
-  const downloadClick = () => {
-    console.log('data');
+  //for view modal
+  let [showViewModal, setShowViewModal] = useState(false);
+  let [viewModalId, setViewModalId] = useState(null);
+  const [viewData, setViewData] = useState({});
+
+  let showTheViewModal = (index) => {
+    setShowViewModal(true);
+    setViewModalId(index);
   };
+
+  let viewModalColse = () => {
+    setShowViewModal(false);
+  };
+
+  //for edit modal
+  let [showEditModal, setShowEditModal] = useState(false);
+  let [modalId, setModalId] = useState(null);
+  const [editData, setEditData] = useState({});
+
+  let showTheEditModal = (index) => {
+    setShowEditModal(true);
+    setModalId(index);
+  };
+
+  let editModalColse = () => {
+    setShowEditModal(false);
+  };
+  console.log(viewData);
+  //for modal
 
   return (
     <div className={`${vendorStyle.ppContainer} py-md-3`}>
@@ -102,9 +129,9 @@ const Vendors = () => {
               </tr>
             </thead>
             <tbody>
-              {vendors?.map((vendor) => (
+              {vendors?.map((vendor, index) => (
                 <>
-                  <tr key={vendor?._id}>
+                  <tr key={vendor?.id} index={index}>
                     <td>{vendor?.company}</td>
                     <td>{vendor?.phone}</td>
                     <td>{vendor?.email}</td>
@@ -114,13 +141,22 @@ const Vendors = () => {
                           type='button'
                           data-bs-toggle='modal'
                           data-bs-target='#viewVendors'
+                          onClick={async () => {
+                            showTheViewModal(index);
+                            await setViewData(vendor);
+                          }}
                         >
                           View
                         </button>
+                        {/* edit button  */}
                         <button
                           type='button'
                           data-bs-toggle='modal'
-                          data-bs-target={`#${vendor.name}`}
+                          data-bs-target='#editVendorModal'
+                          onClick={async () => {
+                            showTheEditModal(index);
+                            await setEditData(vendor);
+                          }}
                         >
                           Edit
                         </button>
@@ -128,146 +164,24 @@ const Vendors = () => {
                       </ul>
                     </td>
                   </tr>
-                  {/* view vendor modal  code starts*/}
-                  <div
-                    class='modal fade w-100'
-                    id='viewVendors'
-                    tabindex='-1'
-                    aria-labelledby='viewModalLabel'
-                    aria-hidden='true'
-                  >
-                    <div class='modal-dialog modal-xl'>
-                      <div class='modal-content'>
-                        <div class='modal-header'>
-                          <h5 class='modal-title' id='viewModalLabel'>
-                            Vendor Data
-                          </h5>
-                          <button
-                            type='button'
-                            class='btn-close'
-                            data-bs-dismiss='modal'
-                            aria-label='Close'
-                          ></button>
-                        </div>
-                        <div class='modal-body'>
-                          <div
-                            style={{ width: '100%' }}
-                            className={vendorStyle.serviceView}
-                          >
-                            <h1
-                              style={{ textAlign: 'start', fontSize: '20px' }}
-                            >
-                              General Information
-                            </h1>
-                            <table className='table table-striped'>
-                              <tbody>
-                                <tr>
-                                  <td className='ps-1 ps-md-2'>ID</td>
-                                  <td className='ps-1 ps-md-2'>{vendor?.id}</td>
-                                </tr>
-                                <tr>
-                                  <td className='ps-1 ps-md-2'> Company</td>
-                                  <td className='ps-1 ps-md-2'>
-                                    {vendor?.company}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className='ps-1 ps-md-2'>Phone</td>
-                                  <td className='ps-1 ps-md-2'>
-                                    {vendor?.phone}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className='ps-1 ps-md-2'>Email</td>
-                                  <td className='ps-1 ps-md-2'>
-                                    {vendor?.email}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className='ps-1 ps-md-2'>Address 1</td>
-                                  <td className='ps-1 ps-md-2'>
-                                    {vendor?.address1}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className='ps-1 ps-md-2'>Address 2</td>
-                                  <td className='ps-1 ps-md-2'>
-                                    {vendor?.address2}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className='ps-1 ps-md-2'>City</td>
-                                  <td className='ps-1 ps-md-2'>
-                                    {vendor?.city}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className='ps-1 ps-md-2'>State</td>
-                                  <td className='ps-1 ps-md-2'>
-                                    {vendor?.state}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className='ps-1 ps-md-2'>Zip Code</td>
-                                  <td className='ps-1 ps-md-2'>
-                                    {vendor?.zipCode}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className='ps-1 ps-md-2'>First Name</td>
-                                  <td className='ps-1 ps-md-2'>
-                                    {vendor?.firstName}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className='ps-1 ps-md-2'>Last Name</td>
-                                  <td className='ps-1 ps-md-2'>
-                                    {vendor?.lastName}
-                                  </td>
-                                </tr>
-                                <tr>
-                                  <td className='ps-1 ps-md-2'>Note</td>
-                                  <td className='ps-1 ps-md-2'>
-                                    {vendor.notes
-                                      ? vendors?.notes?.map((note, index) => {
-                                          <tr key={index}>
-                                            <td>{note}</td>
-                                          </tr>;
-                                        })
-                                      : 'No Notes Found'}
-                                  </td>
-                                </tr>
-                              </tbody>
-                            </table>
-                            <div className={vendorStyle.button}>
-                              <button
-                                className={vendorStyle.downloadBtn}
-                                onClick={downloadClick}
-                              >
-                                <i class='fa fa-download' download></i> Download
-                              </button>
-                              <button className={vendorStyle.printBtn}>
-                                <i class='fa fa-print' download></i> Print
-                              </button>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  {/* edit vendor modal code starts  */}
-                  <EditVendor
-                    vendor={vendor}
-                    key={vendor?._id}
-                    id={vendor?.id}
-                    name={vendor?.name}
-                  ></EditVendor>
                 </>
               ))}
             </tbody>
           </table>
         </div>
       </div>
+      <ViewVendor
+        key={viewData?._id}
+        show={showViewModal}
+        onHide={viewModalColse}
+        viewData={viewData}
+      ></ViewVendor>
+      <EditVendor
+        key={editData?._id}
+        show={showEditModal}
+        onHide={editModalColse}
+        editData={editData}
+      ></EditVendor>
       <div
         class='modal fade w-100'
         id='vendorModal'

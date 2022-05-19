@@ -108,7 +108,44 @@ const Vendors = () => {
     setShowEditModal(false);
   };
   // console.log(viewData);
-  //for modal
+
+  //for delete vendor
+  const deleteVendor = (id) => {
+    const deleteUrl = `${urlPre}/vendor?id=${id}`;
+    Swal.fire({
+      icon: 'warning',
+      title: 'Are you sure to delete this vendor?',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(deleteUrl, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-type': 'application/json',
+          },
+        })
+          .then((res) => {
+            res.json();
+            if (res.status === 200) {
+              Swal.fire('Deleted!', '', 'success');
+              const modifiedVendors = vendors.filter(
+                (vendor) => vendor.id !== id
+              );
+              setVendors(modifiedVendors);
+            }
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Sorry',
+              text: 'Could Not Delete, Try Again Please.',
+            });
+          });
+      }
+    });
+  };
 
   return (
     <div className={`${vendorStyle.ppContainer} py-md-3`}>
@@ -166,7 +203,9 @@ const Vendors = () => {
                         >
                           Edit
                         </button>
-                        <button>Delete </button>
+                        <button onClick={() => deleteVendor(vendor.id)}>
+                          Delete{' '}
+                        </button>
                       </ul>
                     </td>
                   </tr>

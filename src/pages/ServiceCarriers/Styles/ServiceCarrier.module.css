@@ -23,7 +23,7 @@
 
 .TableData table tbody tr td {
   border: 1px solid #445363;
-  padding-bottom: 10px;    /* added */
+  padding: 10px 0px;
 }
 
 .TableData table tbody tr td ul button {

@@ -42,6 +42,7 @@ const Vendors = () => {
       });
   };
 
+  //for adding new Vendor
   const onSubmit = (data) => {
     const vendorData = {
       vendor: data,
@@ -59,6 +60,7 @@ const Vendors = () => {
         if (res.status === 201) {
           Swal.fire('Vendor Added Successfully', '', 'success');
         }
+        window.location.reload();
       })
       .then((data) => {
         reset();

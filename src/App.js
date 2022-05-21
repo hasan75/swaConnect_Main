@@ -26,12 +26,13 @@ import Vendors from './pages/Vendors/Vendors';
 // const Dashboard = () => <ACPVerForm />;
 const Content = () => <h1>Content</h1>;
 // const Courses = () => <h1>Content/Courses</h1>;
-const Videos = () => <h1>Content/Videos</h1>;
-const Design = () => <h1>Design</h1>;
-const Content2 = () => <h1>Content2</h1>;
-const Courses2 = () => <h1>Content/Courses 2</h1>;
-const Videos2 = () => <h1>Content/Videos 2</h1>;
-const Design2 = () => <h1>Design 2</h1>;
+const Operations = () => <h1>Operations</h1>;
+const Subscribers = () => <h1>Subscribers</h1>;
+const Applications = () => <h1>Applications</h1>;
+const DistributorsAgent = () => <h1>DistributorsAgent</h1>;
+const Report = () => <h1>Report</h1>;
+const Users = () => <h1>Users</h1>;
+const Settings = () => <h1>Settings</h1>;
 
 function setToken(userToken) {
   sessionStorage.setItem('token', JSON.stringify(userToken.token));
@@ -118,28 +119,25 @@ function App() {
                   <DeviceOrders></DeviceOrders>
                 </Route>
                 <Route path={'/dashboard/operations'}>
-                  <Design2 />
+                  <Operations />
                 </Route>
                 <Route path={'/dashboard/subscribers'}>
-                  <Design2 />
+                  <Subscribers />
                 </Route>
                 <Route path={'/dashboard/applications'}>
-                  <Design2 />
+                  <Applications />
                 </Route>
                 <Route path={'/dashboard/distributors'}>
-                  <Design2 />
+                  <DistributorsAgent />
                 </Route>
                 <Route path={'/dashboard/report'}>
-                  <Design2 />
+                  <Report />
                 </Route>
                 <Route path={'/dashboard/users'}>
-                  <Design2 />
+                  <Users />
                 </Route>
                 <Route path={'/dashboard/settings'}>
-                  <Design2 />
-                </Route>
-                <Route path={'/logout'}>
-                  <Design2 />
+                  <Settings />
                 </Route>
               </div>
               {/* </Switch> */}

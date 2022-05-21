@@ -1,4 +1,7 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { useForm } from 'react-hook-form';
+import Swal from 'sweetalert2';
+import useToken from '../../hooks/useToken';
 import scStyle from './Styles/ServiceCarrier.module.css';
 
 const ServiceCarriers = () => {
@@ -104,6 +107,72 @@ const ServiceCarriers = () => {
     setFile(newFile);
   };
 
+  //service Carrier works
+  //hook form things
+  const { register, handleSubmit, reset } = useForm();
+  // token
+  const { token } = useToken();
+  //url
+  const urlPre = process.env.REACT_APP_ROOT_URL;
+  const url = `${urlPre}/servicecarrier`;
+
+  const [serviceCarriers, setServiceCarriers] = useState([]);
+
+  useEffect(() => {
+    getServiceCarriers();
+  }, []);
+
+  const getServiceCarriers = () => {
+    fetch(`${url}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => setServiceCarriers(data.data))
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Sorry',
+          text: 'error on device data fetching',
+        });
+      });
+  };
+  console.log(serviceCarriers);
+
+  // for adding service carrier
+  const onSubmit = (data) => {
+    const serviceCarrierData = {
+      serviceCarrier: data,
+    };
+    fetch(`${url}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-type': 'application/json',
+      },
+      body: JSON.stringify({ ...serviceCarrierData }),
+    })
+      .then((res) => {
+        res.json();
+        if (res.status === 201) {
+          Swal.fire('Service Carrier Added Successfully', '', 'success');
+        }
+        window.location.reload();
+      })
+      .then((data) => {
+        reset();
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Sorry',
+          text: `${err.message}`,
+        });
+      });
+  };
+
   return (
     <div className={`${scStyle.serviceCarrierContainer} py-md-3`}>
       <div className={scStyle.serviceData} class='my-3 mx-lg-5'>
@@ -130,27 +199,31 @@ const ServiceCarriers = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>Label</td>
-                <td>SWA Connncect</td>
-                <td>12 April 2022</td>
-                <td>Active</td>
-                <td>
-                  <ul>
-                    <button
-                      type='button'
-                      data-bs-toggle='modal'
-                      data-bs-target='#viewModal'
-                    >
-                      View
-                    </button>
-                    <button>Edit</button>
-                    <button>Delete </button>
-                    <button>Active</button>
-                    <button>Deactive</button>
-                  </ul>
-                </td>
-              </tr>
+              {serviceCarriers?.map((serviceCarrier) => (
+                <tr key={serviceCarrier?.id}>
+                  <td>{serviceCarrier?.label}</td>
+                  <td>{serviceCarrier?.name}</td>
+                  <td>
+                    {new Date(serviceCarrier?.createdDate).toLocaleDateString()}
+                  </td>
+                  <td>{serviceCarrier?.status}</td>
+                  <td>
+                    <ul>
+                      <button
+                        type='button'
+                        data-bs-toggle='modal'
+                        data-bs-target='#viewModal'
+                      >
+                        View
+                      </button>
+                      <button>Edit</button>
+                      <button>Delete </button>
+                      <button>Active</button>
+                      <button>Deactive</button>
+                    </ul>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -176,7 +249,10 @@ const ServiceCarriers = () => {
               ></button>
             </div>
             <div class='modal-body'>
-              <form action=''>
+              <form
+                onSubmit={handleSubmit(onSubmit)}
+                enctype='multipart/form-data'
+              >
                 <div style={{ fontFamily: 'sans-serif' }}>
                   <div class='row px-5'>
                     <div class='col-12 col-md-6 col-lg-6'>
@@ -188,7 +264,7 @@ const ServiceCarriers = () => {
                           type='text'
                           class='form-control'
                           placeholder='Name'
-                          required
+                          {...register('name', { required: true })}
                         />
                       </div>
                     </div>
@@ -201,6 +277,7 @@ const ServiceCarriers = () => {
                           type='text'
                           class='form-control'
                           placeholder='Label'
+                          {...register('label', { required: true })}
                         />
                       </div>
                     </div>
@@ -215,6 +292,7 @@ const ServiceCarriers = () => {
                           type='text'
                           class='form-control'
                           placeholder='Contact Name'
+                          {...register('contactName', { required: true })}
                         />
                       </div>
                     </div>
@@ -227,6 +305,7 @@ const ServiceCarriers = () => {
                           type='text'
                           class='form-control'
                           placeholder='Contact Phone'
+                          {...register('contactPhone', { required: true })}
                         />
                       </div>
                     </div>
@@ -241,6 +320,7 @@ const ServiceCarriers = () => {
                           type='email'
                           class='form-control'
                           placeholder='Contact Email'
+                          {...register('contactEmail', { required: true })}
                         />
                       </div>
                     </div>
@@ -253,6 +333,7 @@ const ServiceCarriers = () => {
                           type='text'
                           class='form-control'
                           placeholder='Support Name'
+                          {...register('supportName')}
                         />
                       </div>
                     </div>
@@ -267,6 +348,7 @@ const ServiceCarriers = () => {
                           type='text'
                           class='form-control'
                           placeholder='Support Phone'
+                          {...register('supportPhone')}
                         />
                       </div>
                     </div>
@@ -279,6 +361,7 @@ const ServiceCarriers = () => {
                           type='text'
                           class='form-control'
                           placeholder='Support Email'
+                          {...register('supportEmail')}
                         />
                       </div>
                     </div>
@@ -293,6 +376,7 @@ const ServiceCarriers = () => {
                           type='text'
                           class='form-control'
                           placeholder='Api User Name'
+                          {...register('apiUserName')}
                         />
                       </div>
                     </div>
@@ -305,6 +389,7 @@ const ServiceCarriers = () => {
                           type='password'
                           class='form-control'
                           placeholder='Api Token Password'
+                          {...register('apiTokenPassword')}
                         />
                       </div>
                     </div>
@@ -319,6 +404,7 @@ const ServiceCarriers = () => {
                           type='password'
                           class='form-control'
                           placeholder='Api Pin'
+                          {...register('apiPin')}
                         />
                       </div>
                     </div>
@@ -331,6 +417,7 @@ const ServiceCarriers = () => {
                           type='text'
                           class='form-control'
                           placeholder='CLECID'
+                          {...register('clecid')}
                         />
                       </div>
                     </div>
@@ -344,10 +431,13 @@ const ServiceCarriers = () => {
                         <select
                           class='form-select'
                           aria-label='Default select example'
+                          {...register('status')}
                         >
-                          <option selected>Select Option</option>
-                          <option value='1'>Active</option>
-                          <option value='2'>Inactive</option>
+                          <option selected disabled hidden>
+                            Select Option
+                          </option>
+                          <option value='Active'>Active</option>
+                          <option value='Inactive'>Inactive</option>
                         </select>
                       </div>
                     </div>

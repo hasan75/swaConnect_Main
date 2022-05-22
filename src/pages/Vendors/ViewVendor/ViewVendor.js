@@ -4,6 +4,7 @@ import ReactToPrint, { useReactToPrint } from 'react-to-print';
 
 const ViewVendor = (props) => {
   const printComponentRef = useRef();
+  console.log(props?.viewData);
 
   const downloadClick = () => {
     console.log('data');

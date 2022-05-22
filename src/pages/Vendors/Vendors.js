@@ -228,6 +228,7 @@ const Vendors = () => {
         onHide={editModalColse}
         editData={editData}
       ></EditVendor>
+      {/* vendor adding form  */}
       <div
         class='modal fade w-100'
         id='vendorModal'

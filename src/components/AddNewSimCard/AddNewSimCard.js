@@ -201,6 +201,7 @@ function AddNewSimCard() {
       });
   };
 
+  // for showing serviceCarriers on select option
   useEffect(() => {
     fetch(`${url}/servicecarrier`, {
       headers: {

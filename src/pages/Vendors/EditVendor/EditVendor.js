@@ -5,7 +5,7 @@ import useToken from '../../../hooks/useToken';
 
 const EditVendor = (props) => {
   const { editData } = props;
-  // console.log(props);
+  console.log(props.editData);
   //hook form things
   const { register, handleSubmit, reset } = useForm({});
   useEffect(() => {

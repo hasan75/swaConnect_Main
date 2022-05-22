@@ -1,8 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useForm } from 'react-hook-form';
+import scStyle from './Styles/ServiceCarrier.module.css';
 import Swal from 'sweetalert2';
 import useToken from '../../hooks/useToken';
-import scStyle from './Styles/ServiceCarrier.module.css';
+
+import EditServiceCarrier from './EditServiceCarrier/EditServiceCarrier';
+import { useForm } from 'react-hook-form';
+import ViewServiceCarrier from './ViewServiceCarrier/ViewServiceCarrier';
 
 const ServiceCarriers = () => {
   const [plusBtn, setPlusBtn] = useState(true);
@@ -118,6 +121,7 @@ const ServiceCarriers = () => {
 
   const [serviceCarriers, setServiceCarriers] = useState([]);
 
+  //getting service carriers
   useEffect(() => {
     getServiceCarriers();
   }, []);
@@ -139,10 +143,10 @@ const ServiceCarriers = () => {
         });
       });
   };
-  console.log(serviceCarriers);
 
   // for adding service carrier
   const onSubmit = (data) => {
+    console.log(data);
     const serviceCarrierData = {
       serviceCarrier: data,
     };
@@ -159,7 +163,9 @@ const ServiceCarriers = () => {
         if (res.status === 201) {
           Swal.fire('Service Carrier Added Successfully', '', 'success');
         }
-        window.location.reload();
+        setTimeout(() => {
+          window.location.reload();
+        }, 1500);
       })
       .then((data) => {
         reset();
@@ -173,6 +179,79 @@ const ServiceCarriers = () => {
       });
   };
 
+  //for view modal
+  let [showViewModal, setShowViewModal] = useState(false);
+  let [viewModalId, setViewModalId] = useState(null);
+  const [viewData, setViewData] = useState({});
+
+  const viewTheVendor = (vendor) => {
+    setViewData((prevendor) => Object.assign(prevendor, vendor));
+    console.log(viewData);
+  };
+  // console.log(viewData);
+
+  let showTheViewModal = (index) => {
+    setShowViewModal(true);
+    setViewModalId(index);
+  };
+
+  let viewModalColse = () => {
+    setShowViewModal(false);
+  };
+
+  //for edit modal
+  let [showEditModal, setShowEditModal] = useState(false);
+  let [modalId, setModalId] = useState(null);
+  const [editData, setEditData] = useState({});
+
+  let showTheEditModal = (index) => {
+    setShowEditModal(true);
+    setModalId(index);
+  };
+
+  let editModalColse = () => {
+    setShowEditModal(false);
+  };
+  // console.log(viewData);
+
+  // delete service carrier
+  const deleteServiceCarrier = (id) => {
+    const deleteUrl = `${urlPre}/servicecarrier?id=${id}`;
+    Swal.fire({
+      icon: 'warning',
+      title: 'Are you sure to delete this service carrier?',
+      showCancelButton: true,
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(deleteUrl, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-type': 'application/json',
+          },
+        })
+          .then((res) => {
+            res.json();
+            if (res.status === 200) {
+              Swal.fire('Deleted!', '', 'success');
+              const modifiedCarriers = serviceCarriers.filter(
+                (carrier) => carrier.id !== id
+              );
+              setServiceCarriers(modifiedCarriers);
+            }
+          })
+          .catch((err) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Sorry',
+              text: 'Could Not Delete, Try Again Please.',
+            });
+          });
+      }
+    });
+  };
+  console.log(serviceCarriers);
   return (
     <div className={`${scStyle.serviceCarrierContainer} py-md-3`}>
       <div className={scStyle.serviceData} class='my-3 mx-lg-5'>
@@ -199,8 +278,8 @@ const ServiceCarriers = () => {
               </tr>
             </thead>
             <tbody>
-              {serviceCarriers?.map((serviceCarrier) => (
-                <tr key={serviceCarrier?.id}>
+              {serviceCarriers?.map((serviceCarrier, index) => (
+                <tr key={serviceCarrier?.id} index={index}>
                   <td>{serviceCarrier?.label}</td>
                   <td>{serviceCarrier?.name}</td>
                   <td>
@@ -212,12 +291,31 @@ const ServiceCarriers = () => {
                       <button
                         type='button'
                         data-bs-toggle='modal'
-                        data-bs-target='#viewModal'
+                        data-bs-target='#viewServiceCarriers'
+                        onClick={() => {
+                          viewTheVendor(serviceCarrier);
+                          showTheViewModal(index);
+                          // setviewscdata(serviceCarrier);
+                        }}
                       >
                         View
                       </button>
-                      <button>Edit</button>
-                      <button>Delete </button>
+                      <button
+                        type='button'
+                        data-bs-toggle='modal'
+                        data-bs-target='#editSCModal'
+                        onClick={async () => {
+                          showTheEditModal(index);
+                          await setEditData(serviceCarrier);
+                        }}
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={() => deleteServiceCarrier(serviceCarrier.id)}
+                      >
+                        Delete{' '}
+                      </button>
                       <button>Active</button>
                       <button>Deactive</button>
                     </ul>
@@ -228,6 +326,19 @@ const ServiceCarriers = () => {
           </table>
         </div>
       </div>
+      {/* view service carrier  */}
+      <ViewServiceCarrier
+        key={viewData?.name}
+        viewData={viewData}
+        onHide={viewModalColse}
+      ></ViewServiceCarrier>
+      <EditServiceCarrier
+        key={editData?.name}
+        show={showEditModal}
+        onHide={editModalColse}
+        editData={editData}
+      ></EditServiceCarrier>
+      {/* add service carrier  */}
       <div
         class='modal fade w-100'
         id='serviceModal'
@@ -251,7 +362,7 @@ const ServiceCarriers = () => {
             <div class='modal-body'>
               <form
                 onSubmit={handleSubmit(onSubmit)}
-                enctype='multipart/form-data'
+                encType='multipart/form-data'
               >
                 <div style={{ fontFamily: 'sans-serif' }}>
                   <div class='row px-5'>
@@ -828,148 +939,6 @@ const ServiceCarriers = () => {
           </div>
         </div>
       </div>
-      {/* start  */}
-      <div
-        class='modal fade w-100'
-        id='viewModal'
-        tabindex='-1'
-        aria-labelledby='viewModalLabel'
-        aria-hidden='true'
-      >
-        <div class='modal-dialog modal-xl'>
-          <div class='modal-content'>
-            <div class='modal-header'>
-              <h5 class='modal-title' id='viewModalLabel'>
-                Service Carrier Data
-              </h5>
-              <button
-                type='button'
-                class='btn-close'
-                data-bs-dismiss='modal'
-                aria-label='Close'
-              ></button>
-            </div>
-            <div class='modal-body'>
-              <div style={{ width: '100%' }} className={scStyle.serviceView}>
-                <h1 style={{ textAlign: 'start', fontSize: '20px' }}>
-                  General Information
-                </h1>
-                <table class='table table-striped '>
-                  <tbody>
-                    <tr>
-                      <td>Name</td>
-                      <td>321 Communication</td>
-                    </tr>
-                    <tr>
-                      <td>Label</td>
-                      <td>We Provide best service</td>
-                    </tr>
-                    <tr>
-                      <td>Contact Name</td>
-                      <td>Tandolkar</td>
-                    </tr>
-                    <tr>
-                      <td>Contact Phone</td>
-                      <td>+92833243239</td>
-                    </tr>
-                    <tr>
-                      <td>Contact Email</td>
-                      <td>tandul32@gmail.com</td>
-                    </tr>
-                    <tr>
-                      <td>Suppor Name</td>
-                      <td>Rohit Sharma</td>
-                    </tr>
-                    <tr>
-                      <td>Support Phone</td>
-                      <td>+92833243239</td>
-                    </tr>
-                    <tr>
-                      <td>Support Email</td>
-                      <td>sharmal32@gmail.com</td>
-                    </tr>
-                    <tr>
-                      <td>Api User Name</td>
-                      <td>Tandulkar</td>
-                    </tr>
-                    <tr>
-                      <td>Api Token Password</td>
-                      <td>124343</td>
-                    </tr>
-                    <tr>
-                      <td>Api Pin</td>
-                      <td>324233</td>
-                    </tr>
-                    <tr>
-                      <td>CLECID</td>
-                      <td>CLECID</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <h1 style={{ textAlign: 'start', fontSize: '20px' }}>
-                  Phone Plan
-                </h1>
-                <table
-                  className={scStyle.planTableData}
-                  class='table table-striped '
-                >
-                  <tbody>
-                    <tr>
-                      <td>Name</td>
-                      <td class='text-start'>321 Communication</td>
-                    </tr>
-                    <tr>
-                      <td>Plan Code</td>
-                      <td class='text-start'>T2345dr</td>
-                    </tr>
-                    <tr>
-                      <td>Created Date</td>
-                      <td>21 April 2022</td>
-                    </tr>
-
-                    <tr>
-                      <td>Description</td>
-                      <td>We love 321 plan tech communication</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <h1 style={{ textAlign: 'start', fontSize: '20px' }}>Notes</h1>
-                <table class='table table-striped '>
-                  <tbody>
-                    <tr>
-                      <td>Note</td>
-                      <td>
-                        A virtual SIM is a mobile phone number provided by a
-                        mobile network operator that does not require a SIM card
-                        to connect phone calls to a user's mobile phone.
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <h1 style={{ textAlign: 'start', fontSize: '20px' }}>Files</h1>
-                <table class='table table-striped '>
-                  <tbody>
-                    <tr>
-                      <td>Name</td>
-                      <td>firstslide.pdf</td>
-                    </tr>
-                  </tbody>
-                </table>
-                <div className={scStyle.button}>
-                  <button className={scStyle.downloadBtn}>
-                    <i class='fa fa-download' download></i> Download
-                  </button>
-                  <button className={scStyle.printBtn}>
-                    <i class='fa fa-print' download></i> Print
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* end  */}
     </div>
   );
 };

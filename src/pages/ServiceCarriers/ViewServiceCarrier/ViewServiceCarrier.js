@@ -3,6 +3,8 @@ import scStyle from '../Styles/ServiceCarrier.module.css';
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
 
 const ViewServiceCarrier = (props) => {
+  const { selectedSc, modalIsOpen, closeModal } = props;
+
   const printComponentRef = useRef();
 
   const downloadClick = () => {
@@ -12,7 +14,8 @@ const ViewServiceCarrier = (props) => {
   const handlePrint = useReactToPrint({
     content: () => printComponentRef.current,
   });
-  console.log(props?.viewData);
+
+  //   console.log(props?.viewData);
 
   return (
     <div
@@ -21,7 +24,8 @@ const ViewServiceCarrier = (props) => {
       tabindex='-1'
       aria-labelledby='viewModalLabel'
       aria-hidden='true'
-      {...props}
+      isOpen={modalIsOpen}
+      onRequestClose={closeModal}
     >
       <div class='modal-dialog modal-xl'>
         <div class='modal-content'>
@@ -34,78 +38,71 @@ const ViewServiceCarrier = (props) => {
               class='btn-close'
               data-bs-dismiss='modal'
               aria-label='Close'
+              onClick={closeModal}
             ></button>
           </div>
           <div class='modal-body' ref={printComponentRef}>
             <div style={{ width: '100%' }} className={scStyle.serviceView}>
               <h1 style={{ textAlign: 'start', fontSize: '20px' }}>
-                General Information a
+                General Information
               </h1>
               <table class='table table-striped '>
                 <tbody>
                   <tr>
                     <td>Name</td>
-                    <td>{props?.viewData?.name}</td>
+                    <td>{selectedSc?.name}</td>
                   </tr>
                   <tr>
                     <td>Label</td>
-                    <td>{props?.viewData?.label}</td>
+                    <td>{selectedSc?.label}</td>
                   </tr>
                   <tr>
                     <td>Contact Name</td>
-                    <td>{props?.viewData?.contactName}</td>
+                    <td>{selectedSc?.contactName}</td>
                   </tr>
                   <tr>
                     <td>Contact Phone</td>
-                    <td>{props?.viewData?.contactPhone}</td>
+                    <td>{selectedSc?.contactPhone}</td>
                   </tr>
                   <tr>
                     <td>Contact Email</td>
-                    <td>{props?.viewData?.contactEmail}</td>
+                    <td>{selectedSc?.contactEmail}</td>
                   </tr>
                   <tr>
                     <td>Suppor Name</td>
-                    <td>{props?.viewData?.supportName}</td>
+                    <td>{selectedSc?.supportName}</td>
                   </tr>
                   <tr>
                     <td>Support Phone</td>
-                    <td>{props?.viewData?.supportPhone}</td>
+                    <td>{selectedSc?.supportPhone}</td>
                   </tr>
                   <tr>
                     <td>Support Email</td>
-                    <td>{props?.viewData?.supportEmail}</td>
+                    <td>{selectedSc?.supportEmail}</td>
                   </tr>
                   <tr>
                     <td>Api User Name</td>
                     <td>
-                      {props?.viewData?.apiUserName
-                        ? props?.viewData?.apiUserName
+                      {selectedSc?.apiUserName
+                        ? selectedSc?.apiUserName
                         : 'N/A'}{' '}
                     </td>
                   </tr>
                   <tr>
                     <td>Api Token Password</td>
                     <td>
-                      {props?.viewData?.apiTokenPassword
-                        ? props?.viewData?.apiTokenPassword
+                      {selectedSc?.apiTokenPassword
+                        ? selectedSc?.apiTokenPassword
                         : 'N/A'}
                     </td>
                   </tr>
                   <tr>
                     <td>Api Pin</td>
-                    <td>
-                      {props?.viewData?.apiPin
-                        ? props?.viewData?.apiPin
-                        : 'N/A'}
-                    </td>
+                    <td>{selectedSc?.apiPin ? selectedSc?.apiPin : 'N/A'}</td>
                   </tr>
                   <tr>
                     <td>CLECID</td>
-                    <td>
-                      {props?.viewData?.clecid
-                        ? props?.viewData?.clecid
-                        : 'N/A'}
-                    </td>
+                    <td>{selectedSc?.clecid ? selectedSc?.clecid : 'N/A'}</td>
                   </tr>
                 </tbody>
               </table>

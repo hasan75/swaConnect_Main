@@ -4,12 +4,13 @@ import Swal from 'sweetalert2';
 import useToken from '../../../hooks/useToken';
 
 const EditServiceCarrier = (props) => {
-  const { editData } = props;
+  console.log(props);
+  const { editModalIsOpen, closeEditModal, editSelectedSc } = props;
   //hook form things
   const { register, handleSubmit, reset } = useForm({});
   useEffect(() => {
     let defaultValues = {};
-    defaultValues = editData;
+    defaultValues = editSelectedSc;
     reset({ ...defaultValues });
   }, [props]);
 
@@ -20,7 +21,7 @@ const EditServiceCarrier = (props) => {
   const url = `${urlPre}/servicecarrier`;
 
   const onEditSubmit = async (data) => {
-    data.id = editData.id;
+    data.id = editSelectedSc?.id;
     const scEditedData = {
       serviceCarrier: data,
     };
@@ -68,7 +69,8 @@ const EditServiceCarrier = (props) => {
       tabIndex='-1'
       aria-labelledby='serviceModalLabel'
       aria-hidden='true'
-      {...props}
+      isOpen={editModalIsOpen}
+      onRequestClose={closeEditModal}
     >
       <div class='modal-dialog modal-xl'>
         <div class='modal-content'>
@@ -81,7 +83,7 @@ const EditServiceCarrier = (props) => {
               class='btn-close'
               data-bs-dismiss='modal'
               aria-label='Close'
-              onClick={props.onHide}
+              onClick={closeEditModal}
             ></button>
           </div>
           <div class='modal-body'>
@@ -99,7 +101,7 @@ const EditServiceCarrier = (props) => {
                       <input
                         type='text'
                         class='form-control'
-                        placeholder={editData.name}
+                        placeholder={editSelectedSc?.name}
                         {...register('name')}
                       />
                     </div>
@@ -112,7 +114,7 @@ const EditServiceCarrier = (props) => {
                       <input
                         type='text'
                         class='form-control'
-                        placeholder={editData.label}
+                        placeholder={editSelectedSc?.label}
                         {...register('label')}
                       />
                     </div>
@@ -127,7 +129,7 @@ const EditServiceCarrier = (props) => {
                       <input
                         type='text'
                         class='form-control'
-                        placeholder={editData.contactName}
+                        placeholder={editSelectedSc?.contactName}
                         {...register('contactName')}
                       />
                     </div>
@@ -140,7 +142,7 @@ const EditServiceCarrier = (props) => {
                       <input
                         type='text'
                         class='form-control'
-                        placeholder={editData.contactPhone}
+                        placeholder={editSelectedSc?.contactPhone}
                         {...register('contactPhone')}
                       />
                     </div>
@@ -155,7 +157,7 @@ const EditServiceCarrier = (props) => {
                       <input
                         type='email'
                         class='form-control'
-                        placeholder={editData.contactEmail}
+                        placeholder={editSelectedSc?.contactEmail}
                         {...register('contactEmail')}
                       />
                     </div>
@@ -168,7 +170,7 @@ const EditServiceCarrier = (props) => {
                       <input
                         type='text'
                         class='form-control'
-                        placeholder={editData.supportName}
+                        placeholder={editSelectedSc?.supportName}
                         {...register('supportName')}
                       />
                     </div>
@@ -183,7 +185,7 @@ const EditServiceCarrier = (props) => {
                       <input
                         type='text'
                         class='form-control'
-                        placeholder={editData.supportPhone}
+                        placeholder={editSelectedSc?.supportPhone}
                         {...register('supportPhone')}
                       />
                     </div>
@@ -196,7 +198,7 @@ const EditServiceCarrier = (props) => {
                       <input
                         type='text'
                         class='form-control'
-                        placeholder={editData.supportEmail}
+                        placeholder={editSelectedSc?.supportEmail}
                         {...register('supportEmail')}
                       />
                     </div>
@@ -211,7 +213,7 @@ const EditServiceCarrier = (props) => {
                       <input
                         type='text'
                         class='form-control'
-                        placeholder={editData.apiUserName}
+                        placeholder={editSelectedSc?.apiUserName}
                         {...register('apiUserName')}
                       />
                     </div>
@@ -224,7 +226,7 @@ const EditServiceCarrier = (props) => {
                       <input
                         type='password'
                         class='form-control'
-                        placeholder={editData.apiTokenPassword}
+                        placeholder={editSelectedSc?.apiTokenPassword}
                         {...register('apiTokenPassword')}
                       />
                     </div>
@@ -239,7 +241,7 @@ const EditServiceCarrier = (props) => {
                       <input
                         type='password'
                         class='form-control'
-                        placeholder={editData.apiPin}
+                        placeholder={editSelectedSc?.apiPin}
                         {...register('apiPin')}
                       />
                     </div>
@@ -252,7 +254,7 @@ const EditServiceCarrier = (props) => {
                       <input
                         type='text'
                         class='form-control'
-                        placeholder={editData.clecid}
+                        placeholder={editSelectedSc?.clecid}
                         {...register('clecid')}
                       />
                     </div>
@@ -266,7 +268,7 @@ const EditServiceCarrier = (props) => {
                       </label>
                       <select
                         class='form-select'
-                        aria-label={editData.status}
+                        aria-label={editSelectedSc?.status}
                         {...register('status')}
                       >
                         <option selected disabled hidden>

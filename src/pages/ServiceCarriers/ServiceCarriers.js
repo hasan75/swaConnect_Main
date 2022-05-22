@@ -6,6 +6,7 @@ import useToken from '../../hooks/useToken';
 import EditServiceCarrier from './EditServiceCarrier/EditServiceCarrier';
 import { useForm } from 'react-hook-form';
 import ViewServiceCarrier from './ViewServiceCarrier/ViewServiceCarrier';
+import TestView from './TestView';
 
 const ServiceCarriers = () => {
   const [plusBtn, setPlusBtn] = useState(true);
@@ -179,40 +180,47 @@ const ServiceCarriers = () => {
       });
   };
 
-  //for view modal
-  let [showViewModal, setShowViewModal] = useState(false);
-  let [viewModalId, setViewModalId] = useState(null);
-  const [viewData, setViewData] = useState({});
+  // //for edit modal
+  // let [showEditModal, setShowEditModal] = useState(false);
+  // let [modalId, setModalId] = useState(null);
+  // const [editData, setEditData] = useState({});
 
-  const viewTheVendor = (vendor) => {
-    setViewData((prevendor) => Object.assign(prevendor, vendor));
-    console.log(viewData);
-  };
-  // console.log(viewData);
+  // let showTheEditModal = (index) => {
+  //   setShowEditModal(true);
+  //   setModalId(index);
+  // };
 
-  let showTheViewModal = (index) => {
-    setShowViewModal(true);
-    setViewModalId(index);
-  };
+  // let editModalColse = () => {
+  //   setShowEditModal(false);
+  // };
 
-  let viewModalColse = () => {
-    setShowViewModal(false);
-  };
+  //for view service carrier modal
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [selectedSc, setSelectedSc] = useState(null);
 
-  //for edit modal
-  let [showEditModal, setShowEditModal] = useState(false);
-  let [modalId, setModalId] = useState(null);
-  const [editData, setEditData] = useState({});
-
-  let showTheEditModal = (index) => {
-    setShowEditModal(true);
-    setModalId(index);
+  const expandModal = (serviceCarrier) => {
+    setSelectedSc(serviceCarrier);
+    setModalIsOpen(true);
   };
 
-  let editModalColse = () => {
-    setShowEditModal(false);
+  const closeModal = () => {
+    setSelectedSc(null);
+    setModalIsOpen(true);
   };
-  // console.log(viewData);
+
+  //for edit service carrier modal
+  const [editModalIsOpen, setEditModalIsOpen] = useState(false);
+  const [editSelectedSc, setEditSelectedSc] = useState(null);
+
+  const expandEditModal = (serviceCarrier) => {
+    setEditSelectedSc(serviceCarrier);
+    setEditModalIsOpen(true);
+  };
+
+  const closeEditModal = () => {
+    setEditSelectedSc(null);
+    setEditModalIsOpen(true);
+  };
 
   // delete service carrier
   const deleteServiceCarrier = (id) => {
@@ -293,9 +301,7 @@ const ServiceCarriers = () => {
                         data-bs-toggle='modal'
                         data-bs-target='#viewServiceCarriers'
                         onClick={() => {
-                          viewTheVendor(serviceCarrier);
-                          showTheViewModal(index);
-                          // setviewscdata(serviceCarrier);
+                          expandModal(serviceCarrier);
                         }}
                       >
                         View
@@ -304,9 +310,8 @@ const ServiceCarriers = () => {
                         type='button'
                         data-bs-toggle='modal'
                         data-bs-target='#editSCModal'
-                        onClick={async () => {
-                          showTheEditModal(index);
-                          await setEditData(serviceCarrier);
+                        onClick={() => {
+                          expandEditModal(serviceCarrier);
                         }}
                       >
                         Edit
@@ -328,15 +333,15 @@ const ServiceCarriers = () => {
       </div>
       {/* view service carrier  */}
       <ViewServiceCarrier
-        key={viewData?.name}
-        viewData={viewData}
-        onHide={viewModalColse}
+        selectedSc={selectedSc}
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
       ></ViewServiceCarrier>
+      {/* edit service carrier modal  */}
       <EditServiceCarrier
-        key={editData?.name}
-        show={showEditModal}
-        onHide={editModalColse}
-        editData={editData}
+        editSelectedSc={editSelectedSc}
+        editModalIsOpen={editModalIsOpen}
+        closeEditModal={closeEditModal}
       ></EditServiceCarrier>
       {/* add service carrier  */}
       <div

@@ -28,7 +28,7 @@ const ViewServiceCarrier = (props) => {
   const urlPre = process.env.REACT_APP_ROOT_URL;
   const url = `${urlPre}/phonePlan?serviceCarrier=${scId}`;
 
-  //getting service carriers
+  //getting phone plan
   useEffect(() => {
     getPhonePlans();
   }, []);
@@ -152,6 +152,9 @@ const ViewServiceCarrier = (props) => {
                   </tr>
                 </tbody>
               </table>
+
+              {/* showing phone plans here  */}
+
               <h1 style={{ textAlign: 'start', fontSize: '20px' }}>
                 Phone Plans
               </h1>

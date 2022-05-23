@@ -6,7 +6,6 @@ import useToken from '../../hooks/useToken';
 import EditServiceCarrier from './EditServiceCarrier/EditServiceCarrier';
 import { useForm } from 'react-hook-form';
 import ViewServiceCarrier from './ViewServiceCarrier/ViewServiceCarrier';
-import TestView from './TestView';
 
 const ServiceCarriers = () => {
   const [plusBtn, setPlusBtn] = useState(true);
@@ -180,20 +179,6 @@ const ServiceCarriers = () => {
       });
   };
 
-  // //for edit modal
-  // let [showEditModal, setShowEditModal] = useState(false);
-  // let [modalId, setModalId] = useState(null);
-  // const [editData, setEditData] = useState({});
-
-  // let showTheEditModal = (index) => {
-  //   setShowEditModal(true);
-  //   setModalId(index);
-  // };
-
-  // let editModalColse = () => {
-  //   setShowEditModal(false);
-  // };
-
   //for view service carrier modal
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [selectedSc, setSelectedSc] = useState(null);
@@ -259,7 +244,9 @@ const ServiceCarriers = () => {
       }
     });
   };
+
   console.log(serviceCarriers);
+
   return (
     <div className={`${scStyle.serviceCarrierContainer} py-md-3`}>
       <div className={scStyle.serviceData} class='my-3 mx-lg-5'>

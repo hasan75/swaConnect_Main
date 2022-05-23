@@ -4,7 +4,6 @@ import Swal from 'sweetalert2';
 import useToken from '../../../hooks/useToken';
 
 const EditServiceCarrier = (props) => {
-  console.log(props);
   const { editModalIsOpen, closeEditModal, editSelectedSc } = props;
   //hook form things
   const { register, handleSubmit, reset } = useForm({});

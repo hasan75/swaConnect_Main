@@ -1,9 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import scStyle from '../Styles/ServiceCarrier.module.css';
 import ReactToPrint, { useReactToPrint } from 'react-to-print';
+import useToken from '../../../hooks/useToken';
+import Swal from 'sweetalert2';
 
 const ViewServiceCarrier = (props) => {
   const { selectedSc, modalIsOpen, closeModal } = props;
+  const [phonePlans, setPhonePlans] = useState([]);
 
   const printComponentRef = useRef();
 
@@ -15,7 +18,50 @@ const ViewServiceCarrier = (props) => {
     content: () => printComponentRef.current,
   });
 
-  //   console.log(props?.viewData);
+  const scId = selectedSc?.id;
+  console.log(scId);
+
+  // getting phone plans by service carrier id
+
+  const { token } = useToken();
+  //url
+  const urlPre = process.env.REACT_APP_ROOT_URL;
+  const url = `${urlPre}/phonePlan?serviceCarrier=${scId}`;
+
+  //getting service carriers
+  useEffect(() => {
+    getPhonePlans();
+  }, []);
+
+  const getPhonePlans = () => {
+    fetch(`${url}`, {
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Content-type': 'application/json',
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.status === 'success') {
+          setPhonePlans(data.data);
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Sorry',
+            text: `${data.data}`,
+          });
+        }
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Sorry',
+          text: 'error on device data fetching',
+        });
+      });
+  };
+
+  console.log(phonePlans);
 
   return (
     <div
@@ -107,32 +153,37 @@ const ViewServiceCarrier = (props) => {
                 </tbody>
               </table>
               <h1 style={{ textAlign: 'start', fontSize: '20px' }}>
-                Phone Plan
+                Phone Plans
               </h1>
-              <table
-                className={scStyle.planTableData}
-                class='table table-striped '
-              >
-                <tbody>
-                  <tr>
-                    <td>Name</td>
-                    <td class='text-start'>321 Communication</td>
-                  </tr>
-                  <tr>
-                    <td>Plan Code</td>
-                    <td class='text-start'>T2345dr</td>
-                  </tr>
-                  <tr>
-                    <td>Created Date</td>
-                    <td>21 April 2022</td>
-                  </tr>
+              {phonePlans?.map((phonePlan) => {
+                <table
+                  className={scStyle.planTableData}
+                  class='table table-striped my-1'
+                  phonePlan={phonePlan}
+                >
+                  <tbody>
+                    <tr>
+                      <td>Name</td>
+                      <td class='text-start'>{phonePlan?.name}</td>
+                    </tr>
+                    <tr>
+                      <td>Plan Code</td>
+                      <td class='text-start'>{phonePlan?.planCode}</td>
+                    </tr>
+                    <tr>
+                      <td>Created Date</td>
+                      <td>
+                        {new Date(phonePlan?.createdDate).toLocaleDateString()}
+                      </td>
+                    </tr>
 
-                  <tr>
-                    <td>Description</td>
-                    <td>We love 321 plan tech communication</td>
-                  </tr>
-                </tbody>
-              </table>
+                    <tr>
+                      <td>Description</td>
+                      <td>We love 321 plan tech communication</td>
+                    </tr>
+                  </tbody>
+                </table>;
+              })}
               <h1 style={{ textAlign: 'start', fontSize: '20px' }}>Notes</h1>
               <table class='table table-striped '>
                 <tbody>

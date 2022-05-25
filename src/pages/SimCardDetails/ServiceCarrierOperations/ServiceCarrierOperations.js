@@ -1,11 +1,18 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import scOperationStyle from './ServiceCarrierOp.module.css';
 import useToken from '../../../hooks/useToken';
 
 const ServiceCarrierOperations = ({ simId }) => {
+  const [zipCode1, setZipCode1] = useState('');
+  const [zipCodeforActive1, setZipCodeforActive1] = useState('');
+  const [zipCodeforMDN1, setZipCodeforMDN1] = useState('');
+
+  const [zipCode2, setZipCode2] = useState('');
+  const [zipCodeforActive2, setZipCodeforActive2] = useState('');
+  const [zipCodeforMDN2, setZipCodeforMDN2] = useState('');
+
   const urlPre = process.env.REACT_APP_ROOT_URL;
   const url = `${urlPre}/simCard`;
-  console.log(url, simId);
 
   const { token } = useToken();
 
@@ -14,7 +21,29 @@ const ServiceCarrierOperations = ({ simId }) => {
   const currentDate = new Date().toLocaleDateString();
   const currentTime = new Date().toLocaleTimeString();
 
-  console.log(currentDate, currentTime);
+  const changeZipCode1 = (e) => {
+    setZipCode1(e.target.value);
+  };
+
+  const changeZipforActive1 = (e) => {
+    setZipCodeforActive1(e.target.value);
+  };
+
+  const changeZipforMDN1 = (e) => {
+    setZipCodeforMDN1(e.target.value);
+  };
+
+  const changeZipCode2 = (e) => {
+    setZipCode2(e.target.value);
+  };
+
+  const changeZipforActive2 = (e) => {
+    setZipCodeforActive2(e.target.value);
+  };
+
+  const changeZipforMDN2 = (e) => {
+    setZipCodeforMDN2(e.target.value);
+  };
 
   return (
     <section>
@@ -33,6 +62,7 @@ const ServiceCarrierOperations = ({ simId }) => {
                   type='text'
                   className='form-control'
                   placeholder='Zip Code'
+                  onChange={changeZipCode1}
                 />
               </div>
               <div className='col-6 col-lg-8'>
@@ -68,6 +98,7 @@ const ServiceCarrierOperations = ({ simId }) => {
               type='text'
               className='form-control'
               placeholder='Zip Code'
+              onChange={changeZipforActive1}
             />
           </div>
           <div className='col-6 col-lg-1 py-sm-1 py-md-0 me-1'>
@@ -130,6 +161,7 @@ const ServiceCarrierOperations = ({ simId }) => {
                   type='text'
                   className='form-control'
                   placeholder='ZIP Code'
+                  onChange={changeZipforMDN1}
                 />
               </div>
               <div className='col-6 col-lg-6'>
@@ -154,6 +186,7 @@ const ServiceCarrierOperations = ({ simId }) => {
                   type='text'
                   className='form-control'
                   placeholder='Zip Code'
+                  onChange={changeZipCode2}
                 />
               </div>
               <div className='col-6 col-lg-8'>
@@ -189,6 +222,7 @@ const ServiceCarrierOperations = ({ simId }) => {
               type='text'
               className='form-control'
               placeholder='Zip Code'
+              onChange={changeZipforActive2}
             />
           </div>
           <div className='col-6 col-lg-1 py-sm-1 py-md-0 me-1'>
@@ -251,6 +285,7 @@ const ServiceCarrierOperations = ({ simId }) => {
                   type='text'
                   className='form-control'
                   placeholder='ZIP Code'
+                  onChange={changeZipforMDN2}
                 />
               </div>
               <div className='col-6 col-lg-6'>

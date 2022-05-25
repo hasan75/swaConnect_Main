@@ -45,6 +45,25 @@ const ServiceCarrierOperations = ({ simId }) => {
     setZipCodeforMDN2(e.target.value);
   };
 
+  //sc1 = service carrier 1
+
+  //sweeet alert will be shown in the data section
+
+  const getCoverageforSC1 = () => {
+    fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ simId }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data.data));
+  };
+
+  console.log(simId);
+
   return (
     <section>
       {/* serviceCarrier 1  */}
@@ -66,7 +85,10 @@ const ServiceCarrierOperations = ({ simId }) => {
                 />
               </div>
               <div className='col-6 col-lg-8'>
-                <button className='btn btn-outline-secondary'>
+                <button
+                  className='btn btn-outline-secondary'
+                  onClick={getCoverageforSC1}
+                >
                   Get Coverage2
                 </button>
               </div>

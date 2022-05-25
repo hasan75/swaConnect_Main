@@ -9,8 +9,16 @@ const ServiceCarrierOperations = ({ simId }) => {
 
   const { token } = useToken();
 
+  const currentDatewithTime = new Date().toLocaleString();
+
+  const currentDate = new Date().toLocaleDateString();
+  const currentTime = new Date().toLocaleTimeString();
+
+  console.log(currentDate, currentTime);
+
   return (
     <section>
+      {/* serviceCarrier 1  */}
       <div className={`${scOperationStyle.planContainer}`}>
         <span className='ms-2 my-2'>
           {' '}
@@ -131,10 +139,11 @@ const ServiceCarrierOperations = ({ simId }) => {
           </div>
         </div>
       </div>
+      {/* serviceCarrier 2  */}
       <div className={`${scOperationStyle.planContainer}`}>
         <span className='ms-2 my-2'>
           {' '}
-          <span className='fw-bold'> Service Carrier #1 </span>321Communications
+          <span className='fw-bold'> Service Carrier #2 </span>PWG
         </span>
         {/* for the zip code and coverage  */}
         <div className='row py-md-2'>
@@ -249,6 +258,41 @@ const ServiceCarrierOperations = ({ simId }) => {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div className={`${scOperationStyle.planContainer}`}>
+        <div className='mb-2'>
+          <span className='fw-bold text-primary'>Sim Operations Log</span>
+        </div>
+        <div className='table-responsive'>
+          <table class='table table-bordered text-center'>
+            <thead class='thead-dark'>
+              <tr>
+                <th scope='col'>Date</th>
+                <th scope='col'>User Name</th>
+                <th scope='col'>Operation</th>
+                <th colSpan={2}>Result</th>
+              </tr>
+            </thead>
+            <tbody className='mb-5'>
+              <tr>
+                <td>{new Date().toLocaleDateString()}</td>
+                <td>Name</td>
+                <td>Active "Plan One"</td>
+                <td colSpan={2}>
+                  UserNote Lorem, ipsum dolor sit amet consectetur.
+                </td>
+              </tr>
+              <tr>
+                <td>{new Date().toLocaleDateString()}</td>
+                <td>Name</td>
+                <td>Active "Plan One"</td>
+                <td colSpan={2}>
+                  UserNote Lorem, ipsum dolor sit amet consectetur.
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </section>
